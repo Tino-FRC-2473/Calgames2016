@@ -32,6 +32,10 @@ hs_err_pid*
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
+.xml
+.properties
+.project
+.classpath
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -61,3 +65,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.properties
+*.xml
