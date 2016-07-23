@@ -17,7 +17,7 @@ public class DriveTrain extends Subsystem {
 	CANTalon leftBackCAN;
 	CANTalon rightBackCAN;
 	
-	public DriveTrain (){
+	public DriveTrain() {
 		super();
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
@@ -33,6 +33,7 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         setDefaultCommand(new TankDrive());
+        //setDefaultCommand(new NewDrive());
     }
     
     public void drive(double left, double right) {
