@@ -30,6 +30,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	driveTrain = new DriveTrain();
 		oi = new OI();
+		
+		SmartDashboard.putData(driveTrain);
     }
 
 	/**
@@ -78,6 +80,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        log();
     }
     
     /**
@@ -85,5 +88,9 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    public void log(){
+    	driveTrain.log();
     }
 }
