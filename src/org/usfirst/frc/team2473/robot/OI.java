@@ -40,11 +40,10 @@ public class OI {
 	
 	public OI() {
 		
-		
 	}
 	
 	public Joystick getJoystick() {
-        return joy;
+        return joy; 
     }
 }
 
