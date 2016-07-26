@@ -3,6 +3,7 @@ package org.usfirst.frc.team2473.robot.subsystems;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -23,6 +24,8 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
+	private AnalogGyro gyro;
+	
 	
 	private RobotDrive drive;
 	private Encoder left_encoder, right_encoder;
@@ -36,6 +39,11 @@ public class DriveTrain extends Subsystem {
 		rightBackCAN = new CANTalon(RobotMap.rightBackMotor);
 		
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
+		
+		gyro = new AnalogGyro(RobotMap.gyro);
+		
+		gyro.initGyro();
+		gyro.calibrate();
 		
 		left_encoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
 		right_encoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
@@ -69,9 +77,14 @@ public class DriveTrain extends Subsystem {
     	return ((CANTalon)leftFrontCAN).get();
     }
     
+    public void resetGyro(){
+    	gyro.reset();
+    }
+    
     public void log(){
     	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
 		SmartDashboard.putNumber("Right Distance", right_encoder.getDistance());
+		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
     }
 }
 
