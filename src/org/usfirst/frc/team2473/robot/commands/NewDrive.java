@@ -19,7 +19,7 @@ public class NewDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.drive(-Robot.oi.getJoystickLeft().getY(),-Robot.oi.getJoystickRight().getY()); //figure out new joystick scheme, recreate/rename this when found
+    	//Robot.driveTrain.drive(l, r); //figure out new joystick scheme, recreate/rename this when found
     }
 
     // Make this return true when this Command no longer needs to run execute()
