@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team2473.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2473.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2473.robot.commands.*;
+import org.usfirst.frc.team2473.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static DriveTrain driveTrain;
 	public static OI oi;
 
     Command autonomousCommand;
@@ -28,21 +28,11 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	driveTrain = new DriveTrain();
 		oi = new OI();
+		
+		SmartDashboard.putData(driveTrain);
     }
-	
-	/**
-     * This function is called once each time the robot enters Disabled mode.
-     * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-     */
-    public void disabledInit(){
-
-    }
-	
-	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
@@ -90,6 +80,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        log();
     }
     
     /**
@@ -97,5 +88,9 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    public void log(){
+    	driveTrain.log();
     }
 }
