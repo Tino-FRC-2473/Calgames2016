@@ -5,14 +5,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousCommand extends CommandGroup {
 
 	public AutonomousCommand() {
-		addSequential(command);
-		addSequential(command);
+//		addSequential(command);
+//		addSequential(command);
 	}
 	
 	@Override
-	@Override
 	protected boolean isFinished() {
-
+		boolean returner = false;
+		return returner;
 	}
 	
 	
