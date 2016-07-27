@@ -30,6 +30,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	driveTrain = new DriveTrain();
 		oi = new OI();
+		//create new command here to assign to autonomousCommand()
     }
 
 	/**
