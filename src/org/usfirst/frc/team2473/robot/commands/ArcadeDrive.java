@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TankDrive extends Command {
+public class ArcadeDrive extends Command {
 
-    public TankDrive() {
+    public ArcadeDrive() {
     	requires(Robot.driveTrain);
     }
 
@@ -19,10 +19,16 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.drive(
-    		-Robot.oi.getJoystickLeft().getY(),
-    		-Robot.oi.getJoystickRight().getY()
-    	);
+    	double throttle = -Robot.oi.getJoystickLeft().getY();
+    	double direction = Robot.oi.getJoystickLeft().getX();
+    	
+    	double right = throttle - direction;
+		double left = throttle + direction;
+    	
+		Robot.driveTrain.drive(
+			Math.pow(left, 2),
+			Math.pow(right, 2)
+		);
     }
 
     // Make this return true when this Command no longer needs to run execute()

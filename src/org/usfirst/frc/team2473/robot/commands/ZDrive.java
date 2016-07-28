@@ -5,11 +5,11 @@ import org.usfirst.frc.team2473.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * comment
+ *
  */
-public class NewDrive extends Command {
+public class ZDrive extends Command {
 
-    public NewDrive() {
+    public ZDrive() {
     	requires(Robot.driveTrain);
     }
 
@@ -19,7 +19,16 @@ public class NewDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.driveTrain.drive(l, r); //figure out new joystick scheme, recreate/rename this when found
+    	double throttle = -Robot.oi.getJoystickLeft().getY();
+    	double direction = Robot.oi.getJoystickLeft().getZ();
+    	
+    	double right = throttle - direction;
+		double left = throttle + direction;
+    	
+		Robot.driveTrain.drive(
+			Math.pow(left, 2),
+			Math.pow(right, 2)
+		);
     }
 
     // Make this return true when this Command no longer needs to run execute()

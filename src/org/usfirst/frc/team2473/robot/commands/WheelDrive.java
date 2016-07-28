@@ -1,15 +1,17 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.OI;
 import org.usfirst.frc.team2473.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class TankDrive extends Command {
+public class WheelDrive extends Command {
 
-    public TankDrive() {
+    public WheelDrive() {
     	requires(Robot.driveTrain);
     }
 
@@ -19,10 +21,26 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	OI o = Robot.oi;
+    	
+    	SmartDashboard.putString("DB/String 1", "Joy1: (" +
+			o.getJoystickOne().getX() + ", " +
+			o.getJoystickOne().getY() + ", " +
+			o.getJoystickOne().getZ() + "), Twist: " +
+			o.getJoystickOne().getTwist()
+    	);
+    	SmartDashboard.putString("DB/String 1", "Joy2: (" +
+			o.getJoystickTwo().getX() + ", " +
+			o.getJoystickTwo().getY() + ", " +
+			o.getJoystickTwo().getZ() + "), Twist: " +
+			o.getJoystickTwo().getTwist()
+    	);
+    	/*
     	Robot.driveTrain.drive(
     		-Robot.oi.getJoystickLeft().getY(),
     		-Robot.oi.getJoystickRight().getY()
-    	);
+    	); 
+    	*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

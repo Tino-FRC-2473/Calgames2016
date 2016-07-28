@@ -20,6 +20,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static OI oi;
+	//public static OI tempoi;
 
     Command autonomousCommand;
 
@@ -29,7 +30,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	driveTrain = new DriveTrain();
-		oi = new OI();
+    	//tempoi = new OI();
+    	oi = new OI(/*tempoi.Config.TANK*/);
     }
 
 	/**

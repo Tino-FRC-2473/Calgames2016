@@ -36,20 +36,62 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	private Joystick joyLeft = new Joystick(0);
-	private Joystick joyRight = new Joystick(1);
+	private Joystick joyOne;
+	private Joystick joyTwo;
+	
+	/*
+	public enum Config {
+	 
+		TANK,
+		Z1,
+		SINGLE,
+		WHEEL
+	};
+	
+	public static Config joyConfig;
+	*/
 	
 	public OI() {
 		
-		
 	}
 	
+/*
+	public OI(Config c) {
+		joyConfig = c;
+		
+		switch(c) {
+		
+		case TANK:
+			joyOne = new Joystick(0);
+			joyTwo = new Joystick(1);
+			
+		case Z1:
+			
+			
+		case SINGLE:
+			
+			
+		case WHEEL:
+			
+			
+		}
+	}
+*/
+	
+	public Joystick getJoystickOne() {
+        return joyOne;
+    }
+	
+	public Joystick getJoystickTwo() {
+        return joyTwo;
+    }
+	
 	public Joystick getJoystickLeft() {
-        return joyLeft;
+        return joyOne;
     }
 	
 	public Joystick getJoystickRight() {
-        return joyRight;
+        return joyTwo;
     }
 }
 
