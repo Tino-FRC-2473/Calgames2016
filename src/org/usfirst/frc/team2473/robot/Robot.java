@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
+	public static Intake intake;
 	public static OI oi;
 
     Command autonomousCommand;
@@ -29,6 +30,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	driveTrain = new DriveTrain();
+    	intake = new Intake();
 		oi = new OI();
 		
 		SmartDashboard.putData(driveTrain);
