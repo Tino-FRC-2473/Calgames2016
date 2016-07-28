@@ -5,8 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousCommand extends CommandGroup {
 
 	public AutonomousCommand() {
-//		addSequential(command);
-//		addSequential(command);
+		
 	}
 	
 	@Override

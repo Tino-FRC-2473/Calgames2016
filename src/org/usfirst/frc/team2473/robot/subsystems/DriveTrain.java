@@ -57,7 +57,7 @@ public class DriveTrain extends Subsystem {
     
     public void drive(double left, double right) {
     	drive.tankDrive(left, right);
-   
+    	
 	}
     
     public double getRightSpeed(){
