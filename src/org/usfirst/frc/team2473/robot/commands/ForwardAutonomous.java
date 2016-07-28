@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.Logger;
 import org.usfirst.frc.team2473.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -13,7 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * */
 
 public class ForwardAutonomous extends Command {
-
+	int seconds = 3;
+	int counter = 0;
+	double pow = 0.4;
 	public ForwardAutonomous() {
 		requires(Robot.driveTrain); //runs using drive train mechanism
 	}
@@ -21,18 +25,26 @@ public class ForwardAutonomous extends Command {
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		SmartDashboard.putString("Status", "Initializing..."); //print status message
+		Logger.getInstance().logLevel = Logger.LogLevel.Debug;
+		SmartDashboard.putNumber("Status", Robot.timer.get()); //print status message
 	}
 
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.driveTrain.drive(0.4, 0.4);
+		Logger.log();
+		Robot.driveTrain.drive(pow, pow);
+		counter++;
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (Robot.timer.get() == (Robot.start + 5));
+//		return false;
+		if(Robot.timer.get() == 2) {
+			return true;
+		} else {
+			return false;
+		}
 //		return (Robot.driveTrain.getRightPosition() == 300 && Robot.driveTrain.getLeftPosition() == 300);
 	}
 

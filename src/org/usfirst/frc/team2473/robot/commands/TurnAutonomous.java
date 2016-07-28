@@ -23,13 +23,14 @@ public class TurnAutonomous extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		turnAngle(ANGLE);
+		//turnAngle(ANGLE);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return Robot.driveTrain.getAngle() == ANGLE;
+		//return Robot.driveTrain.getAngle() == ANGLE;
+		return false;
 	}
 
 	@Override
@@ -45,9 +46,9 @@ public class TurnAutonomous extends Command {
 	}
 	
 	private void turnAngle(double ang) {
-		if(Robot.driveTrain.getAngle() != ANGLE) {
-			Robot.driveTrain.turnRight(0.2);
-		}
+		//if(Robot.driveTrain.getAngle() != ANGLE) {
+		//	Robot.driveTrain.turnRight(0.2);
+		//}
 	}
 
 }

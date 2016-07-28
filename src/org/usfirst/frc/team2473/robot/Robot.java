@@ -6,8 +6,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team2473.robot.commands.*;
 import org.usfirst.frc.team2473.robot.subsystems.*;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -24,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static Timer timer;
 	public static double start;
     Command autonomousCommand;
-
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -61,7 +63,9 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) {
+		Logger.getInstance().logLevel = Logger.LogLevel.Debug;
+
+    	if (autonomousCommand != null) {
         	timer.start();
         	start = timer.get();
         }

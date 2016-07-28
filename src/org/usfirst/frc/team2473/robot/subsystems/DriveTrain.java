@@ -1,7 +1,10 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
 import org.usfirst.frc.team2473.robot.RobotMap;
-import org.usfirst.frc.team2473.robot.commands.TankDrive;
+import org.usfirst.frc.team2473.robot.commands.AutonomousCommand;
+
+
+import org.usfirst.frc.team2473.robot.commands.ForwardAutonomous;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
@@ -31,8 +34,9 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain () {
 		super();
 		
-		gyro.reset();
-		gyro.calibrate();
+		//gyro = new Gyro();
+		//gyro.reset();
+		//gyro.calibrate();
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
@@ -56,7 +60,7 @@ public class DriveTrain extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        setDefaultCommand(new TankDrive());
+        setDefaultCommand(new ForwardAutonomous());
     }
     
     public void drive(double left, double right) {
@@ -89,9 +93,9 @@ public class DriveTrain extends Subsystem {
     	return ((CANTalon)(rightFrontCAN)).getEncPosition();
     }
     
-    public double getAngle() {
-    	return gyro.getAngle();
-    }
+   // public double getAngle() {
+    	//return gyro.getAngle();
+   // }
     
     public void log(){
     	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
