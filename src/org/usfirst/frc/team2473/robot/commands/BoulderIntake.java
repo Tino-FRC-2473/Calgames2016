@@ -1,3 +1,7 @@
+/*
+ * This command will run when the robot needs a boulder and stop when the boulder is in the robot.
+ */
+
 
 package org.usfirst.frc.team2473.robot.commands;
 
