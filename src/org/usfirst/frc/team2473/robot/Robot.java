@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 		//create new command here to assign to autonomousCommand()
 		timer = new Timer();
 		SmartDashboard.putData(driveTrain);
-		autonomousCommand = new ForwardAutonomous();
+		autonomousCommand = new AutonomousCommand();
     }
 
 	/**

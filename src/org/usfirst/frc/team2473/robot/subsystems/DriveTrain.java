@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,12 +24,15 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
-	
+	private Gyro gyro;
 	private RobotDrive drive;
 	private Encoder left_encoder, right_encoder;
 	
 	public DriveTrain () {
 		super();
+		
+		gyro.reset();
+		gyro.calibrate();
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
@@ -60,6 +64,14 @@ public class DriveTrain extends Subsystem {
     	
 	}
     
+    public void turnRight(double pow) {
+    	drive.tankDrive(-pow, pow);
+    }
+
+    public void turnLeft(double pow) {
+    	drive.tankDrive(pow, -pow);    	
+    }
+
     public double getRightSpeed(){
     	return ((CANTalon)rightFrontCAN).get();
     }
@@ -75,6 +87,10 @@ public class DriveTrain extends Subsystem {
 
     public double getRightPosition() {
     	return ((CANTalon)(rightFrontCAN)).getEncPosition();
+    }
+    
+    public double getAngle() {
+    	return gyro.getAngle();
     }
     
     public void log(){
