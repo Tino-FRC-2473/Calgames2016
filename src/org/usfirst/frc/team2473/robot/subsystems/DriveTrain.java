@@ -69,6 +69,14 @@ public class DriveTrain extends Subsystem {
     	return ((CANTalon)leftFrontCAN).get();
     }
     
+    public double getLeftPosition() {
+    	return ((CANTalon)(leftFrontCAN)).getEncPosition();
+    }
+
+    public double getRightPosition() {
+    	return ((CANTalon)(rightFrontCAN)).getEncPosition();
+    }
+    
     public void log(){
     	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
 		SmartDashboard.putNumber("Right Distance", right_encoder.getDistance());

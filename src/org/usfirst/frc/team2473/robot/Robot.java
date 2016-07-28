@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2473.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -20,7 +21,8 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static OI oi;
-
+	public static Timer timer;
+	public static double start;
     Command autonomousCommand;
 
     /**
@@ -30,12 +32,10 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	driveTrain = new DriveTrain();
 		oi = new OI();
-<<<<<<< HEAD
 		//create new command here to assign to autonomousCommand()
-=======
-		
+		timer = new Timer();
 		SmartDashboard.putData(driveTrain);
->>>>>>> master
+		autonomousCommand = new ForwardAutonomous();
     }
 
 	/**
@@ -61,7 +61,11 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        if (autonomousCommand != null) {
+        	timer.start();
+        	start = timer.get();
+        }
+        
     }
 
     /**
@@ -97,4 +101,9 @@ public class Robot extends IterativeRobot {
     public void log(){
     	driveTrain.log();
     }
+    
+    public static double getStart() {
+    	return start;
+    }
+    
 }
