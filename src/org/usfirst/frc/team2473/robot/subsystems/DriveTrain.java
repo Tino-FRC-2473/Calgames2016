@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
 	
 	
 	private RobotDrive drive;
-	private Encoder left_encoder, right_encoder;
+	private Encoder leftEncoder, rightEncoder;
 	
 	public DriveTrain (){
 		super();
@@ -45,11 +45,11 @@ public class DriveTrain extends Subsystem {
 		gyro.initGyro();
 		gyro.calibrate();
 		
-		left_encoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
-		right_encoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
+		leftEncoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
+		rightEncoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
 		
-		left_encoder.setDistancePerPulse(1);
-		right_encoder.setDistancePerPulse(1);
+		leftEncoder.setDistancePerPulse(1);
+		rightEncoder.setDistancePerPulse(1);
 		
 		drive.setMaxOutput(.70);
 		drive.setInvertedMotor(MotorType.kFrontLeft, true);
@@ -68,22 +68,27 @@ public class DriveTrain extends Subsystem {
    
 	}
     
-    public double getRightSpeed(){
-    	return ((CANTalon)rightFrontCAN).get();
+    public double getRightEncoder(){
+    	return rightEncoder.getDistance();
     }
     
-    public double getLeftSpeed(){
-    	
-    	return ((CANTalon)leftFrontCAN).get();
+    public double getLeftEncoder(){
+    	return leftEncoder.getDistance();
     }
     
-    public void resetGyro(){
+    public double getHeading(){
+    	return gyro.getAngle();
+    }
+    
+    public void reset(){
+    	rightEncoder.reset();
+    	leftEncoder.reset();
     	gyro.reset();
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
-		SmartDashboard.putNumber("Right Distance", right_encoder.getDistance());
+    	SmartDashboard.putNumber("Left Distance", leftEncoder.getDistance());
+		SmartDashboard.putNumber("Right Distance", rightEncoder.getDistance());
 		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
     }
 }
