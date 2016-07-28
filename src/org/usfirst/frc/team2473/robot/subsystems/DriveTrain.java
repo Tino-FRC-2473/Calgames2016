@@ -28,7 +28,6 @@ public class DriveTrain extends Subsystem {
 	
 	
 	private RobotDrive drive;
-	private Encoder leftEncoder, rightEncoder;
 	
 	public DriveTrain (){
 		super();
@@ -66,11 +65,11 @@ public class DriveTrain extends Subsystem {
 	}
     
     public double getRightEncoder(){
-    	return rightEncoder.getDistance();
+    	return ((CANTalon)rightFrontCAN).getEncPosition();
     }
     
     public double getLeftEncoder(){
-    	return leftEncoder.getDistance();
+    	return ((CANTalon)leftFrontCAN).getEncPosition();
     }
     
     public double getHeading(){
@@ -78,8 +77,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void reset(){
-    	rightEncoder.reset();
-    	leftEncoder.reset();
+    	((CANTalon)rightFrontCAN).setEncPosition(0);
+    	((CANTalon)leftFrontCAN).setEncPosition(0);
     	gyro.reset();
     }
     
