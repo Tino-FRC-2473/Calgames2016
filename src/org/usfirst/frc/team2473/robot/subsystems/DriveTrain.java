@@ -28,7 +28,6 @@ public class DriveTrain extends Subsystem {
 	
 	
 	private RobotDrive drive;
-	private Encoder leftEncoder, rightEncoder;
 	
 	public DriveTrain (){
 		super();
@@ -45,11 +44,8 @@ public class DriveTrain extends Subsystem {
 		gyro.initGyro();
 		gyro.calibrate();
 		
-		leftEncoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
-		rightEncoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
-		
-		leftEncoder.setDistancePerPulse(1);
-		rightEncoder.setDistancePerPulse(1);
+		((CANTalon)leftFrontCAN).setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		((CANTalon)rightFrontCAN).setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		
 		drive.setMaxOutput(.70);
 		drive.setInvertedMotor(MotorType.kFrontLeft, true);
@@ -69,11 +65,11 @@ public class DriveTrain extends Subsystem {
 	}
     
     public double getRightEncoder(){
-    	return rightEncoder.getDistance();
+    	return ((CANTalon)rightFrontCAN).getEncPosition();
     }
     
     public double getLeftEncoder(){
-    	return leftEncoder.getDistance();
+    	return ((CANTalon)leftFrontCAN).getEncPosition();
     }
     
     public double getHeading(){
@@ -81,14 +77,14 @@ public class DriveTrain extends Subsystem {
     }
     
     public void reset(){
-    	rightEncoder.reset();
-    	leftEncoder.reset();
+    	((CANTalon)rightFrontCAN).setEncPosition(0);
+    	((CANTalon)leftFrontCAN).setEncPosition(0);
     	gyro.reset();
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", leftEncoder.getDistance());
-		SmartDashboard.putNumber("Right Distance", rightEncoder.getDistance());
+    	SmartDashboard.putNumber("Left Distance", ((CANTalon)leftFrontCAN).getEncPosition());
+		SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition());
 		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
     }
 }
