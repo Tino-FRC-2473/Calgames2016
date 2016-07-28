@@ -3,6 +3,7 @@ package org.usfirst.frc.team2473.robot.subsystems;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -23,9 +24,11 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
+	private AnalogGyro gyro;
+	
 	
 	private RobotDrive drive;
-	private Encoder left_encoder, right_encoder;
+	private Encoder leftEncoder, rightEncoder;
 	
 	public DriveTrain (){
 		super();
@@ -37,11 +40,16 @@ public class DriveTrain extends Subsystem {
 		
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
 		
-		left_encoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
-		right_encoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
+		gyro = new AnalogGyro(RobotMap.gyro);
 		
-		left_encoder.setDistancePerPulse(1);
-		right_encoder.setDistancePerPulse(1);
+		gyro.initGyro();
+		gyro.calibrate();
+		
+		leftEncoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
+		rightEncoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
+		
+		leftEncoder.setDistancePerPulse(1);
+		rightEncoder.setDistancePerPulse(1);
 		
 		drive.setMaxOutput(.70);
 		drive.setInvertedMotor(MotorType.kFrontLeft, true);
@@ -60,18 +68,28 @@ public class DriveTrain extends Subsystem {
    
 	}
     
-    public double getRightSpeed(){
-    	return ((CANTalon)rightFrontCAN).get();
+    public double getRightEncoder(){
+    	return rightEncoder.getDistance();
     }
     
-    public double getLeftSpeed(){
-    	
-    	return ((CANTalon)leftFrontCAN).get();
+    public double getLeftEncoder(){
+    	return leftEncoder.getDistance();
+    }
+    
+    public double getHeading(){
+    	return gyro.getAngle();
+    }
+    
+    public void reset(){
+    	rightEncoder.reset();
+    	leftEncoder.reset();
+    	gyro.reset();
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
-		SmartDashboard.putNumber("Right Distance", right_encoder.getDistance());
+    	SmartDashboard.putNumber("Left Distance", leftEncoder.getDistance());
+		SmartDashboard.putNumber("Right Distance", rightEncoder.getDistance());
+		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
     }
 }
 
