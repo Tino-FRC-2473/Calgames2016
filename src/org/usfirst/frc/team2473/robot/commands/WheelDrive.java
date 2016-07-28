@@ -15,11 +15,9 @@ public class WheelDrive extends Command {
     	requires(Robot.driveTrain);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	OI o = Robot.oi;
     	
@@ -29,12 +27,14 @@ public class WheelDrive extends Command {
 			o.getJoystickOne().getZ() + "), Twist: " +
 			o.getJoystickOne().getTwist()
     	);
+    	
     	SmartDashboard.putString("DB/String 1", "Joy2: (" +
 			o.getJoystickTwo().getX() + ", " +
 			o.getJoystickTwo().getY() + ", " +
 			o.getJoystickTwo().getZ() + "), Twist: " +
 			o.getJoystickTwo().getTwist()
     	);
+    	
     	/*
     	Robot.driveTrain.drive(
     		-Robot.oi.getJoystickLeft().getY(),
@@ -48,13 +48,10 @@ public class WheelDrive extends Command {
         return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     	Robot.driveTrain.drive(0, 0);
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     	end();
     }
