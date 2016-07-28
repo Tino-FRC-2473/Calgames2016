@@ -45,11 +45,8 @@ public class DriveTrain extends Subsystem {
 		gyro.initGyro();
 		gyro.calibrate();
 		
-		leftEncoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
-		rightEncoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
-		
-		leftEncoder.setDistancePerPulse(1);
-		rightEncoder.setDistancePerPulse(1);
+		((CANTalon)leftFrontCAN).setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		((CANTalon)rightFrontCAN).setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		
 		drive.setMaxOutput(.70);
 		drive.setInvertedMotor(MotorType.kFrontLeft, true);
@@ -87,8 +84,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", leftEncoder.getDistance());
-		SmartDashboard.putNumber("Right Distance", rightEncoder.getDistance());
+    	SmartDashboard.putNumber("Left Distance", ((CANTalon)leftFrontCAN).getEncPosition());
+		SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition());
 		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
     }
 }
