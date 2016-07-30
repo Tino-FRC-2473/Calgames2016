@@ -17,8 +17,9 @@ public class Intake extends Subsystem {
 	public Intake(){
 		lowerIntake = new CANTalon(RobotMap.leftBackMotor);
 	}
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	
+    // The methods for controlling the subsystem go here.
+	//Call these methods from the commands.
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
