@@ -27,10 +27,12 @@ public class Intake extends Subsystem {
     
     public void start() {
     	lowerIntake.set(0.5);
+    	upperIntake.set(-0.5);
     }
     
     public void stop() {
     	lowerIntake.set(0);
+    	upperIntake.set(0);
     }
 }
 
