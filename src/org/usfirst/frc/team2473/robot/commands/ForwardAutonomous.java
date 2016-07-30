@@ -32,7 +32,7 @@ public class ForwardAutonomous extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Logger.log();
+
 		Robot.driveTrain.drive(pow, pow);
 		counter++;
 
