@@ -33,17 +33,19 @@ public class ForwardAutonomous extends Command {
 	protected void execute() {
 		// TODO Auto-generated method stub
 
-		Robot.driveTrain.drive(pow, pow);
-		counter++;
+//		Robot.driveTrain.drive(pow, pow);
+//		counter++;
 
 		Logger.getInstance().log(Robot.log, Double.toString(Robot.timer.get())); //print the running time
-//		Robot.driveTrain.drive(0.4, 0.4);
+//		System.out.println("Something printing");
+		Robot.driveTrain.drive(-pow, -pow);
 	}
 
 	@Override
 	protected boolean isFinished() {
 //		return false;
-		if(Robot.timer.get() == 2) {
+		if(Math.floor(Robot.timer.get()) == 4) {
+			System.out.println("FINISHED!");
 			return true;
 		} else {
 			return false;

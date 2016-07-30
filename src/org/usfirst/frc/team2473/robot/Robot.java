@@ -65,11 +65,11 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-		Logger.getInstance().logLevel = Logger.LogLevel.Debug;
 
     	if (autonomousCommand != null) {
         	timer.start();
         	start = timer.get();
+        	autonomousCommand.start();
         }
         
     }

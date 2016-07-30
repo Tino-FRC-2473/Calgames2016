@@ -60,7 +60,7 @@ public class DriveTrain extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        setDefaultCommand(new ForwardAutonomous());
+
     }
     
     public void drive(double left, double right) {
