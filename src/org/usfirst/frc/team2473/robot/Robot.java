@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
 	public static Timer timer;
 	public static double start;
     Command autonomousCommand;
-
+    public static Logger.LogLevel log;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot {
 		timer = new Timer();
 		SmartDashboard.putData(driveTrain);
 		autonomousCommand = new AutonomousCommand();
+		log = Logger.LogLevel.Debug;
     }
 
 	/**
@@ -105,5 +106,5 @@ public class Robot extends IterativeRobot {
     public static double getStart() {
     	return start;
     }
-    
+        
 }
