@@ -35,6 +35,9 @@ public class ForwardAutonomous extends Command {
 		Logger.log();
 		Robot.driveTrain.drive(pow, pow);
 		counter++;
+
+		Logger.getInstance().log(Robot.log, Double.toString(Robot.timer.get())); //print the running time
+//		Robot.driveTrain.drive(0.4, 0.4);
 	}
 
 	@Override
