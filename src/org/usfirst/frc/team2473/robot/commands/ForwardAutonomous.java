@@ -37,7 +37,8 @@ public class ForwardAutonomous extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Robot.timer.get() == (Robot.start + 5));
+//		return (Robot.timer.get() == (Robot.start + 5));
+		return (Robot.driveTrain.getRightPosition() >= 300 && Robot.driveTrain.getLeftPosition() >= 300);
 //		return (Robot.driveTrain.getRightPosition() == 300 && Robot.driveTrain.getLeftPosition() == 300);
 	}
 

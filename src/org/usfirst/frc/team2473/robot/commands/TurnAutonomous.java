@@ -45,7 +45,7 @@ public class TurnAutonomous extends Command {
 	}
 	
 	private void turnAngle(double ang) {
-		if(Robot.driveTrain.getAngle() != ANGLE) {
+		if(!(Robot.driveTrain.getAngle() - ANGLE <=  5)) {
 			Robot.driveTrain.turnRight(0.2);
 		}
 	}
