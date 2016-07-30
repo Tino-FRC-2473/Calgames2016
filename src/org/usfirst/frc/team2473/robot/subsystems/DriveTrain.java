@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.GyroBase;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,13 +27,14 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
-	private GyroBase gyro = new GyroBase();
+	private AnalogGyro gyro;
 	private RobotDrive drive;
 	private Encoder left_encoder, right_encoder;
 	
 	public DriveTrain () {
 		super();
 
+		gyro = new AnalogGyro(RobotMap.gyro);
 		gyro.reset();
 		gyro.calibrate();
 		
