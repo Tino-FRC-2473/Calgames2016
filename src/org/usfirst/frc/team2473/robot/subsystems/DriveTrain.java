@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,16 +27,15 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
-	private Gyro gyro;
+	private GyroBase gyro = new GyroBase();
 	private RobotDrive drive;
 	private Encoder left_encoder, right_encoder;
 	
 	public DriveTrain () {
 		super();
-		
-		//gyro = new Gyro();
-		//gyro.reset();
-		//gyro.calibrate();
+
+		gyro.reset();
+		gyro.calibrate();
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
@@ -45,9 +44,10 @@ public class DriveTrain extends Subsystem {
 		
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
 		
+		
 		left_encoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
 		right_encoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
-		
+
 		left_encoder.setDistancePerPulse(1);
 		right_encoder.setDistancePerPulse(1);
 		
@@ -93,9 +93,9 @@ public class DriveTrain extends Subsystem {
     	return ((CANTalon)(rightFrontCAN)).getEncPosition();
     }
     
-   // public double getAngle() {
-    	//return gyro.getAngle();
-   // }
+    public double getAngle() {
+    	return gyro.getAngle();
+    }
     
     public void log(){
     	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());

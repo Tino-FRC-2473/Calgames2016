@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.Logger;
 import org.usfirst.frc.team2473.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,14 +24,20 @@ public class TurnAutonomous extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		//turnAngle(ANGLE);
+		Logger.getInstance().log(Robot.log, Double.toString(Robot.driveTrain.getAngle()));
+//		turnAngle(ANGLE);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		//return Robot.driveTrain.getAngle() == ANGLE;
-		return false;
+		if(Robot.driveTrain.getAngle() == ANGLE) {
+			System.out.println("FINISHED!");
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -46,15 +53,12 @@ public class TurnAutonomous extends Command {
 	}
 	
 	private void turnAngle(double ang) {
-<<<<<<< HEAD
 		//if(Robot.driveTrain.getAngle() != ANGLE) {
 		//	Robot.driveTrain.turnRight(0.2);
 		//}
-=======
 		if(!(Robot.driveTrain.getAngle() - ANGLE <=  5)) {
 			Robot.driveTrain.turnRight(0.2);
 		}
->>>>>>> origin/Autonomous
 	}
 
 }
