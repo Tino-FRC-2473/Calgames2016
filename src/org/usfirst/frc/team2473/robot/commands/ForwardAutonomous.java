@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.Logger;
 import org.usfirst.frc.team2473.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,7 +28,8 @@ public class ForwardAutonomous extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.driveTrain.drive(0.4, 0.4);
+		Logger.getInstance().log(Robot.log, Double.toString(Robot.timer.get())); //print the running time
+//		Robot.driveTrain.drive(0.4, 0.4);
 	}
 
 	@Override
