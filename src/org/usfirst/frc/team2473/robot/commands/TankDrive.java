@@ -18,8 +18,8 @@ public class TankDrive extends Command {
 
     protected void execute() {
     	Robot.driveTrain.drive(
-    		-Robot.oi.getJoystickOne().getY(),
-    		-Robot.oi.getJoystickTwo().getY()
+    		Math.pow(Robot.oi.getJoystickOne().getY(), 2),
+    		Math.pow(Robot.oi.getJoystickTwo().getY(), 2)
     	);
     }
 

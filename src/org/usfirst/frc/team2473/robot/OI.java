@@ -10,7 +10,7 @@ public class OI {
 	private Joystick joyTwo; //the controller plugged into port ONEEEE (1)
 	
 	public OI() {
-		
+		//sjin is short
 	}
 	
 	public Joystick getJoystickOne() {

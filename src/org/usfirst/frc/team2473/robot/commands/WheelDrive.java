@@ -28,7 +28,7 @@ public class WheelDrive extends Command {
 			o.getJoystickOne().getTwist()
     	);
     	
-    	SmartDashboard.putString("DB/String 1", "Joy2: (" +
+    	SmartDashboard.putString("DB/String 2", "Joy2: (" +
 			o.getJoystickTwo().getX() + ", " +
 			o.getJoystickTwo().getY() + ", " +
 			o.getJoystickTwo().getZ() + "), Twist: " +
@@ -37,9 +37,9 @@ public class WheelDrive extends Command {
     	
     	/*
     	Robot.driveTrain.drive(
-    		-Robot.oi.getJoystickLeft().getY(),
-    		-Robot.oi.getJoystickRight().getY()
-    	); 
+    		Math.pow(Robot.oi.getJoystickOne().getY(), 2),
+    		Math.pow(Robot.oi.getJoystickTwo().getY(), 2)
+    	);
     	*/
     }
 

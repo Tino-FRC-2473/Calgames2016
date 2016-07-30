@@ -15,7 +15,7 @@ public class ArcadeDrive extends Command {
 
     protected void initialize() {
     }
-
+    
     protected void execute() {
     	double throttle = -Robot.oi.getJoystickOne().getY();
     	double direction = Robot.oi.getJoystickOne().getX();
