@@ -15,9 +15,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * */
 
 public class ForwardAutonomous extends Command {
+<<<<<<< HEAD
 	int seconds = 3;
 	int counter = 0;
 	double pow = 0.4;
+=======
+	
+>>>>>>> origin/Autonomous
 	public ForwardAutonomous() {
 		requires(Robot.driveTrain); //runs using drive train mechanism
 	}
@@ -32,6 +36,7 @@ public class ForwardAutonomous extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 
 //		Robot.driveTrain.drive(pow, pow);
 //		counter++;
@@ -39,10 +44,18 @@ public class ForwardAutonomous extends Command {
 		Logger.getInstance().log(Robot.log, Double.toString(Robot.timer.get())); //print the running time
 //		System.out.println("Something printing");
 		Robot.driveTrain.drive(-pow, -pow);
+=======
+//		Logger.getInstance().log(Robot.log, Double.toString(Robot.timer.get())); //print the running time
+		Logger.getInstance().log(Robot.log, Double.toString(Robot.driveTrain.getRightPosition())); //print the right position
+		Logger.getInstance().log(Robot.log, Double.toString(Robot.driveTrain.getLeftPosition())); //print the left position
+//		Robot.driveTrain.drive(pow, pow);
+//		Robot.driveTrain.drive(0.4, 0.4);
+>>>>>>> origin/Autonomous
 	}
 
 	@Override
 	protected boolean isFinished() {
+<<<<<<< HEAD
 //		return false;
 		if(Math.floor(Robot.timer.get()) == 4) {
 			System.out.println("FINISHED!");
@@ -50,6 +63,10 @@ public class ForwardAutonomous extends Command {
 		} else {
 			return false;
 		}
+=======
+//		return (Robot.timer.get() == (Robot.start + 5));
+		return (Robot.driveTrain.getRightPosition() >= 300 && Robot.driveTrain.getLeftPosition() >= 300);
+>>>>>>> origin/Autonomous
 //		return (Robot.driveTrain.getRightPosition() == 300 && Robot.driveTrain.getLeftPosition() == 300);
 	}
 
