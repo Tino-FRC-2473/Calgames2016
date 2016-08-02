@@ -15,19 +15,19 @@ public class TankDrive extends Command {
 
     protected void initialize() {
     }
-
+    
     protected void execute() {
-    	Robot.driveTrain.drive(
-    		Math.pow(Robot.oi.getJoystickOne().getY(), 2),
-    		Math.pow(Robot.oi.getJoystickTwo().getY(), 2)
-    	);
+		Robot.driveTrain.drive(
+			Math.pow(Robot.oi.getJoystickOne().getY(), 2),
+			Math.pow(Robot.oi.getJoystickTwo().getY(), 2)
+		);
     }
 
+    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     	Robot.driveTrain.drive(0, 0);
     }
