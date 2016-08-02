@@ -19,8 +19,8 @@ public class OneJoyDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double left = -Robot.oi.getJoystickLeft().getY() + Robot.oi.getJoystickLeft().getTwist() * 0.2;
-    	double right = -Robot.oi.getJoystickLeft().getY() - Robot.oi.getJoystickLeft().getTwist() * 0.2;
+    	double left = -Robot.oi.getJoystickLeft().getY() + Robot.oi.getJoystickLeft().getTwist() * 0.7;
+    	double right = -Robot.oi.getJoystickLeft().getY() - Robot.oi.getJoystickLeft().getTwist() * 0.7;
     	Robot.driveTrain.drive(left, right);
     }
 
