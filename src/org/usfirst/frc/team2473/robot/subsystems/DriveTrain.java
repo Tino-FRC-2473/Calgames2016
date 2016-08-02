@@ -70,11 +70,11 @@ public class DriveTrain extends Subsystem {
 	}
     
     public void turnRight(double pow) {
-    	drive.tankDrive(-pow, pow);
+    	drive(pow, -pow);
     }
 
     public void turnLeft(double pow) {
-    	drive.tankDrive(pow, -pow);    	
+    	drive.tankDrive(-pow, pow);    	
     }
 
     public double getRightSpeed(){
