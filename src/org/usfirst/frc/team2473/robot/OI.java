@@ -10,6 +10,8 @@ public class OI {
 	private Joystick joyTwo; //the controller plugged into port ONEEEE (1)
 	
 	public OI() {
+		joyOne = new Joystick(0);
+		joyTwo = new Joystick(1);
 		
 	}
 	

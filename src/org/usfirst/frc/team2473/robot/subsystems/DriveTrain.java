@@ -43,16 +43,16 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		switch(driveType) {
-		case TANK:
+		/*switch(driveType) {
+		case TANK:*/
 			setDefaultCommand(new TankDrive());
-		case ARCADE:
+		/*case ARCADE:
 			setDefaultCommand(new ArcadeDrive());
 		case Z:
 			setDefaultCommand(new ZDrive());
 		case WHEEL:
 			setDefaultCommand(new WheelDrive());
-		}
+		}*/
 	}
 
 	public void drive(double left, double right) {
