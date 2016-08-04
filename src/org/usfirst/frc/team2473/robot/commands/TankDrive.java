@@ -17,10 +17,12 @@ public class TankDrive extends Command {
     }
     
     protected void execute() {
-		Robot.driveTrain.drive(
-			Math.pow(Robot.oi.getJoystickOne().getY(), 2),
-			Math.pow(Robot.oi.getJoystickTwo().getY(), 2)
-		);
+    	double motorScale = Robot.driveTrain.MOTOR_SCALE;
+    	
+    	double left = Math.abs(Robot.oi.getJoystickOne().getY()) * Robot.oi.getJoystickOne().getY();
+    	double right = Math.abs(Robot.oi.getJoystickOne().getY()) * Robot.oi.getJoystickOne().getY();
+    	
+		Robot.driveTrain.drive(motorScale*left, motorScale*right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

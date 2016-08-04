@@ -20,6 +20,7 @@ public class WheelDrive extends Command {
     }
 
     protected void execute() {
+    	//double motorScale = Robot.driveTrain.MOTOR_SCALE;
     	OI o = Robot.oi;
     	
     	SmartDashboard.putString("DB/String 1", "Joy1: (" +
@@ -36,12 +37,7 @@ public class WheelDrive extends Command {
 			o.getJoystickTwo().getTwist()
     	);
     	
-    	/*
-    	Robot.driveTrain.drive(
-    		Math.pow(Robot.oi.getJoystickOne().getY(), 2),
-    		Math.pow(Robot.oi.getJoystickTwo().getY(), 2)
-    	);
-    	*/
+    	//Robot.driveTrain.drive(motorScale*left, motorScale*right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

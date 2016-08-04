@@ -20,16 +20,14 @@ public class DriveTrain extends Subsystem {
 	CANTalon leftBackCAN;
 	CANTalon rightBackCAN;
 	
-	private enum DriveType {
-		TANK, ARCADE, Z, WHEEL
-	}
+	public final double MOTOR_SCALE = 0.7;
 	
-	private DriveType driveType = null;
+	private int driveType = 0;
 
 	public DriveTrain(int drive) {
 		super();
 		
-		driveType = intToDriveType(drive);
+		driveType = drive;
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
@@ -43,16 +41,18 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		/*switch(driveType) {
-		case TANK:*/
+		switch(driveType) {
+		case 2:
 			setDefaultCommand(new TankDrive());
-		/*case ARCADE:
+		case 3:
 			setDefaultCommand(new ArcadeDrive());
-		case Z:
+		case 4:
 			setDefaultCommand(new ZDrive());
-		case WHEEL:
+		case 5:
 			setDefaultCommand(new WheelDrive());
-		}*/
+		default:
+			setDefaultCommand(new TankDrive());
+		}
 	}
 
 	public void drive(double left, double right) {
@@ -60,21 +60,6 @@ public class DriveTrain extends Subsystem {
 		leftBackCAN.set(-left);
 		rightFrontCAN.set(right);
 		rightBackCAN.set(right);
-	}
-
-	private DriveType intToDriveType(int c) {
-		switch(c) {
-		case 2:
-			return DriveType.TANK;
-		case 3:
-			return DriveType.ARCADE;
-		case 4:
-			return DriveType.Z;
-		case 5:
-			return DriveType.WHEEL;
-		}
-			
-		return DriveType.TANK;
 	}
 	
 	private void setUpDriveMotors(CANTalon tal) {

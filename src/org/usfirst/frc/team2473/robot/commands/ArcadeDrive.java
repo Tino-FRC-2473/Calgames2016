@@ -17,16 +17,17 @@ public class ArcadeDrive extends Command {
     }
     
     protected void execute() {
+    	double motorScale = Robot.driveTrain.MOTOR_SCALE;
+    	
     	double throttle = -Robot.oi.getJoystickOne().getY();
     	double direction = Robot.oi.getJoystickOne().getX();
-    	
+    	double left = throttle + direction;
     	double right = throttle - direction;
-		double left = throttle + direction;
     	
-		Robot.driveTrain.drive(
-			Math.pow(left, 2),
-			Math.pow(right, 2)
-		);
+    	left = Math.abs(left) * left;
+		right = Math.abs(right) * right;
+    	
+		Robot.driveTrain.drive(motorScale*left, motorScale*right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
