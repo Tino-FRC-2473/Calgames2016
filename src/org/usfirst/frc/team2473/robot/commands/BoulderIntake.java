@@ -16,7 +16,7 @@ public class BoulderIntake extends Command {
 
     public BoulderIntake() {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.intake);
+    	requires(Robot.pickup);
     }
 
     // Called just before this Command runs the first time
@@ -25,20 +25,17 @@ public class BoulderIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.start();
+    	Robot.pickup.startIntake();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (boulderInside()) {
-    		return true;
-    	}
-    	return false;
+    	return boulderInside();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intake.stop();
+    	Robot.pickup.stopIntake();
     }
 
     // Called when another command which requires one or more of the same
