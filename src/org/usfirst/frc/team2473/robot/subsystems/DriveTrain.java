@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
 		setUpDriveMotors(leftFrontCAN);
 		setUpDriveMotors(rightFrontCAN);
 		setUpDriveMotors(leftBackCAN);
-		setUpDriveMotors(rightBackCAN);
+		setUpDriveMotors(rightBackCAN);	
 	}
 
 	public void initDefaultCommand() {
