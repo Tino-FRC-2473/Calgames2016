@@ -22,7 +22,7 @@ public class TurnAutonomous extends Command {
 	}
 
 	@Override
-	protected void execute() {
+	protected void execute() { 
 		// TODO Auto-generated method stub
 		System.out.println("Angle: " + Math.floor(Robot.driveTrain.getAngle()));
 //		Logger.getInstance().log(Robot.log, "Angle: " + Double.toString(Robot.driveTrain.getAngle()));
