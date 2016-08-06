@@ -19,8 +19,8 @@ public class TankDrive extends Command {
     protected void execute() {
     	double motorScale = Robot.driveTrain.MOTOR_SCALE;
     	
-    	double left = Math.abs(Robot.oi.getJoystickOne().getY()) * Robot.oi.getJoystickOne().getY();
-    	double right = Math.abs(Robot.oi.getJoystickOne().getY()) * Robot.oi.getJoystickOne().getY();
+    	double left = -Math.abs(Robot.oi.getJoystickOne().getY()) * Robot.oi.getJoystickOne().getY();
+    	double right = -Math.abs(Robot.oi.getJoystickTwo().getY()) * Robot.oi.getJoystickTwo().getY();
     	
 		Robot.driveTrain.drive(motorScale*left, motorScale*right);
     }

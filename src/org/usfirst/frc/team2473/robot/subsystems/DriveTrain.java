@@ -9,6 +9,7 @@ import org.usfirst.frc.team2473.robot.commands.ZDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -44,14 +45,19 @@ public class DriveTrain extends Subsystem {
 		switch(driveType) {
 		case 2:
 			setDefaultCommand(new TankDrive());
+			break;
 		case 3:
 			setDefaultCommand(new ArcadeDrive());
+			break;
 		case 4:
 			setDefaultCommand(new ZDrive());
+			break;
 		case 5:
 			setDefaultCommand(new WheelDrive());
+			break;
 		default:
 			setDefaultCommand(new TankDrive());
+			break;
 		}
 	}
 

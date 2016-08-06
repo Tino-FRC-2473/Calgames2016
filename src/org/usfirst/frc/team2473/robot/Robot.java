@@ -25,16 +25,16 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putString("DB/String 1", "Select the drive control you wish to use by pressing a button.");
     	SmartDashboard.putString("DB/String 2", "(2: TANK), (3: ARCADE), (4: Z), (5: WHEEL), (1: DEFAULT [TANK])");
     	
-    	while(drive == 0) {
-    		for(int i = 1; i <= 5; i++) {
-    			if(oi.getJoystickOne().getRawButton(i)) {
-    				drive = i;
-    				break;
-    			}
-    		}
-    	}
+//    	while(drive == 0) {
+//    		for(int i = 1; i <= 5; i++) {
+//    			if(oi.getJoystickOne().getRawButton(i)) {
+//    				drive = i;
+//    				break;
+//    			}
+//    		}
+//    	}
     	
-    	driveTrain = new DriveTrain(drive);
+    	driveTrain = new DriveTrain(3/*drive*/);
     }
 
     public void autonomousInit() {

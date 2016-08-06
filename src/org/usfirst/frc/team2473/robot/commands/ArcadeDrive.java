@@ -24,6 +24,11 @@ public class ArcadeDrive extends Command {
     	double left = throttle + direction;
     	double right = throttle - direction;
     	
+    	if(left > 1.0) left = 1.0;
+    	if(right > 1.0) right = 1.0;
+    	if(left < -1.0) left = -1.0;
+    	if(right < -1.0) right = -1.0;
+    	
     	left = Math.abs(left) * left;
 		right = Math.abs(right) * right;
     	
