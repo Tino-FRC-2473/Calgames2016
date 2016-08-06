@@ -20,21 +20,8 @@ public class Robot extends IterativeRobot {
 	private int drive = 0;
 
     public void robotInit() {
+    	driveTrain = new DriveTrain(drive);
     	oi = new OI();
-    	
-    	SmartDashboard.putString("DB/String 1", "Select the drive control you wish to use by pressing a button.");
-    	SmartDashboard.putString("DB/String 2", "(2: TANK), (3: ARCADE), (4: Z), (5: WHEEL), (1: DEFAULT [TANK])");
-    	
-//    	while(drive == 0) {
-//    		for(int i = 1; i <= 5; i++) {
-//    			if(oi.getJoystickOne().getRawButton(i)) {
-//    				drive = i;
-//    				break;
-//    			}
-//    		}
-//    	}
-    	
-    	driveTrain = new DriveTrain(3/*drive*/);
     }
 
     public void autonomousInit() {
@@ -47,6 +34,20 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        SmartDashboard.putString("DB/String 0", "Select the drive control you wish to use by pressing a button.");
+        SmartDashboard.putString("DB/String 1", "Otherwise, just press 1, the trigger.");
+    	SmartDashboard.putString("DB/String 2", "(2: TANK), (3: ARCADE), (4: Z), (5: WHEEL), (1: DEFAULT [TANK])");
+    	
+    	while(drive == 0) {
+    		for(int i = 1; i <= 5; i++) {
+    			if(oi.getJoystickOne().getRawButton(i)) {
+    				drive = i;
+    				driveTrain.setDriveType(drive);
+    				break;
+    			}
+    		}
+    	}
     }
 
     public void teleopPeriodic() {

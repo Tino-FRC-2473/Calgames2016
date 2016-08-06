@@ -9,7 +9,6 @@ import org.usfirst.frc.team2473.robot.commands.ZDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -42,7 +41,15 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		switch(driveType) {
+		setDriveType(driveType);
+	}
+	
+	public void changeDriveType(int d) {
+		setDriveType(driveType);
+	}
+
+	public void setDriveType(int d) {
+		switch(d) {
 		case 2:
 			setDefaultCommand(new TankDrive());
 			break;
@@ -60,7 +67,7 @@ public class DriveTrain extends Subsystem {
 			break;
 		}
 	}
-
+	
 	public void drive(double left, double right) {
 		leftFrontCAN.set(-left);
 		leftBackCAN.set(-left);
