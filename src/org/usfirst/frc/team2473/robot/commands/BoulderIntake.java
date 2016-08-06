@@ -30,7 +30,7 @@ public class BoulderIntake extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return boulderInside();
+    	return isBoulderInside();
     }
 
     // Called once after isFinished returns true
@@ -43,7 +43,8 @@ public class BoulderIntake extends Command {
     protected void interrupted() {
     }
     
-    private boolean boulderInside() {
+    private boolean isBoulderInside() {
+    	//Get data from the shooter's breakbeam to determine when to stop running execute()
     	return false;
     }
 }

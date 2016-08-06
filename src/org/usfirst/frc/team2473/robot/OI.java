@@ -2,6 +2,8 @@ package org.usfirst.frc.team2473.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 import org.usfirst.frc.team2473.robot.commands.*;
 
 /**
@@ -40,7 +42,6 @@ public class OI {
 	private Joystick joyRight = new Joystick(1);
 	
 	public OI() {
-		
 		
 	}
 	
