@@ -23,14 +23,14 @@ public class WheelDrive extends Command {
     	//double motorScale = Robot.driveTrain.MOTOR_SCALE;
     	OI o = Robot.oi;
     	
-    	SmartDashboard.putString("DB/String 1", "Joy1: (" +
+    	SmartDashboard.putString("DB/String 0", "Joy1: (" +
 			o.getJoystickOne().getX() + ", " +
 			o.getJoystickOne().getY() + ", " +
 			o.getJoystickOne().getZ() + "), Twist: " +
 			o.getJoystickOne().getTwist()
     	);
     	
-    	SmartDashboard.putString("DB/String 2", "Joy2: (" +
+    	SmartDashboard.putString("DB/String 1", "Joy2: (" +
 			o.getJoystickTwo().getX() + ", " +
 			o.getJoystickTwo().getY() + ", " +
 			o.getJoystickTwo().getZ() + "), Twist: " +
