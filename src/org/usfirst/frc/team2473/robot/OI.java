@@ -41,8 +41,10 @@ public class OI {
 	private Joystick joyLeft = new Joystick(0);
 	private Joystick joyRight = new Joystick(1);
 	
+	Button button1 = new JoystickButton(joyLeft, 1);
+	
 	public OI() {
-		
+		button1.whenPressed(new IntakePosition());
 	}
 	
 	public Joystick getJoystickLeft() {
