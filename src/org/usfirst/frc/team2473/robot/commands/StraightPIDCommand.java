@@ -6,29 +6,30 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class StraightPIDCommand extends Command {
 
-	double left_previous, right_previous, dL, dR, pow, pow_r, pow_l, total, k;
+	double left_previous, right_previous, dL, dR, pow, total;
+	double distance;
+	double difference;
+	double speed;
 	
-	public StraightPIDCommand() {
+	final double KP = 0.1;
+	final double KI = 0.1;
+	
+	final static double FOREVER = -1;
+
+	public StraightPIDCommand(double distance, double speed) {
 		requires(Robot.driveTrain);
+		this.distance = distance;
+		this.speed = speed;
 	}
 	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
-		left_previous = 0;
-		right_previous = 0;
-		dL = 0;
-		dR = 0;
 		pow = 0.1;
-		pow_r = pow;
-		pow_l = pow;
-		total = 0;
-		k = 0.1;
+		Robot.driveTrain.drive(speed, speed);
 	}
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
 		dL = Robot.driveTrain.getLeftPosition() - left_previous;
 		dR = Robot.driveTrain.getRightPosition() - right_previous;
 		left_previous = Robot.driveTrain.getLeftPosition();
@@ -37,21 +38,20 @@ public class StraightPIDCommand extends Command {
 		double dE = dL - dR;
 		total += dE;
 
-		pow_r = pow_r + k*(total);
-		Robot.driveTrain.drive(pow_l, pow_r);
-		System.out.println("Left: " + pow_l + " Right: " + pow_r);
+		difference = difference + KP*dE + KI*(total);
+		Robot.driveTrain.drive(speed - difference, speed + difference);
+		System.out.println("Left: " + (speed - difference) + " Right: " + (speed + difference));
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		return distance == FOREVER ? false : (Robot.driveTrain.getLeftPosition() + Robot.driveTrain.getRightPosition())/2 > distance;
 	}
 
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
-		
+		Robot.driveTrain.drive(0, 0);
 	}
 
 	@Override
