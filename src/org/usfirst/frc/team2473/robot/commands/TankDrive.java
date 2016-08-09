@@ -17,12 +17,13 @@ public class TankDrive extends Command {
     }
     
     protected void execute() {
-    	double motorScale = Robot.driveTrain.MOTOR_SCALE;
     	
     	double left = -Math.abs(Robot.oi.getJoystickOne().getY()) * Robot.oi.getJoystickOne().getY();
     	double right = -Math.abs(Robot.oi.getJoystickTwo().getY()) * Robot.oi.getJoystickTwo().getY();
     	
-		Robot.driveTrain.drive(motorScale*left, motorScale*right);
+    	left = limitRangeAndScaleAndSquare(left);
+    	right = limitRangeAndScaleAndSquare(right);
+		Robot.driveTrain.drive(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,5 +37,16 @@ public class TankDrive extends Command {
 
     protected void interrupted() {
     	end();
+    }
+    
+    private double limitRangeAndScaleAndSquare(double x) {
+    	if(x < -1.0) x = -1.0;
+    	if(x > 1.0) x = 1.0;
+    	
+    	x = Math.abs(x) * x;
+    	
+    	x = Robot.driveTrain.MOTOR_SCALE * x;
+    	
+    	return x;
     }
 }

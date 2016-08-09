@@ -20,24 +20,23 @@ public class WheelDrive extends Command {
     }
 
     protected void execute() {
-    	//double motorScale = Robot.driveTrain.MOTOR_SCALE;
     	OI o = Robot.oi;
     	
-    	SmartDashboard.putString("DB/String 0", "Joy1: (" +
-			o.getJoystickOne().getX() + ", " +
-			o.getJoystickOne().getY() + ", " +
-			o.getJoystickOne().getZ() + "), Twist: " +
-			o.getJoystickOne().getTwist()
-    	);
+    	SmartDashboard.putString("DB/String 0", "Joy1");
+    	SmartDashboard.putString("DB/String 1", "X: " + o.getJoystickOne().getX());
+    	SmartDashboard.putString("DB/String 2", "Y: " + o.getJoystickOne().getY());
+    	SmartDashboard.putString("DB/String 3", "Z: " + o.getJoystickOne().getZ());
+    	SmartDashboard.putString("DB/String 4", "Tw: " + o.getJoystickOne().getTwist());
     	
-    	SmartDashboard.putString("DB/String 1", "Joy2: (" +
-			o.getJoystickTwo().getX() + ", " +
-			o.getJoystickTwo().getY() + ", " +
-			o.getJoystickTwo().getZ() + "), Twist: " +
-			o.getJoystickTwo().getTwist()
-    	);
+    	SmartDashboard.putString("DB/String 5", "Joy2");
+    	SmartDashboard.putString("DB/String 6", "X: " + o.getJoystickTwo().getX());
+    	SmartDashboard.putString("DB/String 7", "Y: " + o.getJoystickTwo().getY());
+    	SmartDashboard.putString("DB/String 8", "Z: " + o.getJoystickTwo().getZ());
+    	SmartDashboard.putString("DB/String 9", "Tw: " + o.getJoystickTwo().getTwist());
     	
-    	//Robot.driveTrain.drive(motorScale*left, motorScale*right);
+    	//left = limitRangeAndScaleAndSquare(left);
+    	//right = limitRangeAndScaleAndSquare(right);
+		//Robot.driveTrain.drive(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -52,4 +51,15 @@ public class WheelDrive extends Command {
     protected void interrupted() {
     	end();
     }
+    
+    /*private double limitRangeAndScaleAndSquare(double x) {
+    	if(x < -1.0) x = -1.0;
+    	if(x > 1.0) x = 1.0;
+    	
+    	x = Math.abs(x) * x;
+    	
+    	x = Robot.driveTrain.MOTOR_SCALE * x;
+    	
+    	return x;
+    }*/
 }

@@ -1,15 +1,14 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
 import org.usfirst.frc.team2473.robot.RobotMap;
-import org.usfirst.frc.team2473.robot.commands.ArcadeDrive;
-import org.usfirst.frc.team2473.robot.commands.TankDrive;
-import org.usfirst.frc.team2473.robot.commands.WheelDrive;
-import org.usfirst.frc.team2473.robot.commands.ZDrive;
+import org.usfirst.frc.team2473.robot.commands.TeleOpCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,21 +17,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
 
-	CANTalon leftFrontCAN;
-	CANTalon rightFrontCAN;
-	CANTalon leftBackCAN;
-	CANTalon rightBackCAN;
+	private SpeedController leftFrontCAN;
+	private SpeedController rightFrontCAN;
+	private SpeedController leftBackCAN;
+	private SpeedController rightBackCAN;
 	
 	private RobotDrive drive;
 	
-	public final double MOTOR_SCALE = 0.7;
+	public final double MOTOR_SCALE = 0.6;
 	
-	private int driveType = 0;
+	private Command driveType;
 
-	public DriveTrain(int d) {
+	public DriveTrain(Command c) {
 		super();
 		
-		driveType = d;
+		driveType = c;
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
@@ -52,31 +51,7 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDriveType(driveType);
-	}
-	
-	public void changeDriveType(int d) {
-		setDriveType(driveType);
-	}
-
-	public void setDriveType(int d) {
-		switch(d) {
-		case 2:
-			setDefaultCommand(new TankDrive());
-			break;
-		case 3:
-			setDefaultCommand(new ArcadeDrive());
-			break;
-		case 4:
-			setDefaultCommand(new ZDrive());
-			break;
-		case 5:
-			setDefaultCommand(new WheelDrive());
-			break;
-		default:
-			setDefaultCommand(new TankDrive());
-			break;
-		}
+		setDefaultCommand(new TeleOpCommand(driveType));
 	}
 	
 	public void drive(double left, double right) {

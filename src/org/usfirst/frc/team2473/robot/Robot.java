@@ -5,22 +5,35 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team2473.robot.commands.ArcadeDrive;
+import org.usfirst.frc.team2473.robot.commands.TankDrive;
+import org.usfirst.frc.team2473.robot.commands.TeleOpCommand;
+import org.usfirst.frc.team2473.robot.commands.WheelDrive;
+import org.usfirst.frc.team2473.robot.commands.ZDrive;
 //import org.usfirst.frc.team2473.robot.commands.*;
 import org.usfirst.frc.team2473.robot.subsystems.*;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static OI oi;
 
-    Command autonomousCommand;
+    private Command autonomousCommand;
+    private Command teleOpCommand;
     
-	private int drive = 0;
+    private Command driveCmd;
 
-    public void robotInit() {
-    	driveTrain = new DriveTrain(drive);
+    public void robotInit() { //(1: TANK), (2: ARCADE), (3: Z), (4: WHEEL)
+    	int drive = 1;
+    	driveCmd = getDriveCmdFromInt(drive);
+    	
+    	teleOpCommand = new TeleOpCommand(driveCmd);
+    	//autonomousCommand = new AutonomousCommand();
+    	
+    	driveTrain = new DriveTrain(teleOpCommand);
     	oi = new OI();
     }
 
@@ -34,20 +47,6 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
         if (autonomousCommand != null) autonomousCommand.cancel();
-        
-        SmartDashboard.putString("DB/String 0", "Select the drive control you wish to use by pressing a button.");
-        SmartDashboard.putString("DB/String 1", "Otherwise, just press 1, the trigger.");
-    	SmartDashboard.putString("DB/String 2", "(2: TANK), (3: ARCADE), (4: Z), (5: WHEEL), (1: DEFAULT [TANK])");
-    	
-    	while(drive == 0) {
-    		for(int i = 1; i <= 5; i++) {
-    			if(oi.getJoystickOne().getRawButton(i)) {
-    				drive = i;
-    				driveTrain.setDriveType(drive);
-    				break;
-    			}
-    		}
-    	}
     }
 
     public void teleopPeriodic() {
@@ -57,5 +56,25 @@ public class Robot extends IterativeRobot {
     
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    private Command getDriveCmdFromInt(int d) {
+    	switch(d) {
+    	case 1:
+    		return new TankDrive();
+    		
+    	case 2:
+    		return new ArcadeDrive();
+    		
+    	case 3:
+    		return new ZDrive();
+    		
+    	case 4:
+    		return new WheelDrive();
+    		
+    	default:
+    		return new TankDrive();
+    		
+    	}
     }
 }

@@ -17,17 +17,14 @@ public class ZDrive extends Command {
     }
 
     protected void execute() {
-    	double motorScale = Robot.driveTrain.MOTOR_SCALE;
-    	
     	double throttle = -Robot.oi.getJoystickOne().getY();
-    	double direction = Robot.oi.getJoystickOne().getZ();
+    	double direction = Robot.oi.getJoystickTwo().getZ();
     	double left = throttle + direction;
     	double right = throttle - direction;
     	
-    	left = Math.abs(left) * left;
-		right = Math.abs(right) * right;
-    	
-		Robot.driveTrain.drive(motorScale*left, motorScale*right);
+    	left = limitRangeAndScaleAndSquare(left);
+    	right = limitRangeAndScaleAndSquare(right);
+		Robot.driveTrain.drive(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,5 +38,16 @@ public class ZDrive extends Command {
 
     protected void interrupted() {
     	end();
+    }
+    
+    private double limitRangeAndScaleAndSquare(double x) {
+    	if(x < -1.0) x = -1.0;
+    	if(x > 1.0) x = 1.0;
+    	
+    	x = Math.abs(x) * x;
+    	
+    	x = Robot.driveTrain.MOTOR_SCALE * x;
+    	
+    	return x;
     }
 }
