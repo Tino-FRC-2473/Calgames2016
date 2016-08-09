@@ -7,19 +7,33 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OneJoyDrive extends Command {
+public class DriveStraight extends Command {
 
-    public OneJoyDrive() {
-        requires(Robot.driveTrain);
+    public DriveStraight() {
+    	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveTrain.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.driveArcade(-Robot.oi.getJoystickLeft().getY(), Robot.oi.getJoystickLeft().getTwist() * .7);
+    	
+    	/*double error = Robot.driveTrain.getRightEncoder() - Robot.driveTrain.getLeftEncoder();
+    	double baseSpeed = .35;
+    	error /= 100;
+    	
+    	Robot.driveTrain.drive(baseSpeed + error,   baseSpeed - error);*/
+    	
+    	//double direction = Math.abs(Robot.driveTrain.getHeading())/Robot.driveTrain.getHeading();
+    	//Robot.driveTrain.driveArcade(.6, Math.min(Math.abs(Robot.driveTrain.getHeading()*.3),.5)*direction);
+    	
+    	double error = Robot.driveTrain.getHeading();
+    	
+    	Robot.driveTrain.driveArcade(.7, -error*.3);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

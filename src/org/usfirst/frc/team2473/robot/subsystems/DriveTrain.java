@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
 import org.usfirst.frc.team2473.robot.RobotMap;
+import org.usfirst.frc.team2473.robot.commands.DriveStraight;
 import org.usfirst.frc.team2473.robot.commands.OneJoyDrive;
 import org.usfirst.frc.team2473.robot.commands.TankDrive;
 
@@ -28,8 +29,10 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightBackCAN;
 	private AnalogGyro gyro;
 	private AnalogInput ir;
+	private CANTalon leftFront;
+	private CANTalon rightFront;
 	
-	private double leftEncConstant = .018461; //scales encoders to inches
+	private double leftEncConstant = .01944349; //scales encoders to inches
 	private double rightEncConstant = .00827586;
 	
 	
@@ -51,8 +54,12 @@ public class DriveTrain extends Subsystem {
 		gyro.initGyro();
 		gyro.calibrate();
 		
-		((CANTalon)leftFrontCAN).setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		((CANTalon)rightFrontCAN).setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftFront = ((CANTalon)leftFrontCAN);
+		rightFront = ((CANTalon)rightFrontCAN);
+		
+		
+		leftFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 
 		reset();
 		
@@ -65,7 +72,7 @@ public class DriveTrain extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        setDefaultCommand(new OneJoyDrive());
+         setDefaultCommand(new DriveStraight());
     }
     
     public void drive(double left, double right) {
@@ -73,12 +80,17 @@ public class DriveTrain extends Subsystem {
    
 	}
     
+    public void driveArcade(double speed, double rotate) {
+    	drive.arcadeDrive(speed, rotate);
+   
+	}
+    
     public double getRightEncoder(){
-    	return ((CANTalon)rightFrontCAN).getEncPosition() * rightEncConstant;
+    	return rightFront.getEncPosition() * rightEncConstant;
     }
     
     public double getLeftEncoder(){
-    	return ((CANTalon)leftFrontCAN).getEncPosition() * leftEncConstant;
+    	return leftFront.getEncPosition() * leftEncConstant;
     }
     
     public double getHeading(){
@@ -86,14 +98,16 @@ public class DriveTrain extends Subsystem {
     }
     
     public void reset(){
-    	((CANTalon)rightFrontCAN).setEncPosition(0);
-    	((CANTalon)leftFrontCAN).setEncPosition(0);
+    	rightFront.setEncPosition(0);
+    	leftFront.setEncPosition(0);
     	gyro.reset();
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", ((CANTalon)leftFrontCAN).getEncPosition() *  leftEncConstant);
-		SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition() *  rightEncConstant);
+    	SmartDashboard.putNumber("Left Distance", leftFront.getEncPosition() *  leftEncConstant);
+		SmartDashboard.putNumber("Right Distance", rightFront.getEncPosition() *  rightEncConstant);
+	//	SmartDashboard.putNumber("Left Velocity", ((CANTalon)leftFrontCAN).getEncVelocity() *  leftEncConstant);
+	//	SmartDashboard.putNumber("Right Velocity", ((CANTalon)rightFrontCAN).getEncVelocity() *  rightEncConstant);
 		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
 
     }
