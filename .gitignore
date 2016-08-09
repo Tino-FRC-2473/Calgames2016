@@ -67,3 +67,4 @@ $RECYCLE.BIN/
 *.lnk
 *.properties
 *.xml
+/bin/
