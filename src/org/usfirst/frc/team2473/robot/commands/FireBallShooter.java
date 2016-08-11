@@ -1,7 +1,9 @@
 package org.usfirst.frc.team2473.robot.commands;
 
 import org.usfirst.frc.team2473.robot.Robot;
+import org.usfirst.frc.team2473.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,11 +12,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class FireBallShooter extends Command {
 	
-	double speed;
+	double percentageOfSpeedOnMotor;
+	private DigitalInput breakbeam;
 	
 	public FireBallShooter(){
 		requires(Robot.ballShooter);
-		speed = .5;
+		percentageOfSpeedOnMotor = .5;
+		breakbeam = new DigitalInput(RobotMap.breakbeamChannel);
 	}
 	
 	//Startup the 
@@ -26,7 +30,7 @@ public class FireBallShooter extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.ballShooter.spinMotor(speed);		
+		Robot.ballShooter.spinMotor(percentageOfSpeedOnMotor);		
 	}
 
 	@Override
@@ -34,13 +38,14 @@ public class FireBallShooter extends Command {
 		// TODO Auto-generated method stub
 		//Check if the BreakBeam is completed and if it is then the ball is not 
 		//inside anymore
-		return false;
+		return !breakbeam.get();
 	}
 
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
 		Robot.ballShooter.spinMotor(0);
+		
 	}
 
 	@Override

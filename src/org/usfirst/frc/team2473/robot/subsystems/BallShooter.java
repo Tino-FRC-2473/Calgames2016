@@ -9,12 +9,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class BallShooter extends Subsystem{
 
 	private CANTalon shooterCAN;
-	
+
 	public BallShooter(){
 		super();
-		
 		shooterCAN = new CANTalon(RobotMap.ballShooterMotor);
-		
 	}
 	
 	@Override

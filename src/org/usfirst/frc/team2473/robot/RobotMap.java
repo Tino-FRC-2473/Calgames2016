@@ -21,6 +21,7 @@ public class RobotMap {
 	public static final int leftBackMotor = 8;
 	public static final int rightBackMotor = 2;
 	public static final int gyro = 0;
-	public static final int ballShooterMotor = 1; //Not sure about the number as of now. 
+	public static final int ballShooterMotor = 888; //Not sure about the number as of now. 
 												  //Just a number for now
+	public static final int breakbeamChannel = 999;
 }
