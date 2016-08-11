@@ -14,26 +14,26 @@ public class MoveChevalMech extends Command {
 	@Override
 	protected void initialize() {
 		
-		currentpos = Robot.chevalmech.get();
+		currentpos = Robot.chevalmech.get(); // Gets the current position of the piston.
 
 	}
 
 	@Override
 	protected void execute() {
 		
-		Robot.chevalmech.set(!currentpos);
+		Robot.chevalmech.set(!currentpos); // Changes position of piston.
 		
 	}
 
 	@Override
 	protected boolean isFinished() {
 		
-		return Robot.chevalmech.get() == !currentpos;
+		return Robot.chevalmech.get() == !currentpos; // Check if the position if fully changed
 	}
 
 	@Override
 	protected void end() {
-		currentpos = Robot.chevalmech.get();
+		currentpos = Robot.chevalmech.get(); //Reset Current Position
 
 	}
 

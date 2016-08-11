@@ -20,11 +20,12 @@ public class ChevalMech extends Subsystem {
 	protected void initDefaultCommand() {
 		
 	}
-	
+	// Sets position of piston ( True / False )
 	public void set(Boolean pos){
 		chevalM.set(pos);
 	}
 	
+	// Returns Position of piston returns (True / False)
 	public boolean get(){
 		return chevalM.get();
 	}
