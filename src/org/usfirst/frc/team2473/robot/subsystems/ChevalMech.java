@@ -24,5 +24,9 @@ public class ChevalMech extends Subsystem {
 	public void set(Boolean pos){
 		chevalM.set(pos);
 	}
+	
+	public boolean get(){
+		return chevalM.get();
+	}
 
 }

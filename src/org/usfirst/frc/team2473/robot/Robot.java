@@ -20,6 +20,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static OI oi;
+	public static ChevalMech chevalmech;
 
     Command autonomousCommand;
 
