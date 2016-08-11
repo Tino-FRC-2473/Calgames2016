@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -23,7 +23,7 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightBackCAN;
 	
 	private RobotDrive drive;
-	
+  	
 	public final double MOTOR_SCALE = 0.6;
 	
 	private Command driveType;
@@ -67,7 +67,7 @@ public class DriveTrain extends Subsystem {
     }
 	
 	public void log() {
-		SmartDashboard.putNumber("Left Distance", ((CANTalon)leftFrontCAN).getEncPosition());
-		SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition());
+		//SmartDashboard.putNumber("Left Distance", ((CANTalon)leftFrontCAN).getEncPosition());
+		//SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition());
 	}
 }

@@ -26,13 +26,11 @@ public class WheelDrive extends Command {
     	SmartDashboard.putString("DB/String 1", "X: " + o.getJoystickOne().getX());
     	SmartDashboard.putString("DB/String 2", "Y: " + o.getJoystickOne().getY());
     	SmartDashboard.putString("DB/String 3", "Z: " + o.getJoystickOne().getZ());
-    	SmartDashboard.putString("DB/String 4", "Tw: " + o.getJoystickOne().getTwist());
     	
     	SmartDashboard.putString("DB/String 5", "Joy2");
     	SmartDashboard.putString("DB/String 6", "X: " + o.getJoystickTwo().getX());
     	SmartDashboard.putString("DB/String 7", "Y: " + o.getJoystickTwo().getY());
     	SmartDashboard.putString("DB/String 8", "Z: " + o.getJoystickTwo().getZ());
-    	SmartDashboard.putString("DB/String 9", "Tw: " + o.getJoystickTwo().getTwist());
     	
     	//left = limitRangeAndScaleAndSquare(left);
     	//right = limitRangeAndScaleAndSquare(right);

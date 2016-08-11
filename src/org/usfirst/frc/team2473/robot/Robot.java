@@ -26,7 +26,8 @@ public class Robot extends IterativeRobot {
     
     private Command driveCmd;
 
-    public void robotInit() { //(1: TANK), (2: ARCADE), (3: Z), (4: WHEEL)
+    public void robotInit() {
+    	//(1: TANK), (2: ARCADE), (3: Z), (4: WHEEL)
     	int drive = 1;
     	driveCmd = getDriveCmdFromInt(drive);
     	

@@ -18,8 +18,8 @@ public class TankDrive extends Command {
     
     protected void execute() {
     	
-    	double left = -Math.abs(Robot.oi.getJoystickOne().getY()) * Robot.oi.getJoystickOne().getY();
-    	double right = -Math.abs(Robot.oi.getJoystickTwo().getY()) * Robot.oi.getJoystickTwo().getY();
+    	double left = -Robot.oi.getJoystickOne().getY();
+    	double right = -Robot.oi.getJoystickTwo().getY();
     	
     	left = limitRangeAndScaleAndSquare(left);
     	right = limitRangeAndScaleAndSquare(right);
