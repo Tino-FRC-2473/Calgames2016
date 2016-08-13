@@ -12,11 +12,9 @@ import org.usfirst.frc.team2473.robot.Robot;
 /**
  *
  */
-public class IntakePosition extends Command {
-	
-	private String previousPosition = "Reverse";
+public class MoveIntakeUp extends Command {
 
-    public IntakePosition() {
+    public MoveIntakeUp() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.pickup);
     }
@@ -27,14 +25,7 @@ public class IntakePosition extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.getJoystickLeft().getRawButton(1) && previousPosition.equals("Reverse")) {
-    		Robot.pickup.togglePiston(true);
-    		previousPosition = "Forward";
-    	}
-    	else if (Robot.oi.getJoystickLeft().getRawButton(1) && previousPosition.equals("Forward")) {
-    		Robot.pickup.togglePiston(false);
-    		previousPosition = "Reverse";
-    	}
+    	Robot.pickup.togglePiston(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()

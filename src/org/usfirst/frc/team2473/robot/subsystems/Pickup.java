@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2473.robot.RobotMap;
-import org.usfirst.frc.team2473.robot.commands.IntakePosition;
+import org.usfirst.frc.team2473.robot.commands.MoveIntakeUp;
 
 
 /**
@@ -29,8 +29,7 @@ public class Pickup extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new IntakePosition());
+    	setDefaultCommand(new MoveIntakeUp());
     }
     
     public void startIntake() {
