@@ -1,18 +1,19 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
+import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
-import org.usfirst.frc.team2473.robot.commands.TeleOpCommand;
+import org.usfirst.frc.team2473.robot.commands.TankDrive;
+//import org.usfirst.frc.team2473.robot.commands.TeleOpCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
+/**	
  *
  */
 public class DriveTrain extends Subsystem {
@@ -24,14 +25,10 @@ public class DriveTrain extends Subsystem {
 	
 	private RobotDrive drive;
   	
-	public final double MOTOR_SCALE = 0.6;
-	
-	private Command driveType;
+	public final double MOTOR_SCALE = 0.7;
 
-	public DriveTrain(Command c) {
+	public DriveTrain() {
 		super();
-		
-		driveType = c;
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
@@ -51,7 +48,10 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new TeleOpCommand(driveType));
+		setDefaultCommand(new TankDrive());
+		//setDefaultCommand(Robot.t);
+		//setDefaultCommand(new TeleOpCommand(1));
+		//setDefaultCommand(Robot.teleOpCommand);
 	}
 	
 	public void drive(double left, double right) {
