@@ -32,7 +32,7 @@ public class DriveStraight extends Command {
     	
     	double error = Robot.driveTrain.getHeading();
     	
-    	Robot.driveTrain.driveArcade(.7, -error*.3);
+    	Robot.driveTrain.driveArcade(.7, error*.3);
     	
     }
 

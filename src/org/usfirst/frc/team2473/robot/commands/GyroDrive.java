@@ -7,21 +7,27 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OneJoyDrive extends Command {
+public class GyroDrive extends Command {
 
-    public OneJoyDrive() {
+	private double newHeading;
+	
+    public GyroDrive() {
         requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	newHeading = Robot.driveTrain.getHeading();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.driveTrain.driveArcade(-Robot.oi.getJoystickLeft().getY(), -(1 - Robot.oi.getJoystickLeft().getY()*.4) * Robot.oi.getJoystickLeft().getTwist());
-    	Robot.driveTrain.driveArcade(-Robot.oi.getJoystickRight().getY(), -(1 - Robot.oi.getJoystickRight().getY()*.3) *((Robot.oi.getJoystickLeft().getX() > 0)?1:-1) * Math.sqrt(Math.abs(Robot.oi.getJoystickLeft().getX())) * 1.0);
-    	 
+    	
+    	newHeading += Robot.oi.getJoystickLeft().getTwist() * 2 * (1-Math.abs(Robot.oi.getJoystickLeft().getY())*.4);
+    	
+    	double error = Math.max(Math.min(.07*(Robot.driveTrain.getHeading() - newHeading),1),-1);
+    	
+    	Robot.driveTrain.driveArcade(-Robot.oi.getJoystickLeft().getY() * 0.9, error);
     }
 
     // Make this return true when this Command no longer needs to run execute()

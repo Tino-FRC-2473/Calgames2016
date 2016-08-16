@@ -2,6 +2,7 @@ package org.usfirst.frc.team2473.robot.subsystems;
 
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.DriveStraight;
+import org.usfirst.frc.team2473.robot.commands.GyroDrive;
 import org.usfirst.frc.team2473.robot.commands.OneJoyDrive;
 import org.usfirst.frc.team2473.robot.commands.TankDrive;
 
@@ -72,7 +73,7 @@ public class DriveTrain extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-         setDefaultCommand(new DriveStraight());
+         setDefaultCommand(new OneJoyDrive());
     }
     
     public void drive(double left, double right) {
