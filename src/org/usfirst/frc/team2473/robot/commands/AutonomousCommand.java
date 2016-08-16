@@ -6,7 +6,8 @@ public class AutonomousCommand extends CommandGroup {
 
 	public AutonomousCommand() {
 //		addSequential(new ForwardAutonomous());
-		addSequential(new TurnAutonomous());
+//		addSequential(new TurnAutonomous());
+		addSequential(new SensorReader());
 //		addSequential(new ForwardAutonomous());
 	}
 	

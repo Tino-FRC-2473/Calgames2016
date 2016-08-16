@@ -24,7 +24,7 @@ public class TurnAutonomous extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		System.out.println("Angle: " + Math.floor(Robot.driveTrain.getAngle()));
+//		System.out.println("Angle: " + Math.floor(Robot.driveTrain.getAngle()));
 //		Logger.getInstance().log(Robot.log, "Angle: " + Double.toString(Robot.driveTrain.getAngle()));
     	Robot.driveTrain.turnRight(0.6);
 	}
@@ -33,12 +33,13 @@ public class TurnAutonomous extends Command {
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		//return Robot.driveTrain.getAngle() == ANGLE;
-		if((Math.abs(Math.floor(Robot.driveTrain.getAngle()) - ANGLE)) == 0) {
-			System.out.println("FINISHED!");
-			return true;
-		} else {
-			return false;
-		}
+//		if((Math.abs(Math.floor(Robot.driveTrain.getAngle()) - ANGLE)) == 0) {
+//			System.out.println("FINISHED!");
+//			return true;
+//		} else {
+//			return false;
+//		}
+		return false;
 	}
 
 	@Override
