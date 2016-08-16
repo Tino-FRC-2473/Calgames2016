@@ -59,4 +59,15 @@ public class SensorThread extends Thread{
 		alive = false;
 		notify();
 	}
+	
+	
+	public boolean isDead()
+	{
+		return !alive;
+	}
+	
+	public boolean isUpdating()
+	{
+		return run;
+	}
 }
