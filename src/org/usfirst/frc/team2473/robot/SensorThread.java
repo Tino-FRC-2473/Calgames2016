@@ -27,7 +27,11 @@ public class SensorThread extends Thread{
 			while (run && alive) {
 				//update sensors
 			}
-			wait();
+			if(alive)
+			{
+				wait();
+			}
+			
 		}
 	}
 
