@@ -17,17 +17,15 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static OI oi;
 
-    public Command autonomousCommand;
-    public Command teleOpCommand;
+    public static Command autonomousCommand;
+    public static Command teleOpCommand;
     
-    public static Command t;
-
     public void robotInit() {
-    	driveTrain = new DriveTrain();
+    	driveTrain = new DriveTrain(); //make sure driveTrain is defined before defining any command
     	oi = new OI();
     	
     	//(1: TANK), (2: ARCADE), (3: Z), (4: WHEEL)
-    	teleOpCommand = new TeleOpCommand(4);
+    	teleOpCommand = new TeleOpCommand(1);
     	
     	//autonomousCommand = new AutonomousCommand();
     }

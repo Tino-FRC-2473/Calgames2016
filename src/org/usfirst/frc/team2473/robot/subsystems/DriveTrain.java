@@ -2,7 +2,6 @@ package org.usfirst.frc.team2473.robot.subsystems;
 
 import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
-import org.usfirst.frc.team2473.robot.commands.TankDrive;
 //import org.usfirst.frc.team2473.robot.commands.TeleOpCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -48,10 +47,9 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new TankDrive());
-		//setDefaultCommand(Robot.t);
+		//setDefaultCommand(new TankDrive());
 		//setDefaultCommand(new TeleOpCommand(1));
-		//setDefaultCommand(Robot.teleOpCommand);
+		setDefaultCommand(Robot.teleOpCommand);
 	}
 	
 	public void drive(double left, double right) {
