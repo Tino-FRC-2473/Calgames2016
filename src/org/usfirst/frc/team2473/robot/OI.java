@@ -42,11 +42,12 @@ public class OI {
 	private Joystick joyRight = new Joystick(1);
 	
 	Button button1 = new JoystickButton(joyLeft, 1);
-	Button button3 = new JoystickButton(joyLeft, 3);
+//	Button button3 = new JoystickButton(joyLeft, 3);
 	
 	public OI() {
-		button1.whileHeld(new MoveIntakeUp());
-		button3.whileHeld(new MoveIntakeDown());
+		button1.whenPressed(new IntakePosition());
+//		button1.whileHeld(new MoveIntakeUp());
+//		button3.whileHeld(new MoveIntakeDown());
 	}
 	
 	public Joystick getJoystickLeft() {

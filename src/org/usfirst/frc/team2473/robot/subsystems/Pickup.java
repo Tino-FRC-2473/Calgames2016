@@ -21,7 +21,7 @@ public class Pickup extends Subsystem {
 	public Pickup(){
 		intake = new CANTalon(RobotMap.leftBackMotor);
 		pistonOne = new DoubleSolenoid(1, 2);
-		pistonTwo = new DoubleSolenoid(1, 2);
+		pistonTwo = new DoubleSolenoid(3, 4);
 	}
 	
     // The methods for controlling the subsystem go here.
@@ -29,6 +29,7 @@ public class Pickup extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(new MoveIntakeUp());
     }
     

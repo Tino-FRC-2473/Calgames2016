@@ -2,7 +2,6 @@
  * This command will run when the robot needs a boulder and stop when the boulder is in the robot.
  */
 
-
 package org.usfirst.frc.team2473.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,31 +13,30 @@ import org.usfirst.frc.team2473.robot.Robot;
  */
 public class IntakePosition extends Command {
 	
-	private String previousPosition = "Reverse";
-
-    public IntakePosition() {
+	private long startTime = 0;
+	private boolean pistonOn = true;
+	
+	public IntakePosition() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.pickup);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	startTime = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	if (Robot.oi.getJoystickLeft().getRawButton(1) && previousPosition.equals("Reverse")) {
-//    		Robot.pickup.togglePiston(true);
-//    		previousPosition = "Forward";
-//    	}
-//    	else if (Robot.oi.getJoystickLeft().getRawButton(1) && previousPosition.equals("Forward")) {
-//    		Robot.pickup.togglePiston(false);
-//    		previousPosition = "Reverse";
-//    	}
-    	if (Robot.oi.getJoystickLeft().getRawButton(1)){
+    	if (Robot.oi.getJoystickLeft().getRawButton(1) && pistonOn){
     		Robot.pickup.togglePiston(true);
-    	}else if (Robot.oi.getJoystickLeft().getRawButton(3)){
+    	} else if (Robot.oi.getJoystickLeft().getRawButton(1) && !pistonOn){
     		Robot.pickup.togglePiston(false);
+    	}
+    	
+    	if (System.currentTimeMillis() - startTime > 500) {
+    		pistonOn = !pistonOn;
+    		startTime = System.currentTimeMillis();
     	}
     }
 
