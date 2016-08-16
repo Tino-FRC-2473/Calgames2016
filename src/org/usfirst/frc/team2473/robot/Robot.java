@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.usfirst.frc.team2473.robot.commands.*;
 import org.usfirst.frc.team2473.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,11 +21,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static DriveTrain driveTrain;
-	public static OI oi;
+	
+	Timer robotControlLoop;
 
     Command autonomousCommand;
+    boolean timerStarted;
+    
+    OI oi;
+    
+    Thread sensorThread;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -32,6 +40,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		SmartDashboard.putData(driveTrain);
+		
+		robotControlLoop = new Timer();
     }
 
 	/**
@@ -72,22 +82,50 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
+        if(!timerStarted)
+        {
+        	robotControlLoop.schedule(new TimerTask(){
+    			
+    			@Override
+    			public void run() {
+    				Scheduler.getInstance().run();
+    				
+    			}
+    		}, 20);
+        	timerStarted = true;
+        }
+        if(sensorThread == null)
+        {
+        	sensorThread = new Thread(() ->
+        	{
+        		//init sensors
+        		while(true)
+        		{
+        			//update sensors
+        		}
+        	}, "Sensor I/O");
+        	sensorThread.setPriority(2);
+        }
+        sensorThread.start();
         log();
+        
+        
+        
+        
     }
     
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-        LiveWindow.run();
+        LiveWindow.run();  
     }
     
     public void log(){
