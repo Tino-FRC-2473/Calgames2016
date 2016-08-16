@@ -15,6 +15,7 @@ public class IntakePosition extends Command {
 	
 	private long startTime = 0;
 	private boolean pistonOn = true;
+	private boolean loopFinished = false;
 	
 	public IntakePosition() {
         // Use requires() here to declare subsystem dependencies
@@ -28,21 +29,22 @@ public class IntakePosition extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (System.currentTimeMillis() - startTime > 500) {
+    		pistonOn = !pistonOn;
+    		startTime = System.currentTimeMillis();
+    		loopFinished = true;
+    	}
+    	
     	if (Robot.oi.getJoystickLeft().getRawButton(1) && pistonOn){
     		Robot.pickup.togglePiston(true);
     	} else if (Robot.oi.getJoystickLeft().getRawButton(1) && !pistonOn){
     		Robot.pickup.togglePiston(false);
     	}
-    	
-    	if (System.currentTimeMillis() - startTime > 500) {
-    		pistonOn = !pistonOn;
-    		startTime = System.currentTimeMillis();
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		if (Robot.oi.getJoystickLeft().getRawButton(2)) {
+		if (loopFinished) {
 			return true;
 		}
 		return false;
