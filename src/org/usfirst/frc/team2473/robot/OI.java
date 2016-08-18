@@ -1,8 +1,11 @@
 package org.usfirst.frc.team2473.robot;
 
+import org.usfirst.frc.team2473.robot.commands.MoveChevalMech;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team2473.robot.commands.*;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -40,6 +43,10 @@ public class OI {
 	private Joystick joyRight = new Joystick(1);
 	
 	public OI() {
+		
+		//Button shooterButton = new JoystickButton(joyLeft, 2);
+		
+		//shooterButton.whenPressed(new MoveChevalMech());
 		
 		
 	}

@@ -22,5 +22,5 @@ public class RobotMap {
 	public static final int rightBackMotor = 2;
 	public static final int gyro = 0;
 	public static final int chevalMechanism = 0;
-	public static final int pcm = 4; // pneumatic control module
+	public static final int pcm = 0; // pneumatic control module
 }
