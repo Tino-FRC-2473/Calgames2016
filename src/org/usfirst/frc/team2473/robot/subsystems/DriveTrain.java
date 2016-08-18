@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
+import org.usfirst.frc.team2473.robot.Database;
+import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.DriveStraight;
 import org.usfirst.frc.team2473.robot.commands.GyroDrive;
@@ -24,15 +26,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
     
-	private CANTalon leftFrontCAN;
-	private CANTalon rightFrontCAN;
-	private CANTalon leftBackCAN;
-	private CANTalon rightBackCAN;
-	private AnalogGyro gyro;
-	
-	private static final double LEFT_ENC_CONSTANT = .01944349; //scales encoders to inches
-	private static final double RIGHT_ENC_CONSTANT = .00827586;
-	
+	private SpeedController  leftFrontCAN;
+	private SpeedController rightFrontCAN;
+	private SpeedController leftBackCAN;
+	private SpeedController rightBackCAN;
 	
 	private RobotDrive drive;
 	
@@ -45,17 +42,6 @@ public class DriveTrain extends Subsystem {
 		rightBackCAN = new CANTalon(RobotMap.rightBackMotor);
 		
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
-		
-		gyro = new AnalogGyro(RobotMap.gyro);
-		
-		gyro.initGyro();
-		gyro.calibrate();
-		
-		
-		leftFrontCAN.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightFrontCAN.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-
-		reset();
 		
 		drive.setMaxOutput(.70);
 		drive.setInvertedMotor(MotorType.kFrontLeft, true);
@@ -80,29 +66,28 @@ public class DriveTrain extends Subsystem {
 	}
     
     public double getRightEncoder(){
-    	return rightFrontCAN.getEncPosition() * RIGHT_ENC_CONSTANT;
+    	return Database.getInstance().getRightEncoder();
     }
     
     public double getLeftEncoder(){
-    	return leftFrontCAN.getEncPosition() * LEFT_ENC_CONSTANT;
+    	return Database.getInstance().getLeftEncoder();
     }
     
     public double getHeading(){
-    	return gyro.getAngle();
+    	return Database.getInstance().getGyroAngle();
     }
     
-    public void reset(){
-    	rightFrontCAN.setEncPosition(0);
-    	leftFrontCAN.setEncPosition(0);
-    	gyro.reset();
+    public void resetSensors(){
+    	if(Robot.sensorThread != null){
+    		Robot.sensorThread.resetGyro();
+    		Robot.sensorThread.resetEncoders();
+    	}
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", leftFrontCAN.getEncPosition() *  LEFT_ENC_CONSTANT);
-		SmartDashboard.putNumber("Right Distance", rightFrontCAN.getEncPosition() *  RIGHT_ENC_CONSTANT);
-	//	SmartDashboard.putNumber("Left Velocity", ((CANTalon)leftFrontCAN).getEncVelocity() *  leftEncConstant);
-	//	SmartDashboard.putNumber("Right Velocity", ((CANTalon)rightFrontCAN).getEncVelocity() *  rightEncConstant);
-		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
+    	SmartDashboard.putNumber("Left Distance", Database.getInstance().getLeftEncoder());
+		SmartDashboard.putNumber("Right Distance", Database.getInstance().getRightEncoder());
+		SmartDashboard.putNumber("Gyro Angle", Database.getInstance().getGyroAngle());
 
     }
 }
