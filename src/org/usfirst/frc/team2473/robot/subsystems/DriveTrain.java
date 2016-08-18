@@ -24,17 +24,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
     
-	private SpeedController leftFrontCAN;
-	private SpeedController rightFrontCAN;
-	private SpeedController leftBackCAN;
-	private SpeedController rightBackCAN;
+	private CANTalon leftFrontCAN;
+	private CANTalon rightFrontCAN;
+	private CANTalon leftBackCAN;
+	private CANTalon rightBackCAN;
 	private AnalogGyro gyro;
-	private AnalogInput ir;
-	private CANTalon leftFront;
-	private CANTalon rightFront;
 	
-	private double leftEncConstant = .01944349; //scales encoders to inches
-	private double rightEncConstant = .00827586;
+	private static final double LEFT_ENC_CONSTANT = .01944349; //scales encoders to inches
+	private static final double RIGHT_ENC_CONSTANT = .00827586;
 	
 	
 	private RobotDrive drive;
@@ -50,17 +47,13 @@ public class DriveTrain extends Subsystem {
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
 		
 		gyro = new AnalogGyro(RobotMap.gyro);
-		ir = new AnalogInput(RobotMap.ir);
 		
 		gyro.initGyro();
 		gyro.calibrate();
 		
-		leftFront = ((CANTalon)leftFrontCAN);
-		rightFront = ((CANTalon)rightFrontCAN);
 		
-		
-		leftFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		rightFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		leftFrontCAN.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightFrontCAN.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 
 		reset();
 		
@@ -87,11 +80,11 @@ public class DriveTrain extends Subsystem {
 	}
     
     public double getRightEncoder(){
-    	return rightFront.getEncPosition() * rightEncConstant;
+    	return rightFrontCAN.getEncPosition() * RIGHT_ENC_CONSTANT;
     }
     
     public double getLeftEncoder(){
-    	return leftFront.getEncPosition() * leftEncConstant;
+    	return leftFrontCAN.getEncPosition() * LEFT_ENC_CONSTANT;
     }
     
     public double getHeading(){
@@ -99,14 +92,14 @@ public class DriveTrain extends Subsystem {
     }
     
     public void reset(){
-    	rightFront.setEncPosition(0);
-    	leftFront.setEncPosition(0);
+    	rightFrontCAN.setEncPosition(0);
+    	leftFrontCAN.setEncPosition(0);
     	gyro.reset();
     }
     
     public void log(){
-    	SmartDashboard.putNumber("Left Distance", leftFront.getEncPosition() *  leftEncConstant);
-		SmartDashboard.putNumber("Right Distance", rightFront.getEncPosition() *  rightEncConstant);
+    	SmartDashboard.putNumber("Left Distance", leftFrontCAN.getEncPosition() *  LEFT_ENC_CONSTANT);
+		SmartDashboard.putNumber("Right Distance", rightFrontCAN.getEncPosition() *  RIGHT_ENC_CONSTANT);
 	//	SmartDashboard.putNumber("Left Velocity", ((CANTalon)leftFrontCAN).getEncVelocity() *  leftEncConstant);
 	//	SmartDashboard.putNumber("Right Velocity", ((CANTalon)rightFrontCAN).getEncVelocity() *  rightEncConstant);
 		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());

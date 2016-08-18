@@ -2,6 +2,7 @@ package org.usfirst.frc.team2473.robot;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CANTalon;
 
 public class SensorThread extends Thread{
 
@@ -29,7 +30,11 @@ public class SensorThread extends Thread{
 			}
 			if(alive)
 			{
-				wait();
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			
 		}

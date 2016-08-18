@@ -23,52 +23,52 @@ public class Database{
 
 	private ThreadSafeHolder gyroHolder = new ThreadSafeHolder();
 
-	public int getGyro() {
+	public double getGyroAngle() {
 		return gyroHolder.getValue();
 	}
 
-	public void setGyro(int newValue) {
+	public void setGyroAngle(double newValue) {
 		gyroHolder.setValue(newValue);
 	}
 
 
 	private ThreadSafeHolder rightEncoderHolder = new ThreadSafeHolder();
 
-	public int getRightEncoder() {
+	public double getRightEncoder() {
 		return rightEncoderHolder.getValue();
 	}
 
-	public void setRightEncoder(int newValue) {
+	public void setRightEncoder(double newValue) {
 		rightEncoderHolder.setValue(newValue);
 	}
 
 	private ThreadSafeHolder leftEncoderHolder = new ThreadSafeHolder();
 
-	public int getLeftEncoder() {
+	public double getLeftEncoder() {
 		return leftEncoderHolder.getValue();
 	}
 
-	public void setLeftEncoder(int newValue) {
+	public void setLeftEncoder(double newValue) {
 		leftEncoderHolder.setValue(newValue);
 	}
 
 	private ThreadSafeHolder leftLightSensorHolder = new ThreadSafeHolder();
 
-	public int getLeftLightSensorHolder() {
+	public double getLeftLightSensorHolder() {
 		return leftLightSensorHolder.getValue();
 	}
 
-	public void setLeftLightSensorHolder(int newValue) {
+	public void setLeftLightSensorHolder(double newValue) {
 		leftLightSensorHolder.setValue(newValue);
 	}
 
 	private ThreadSafeHolder rightLightSensorHolder = new ThreadSafeHolder();
 
-	public int getRightLightSensorHolder() {
+	public double getRightLightSensorHolder() {
 		return rightLightSensorHolder.getValue();
 	}
 
-	public void setRightLightSensorHolder(int newValue) {
+	public void setRightLightSensorHolder(double newValue) {
 		rightLightSensorHolder.setValue(newValue);
 	}
 
@@ -77,10 +77,10 @@ public class Database{
 
 class ThreadSafeHolder{
 
-	private volatile int value;
+	private volatile double value;
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
-	public int getValue() {
+	public double getValue() {
 		try {
 			lock.readLock().lock();
 			return value;
@@ -90,7 +90,7 @@ class ThreadSafeHolder{
 
 	}
 
-	public void setValue(int newValue) {
+	public void setValue(double newValue) {
 		try {
 			lock.writeLock().lock();
 			value = newValue;

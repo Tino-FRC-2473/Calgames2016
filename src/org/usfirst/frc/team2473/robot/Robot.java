@@ -22,14 +22,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot{
 
-	Timer robotControlLoop;
-
 	Command autonomousCommand;
 	boolean timerRunning;
 
-	OI oi;
+	public static DriveTrain driveTrain;
+	public static OI oi;
 
 	SensorThread sensorThread;
+	Timer robotControlLoop;
 
 	/**
 	 * This function is run when the robot is first started up and should be
