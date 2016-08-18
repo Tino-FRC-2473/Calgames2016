@@ -68,3 +68,11 @@ $RECYCLE.BIN/
 *.properties
 *.xml
 /bin/
+
+#Intellij Stuff and GradleRio
+gradle/
+*.gradle
+*.bat
+*.iml
+gradlew
+.idea/
