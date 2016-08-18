@@ -25,6 +25,7 @@ public class DriveTrain extends Subsystem {
 	private RobotDrive drive;
   	
 	public final double MOTOR_SCALE = 0.7;
+	public final double DIR_THR_SCALE = 1.0;
 
 	public DriveTrain() {
 		super();
@@ -62,6 +63,10 @@ public class DriveTrain extends Subsystem {
     
     public double getLeftEncoder(){
     	return ((CANTalon)leftFrontCAN).getEncPosition();
+    }
+    
+    public double scaleDirectionByThrottle(double dir, double thr) {
+    	return dir * DIR_THR_SCALE * (1 - thr);
     }
 	
 	public void log() {
