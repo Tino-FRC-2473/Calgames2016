@@ -40,6 +40,7 @@ public class Robot extends IterativeRobot{
 		oi = new OI();
 
 		robotControlLoop = new Timer(false);
+		timerRunning = false;
 		
 		SmartDashboard.putData(driveTrain);
 	}
@@ -94,7 +95,6 @@ public class Robot extends IterativeRobot{
 				@Override
 				public void run() {
 					Scheduler.getInstance().run();
-
 				}
 			}, 20);
 			timerRunning = true;
