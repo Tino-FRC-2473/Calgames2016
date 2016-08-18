@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot{
 	public static DriveTrain driveTrain;
 	public static OI oi;
 
-	SensorThread sensorThread;
+	public static SensorThread sensorThread;
 	Timer robotControlLoop;
 
 	/**
@@ -39,6 +39,9 @@ public class Robot extends IterativeRobot{
 		driveTrain = new DriveTrain();
 		oi = new OI();
 
+		robotControlLoop = new Timer(false);
+		timerRunning = false;
+		
 		SmartDashboard.putData(driveTrain);
 	}
 
@@ -79,7 +82,6 @@ public class Robot extends IterativeRobot{
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		robotControlLoop = new Timer(false);
 
 	}
 
@@ -93,14 +95,13 @@ public class Robot extends IterativeRobot{
 				@Override
 				public void run() {
 					Scheduler.getInstance().run();
-
 				}
 			}, 20);
 			timerRunning = true;
 		}
 		if (sensorThread == null) {
 			// create the args for sensorThread
-			sensorThread = new SensorThread(null, null, null, null, null);
+			sensorThread = new SensorThread();
 			sensorThread.setPriority(2);
 			sensorThread.start();
 		}
@@ -135,5 +136,17 @@ public class Robot extends IterativeRobot{
 
 	public void log() {
 		driveTrain.log();
+	}
+	
+	@Override
+	public void finalize()
+	{
+		try {
+			super.finalize();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//set motors to 0
 	}
 }

@@ -3,6 +3,7 @@ package org.usfirst.frc.team2473.robot;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 
 public class SensorThread extends Thread{
 
@@ -11,14 +12,22 @@ public class SensorThread extends Thread{
 	CANTalon leftEncoder, rightEncoder;
 	private volatile boolean run = true, alive = true;
 
-	public SensorThread(AnalogInput gyro, AnalogInput leftLightSensor,
-			AnalogInput rightLightSensor, CANTalon leftEncoder,
-			CANTalon rightEncoder) {
-		this.gyro = new AnalogGyro(gyro);
-		this.leftLightSensor = leftLightSensor;
-		this.leftEncoder = leftEncoder;
-		this.rightEncoder = rightEncoder;
-		this.rightLightSensor = rightLightSensor;
+	public SensorThread() {
+		this.gyro = new AnalogGyro(RobotMap.gyro);
+		this.leftLightSensor = new AnalogInput(RobotMap.leftLightSensor);
+		this.leftEncoder = new CANTalon(RobotMap.leftFrontMotor);
+		this.rightEncoder = new CANTalon(RobotMap.rightFrontMotor);
+		this.rightLightSensor = new AnalogInput(RobotMap.rightLightSensor);
+		
+		gyro.initGyro();
+		gyro.calibrate();
+		
+		leftEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		rightEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		
+		resetEncoders();
+		resetGyro();
+		
 		super.setDaemon(true);
 	}
 
@@ -26,7 +35,11 @@ public class SensorThread extends Thread{
 	public void run() {
 		while (alive) {
 			while (run && alive) {
-				//update sensors
+				Database.getInstance().setGyroAngle(gyro.getAngle());
+				Database.getInstance().setLeftEncoder(leftEncoder.getEncPosition());
+				Database.getInstance().setRightEncoder(rightEncoder.getEncPosition());
+				Database.getInstance().setLeftLightSensor(leftLightSensor.getValue());
+				Database.getInstance().setRightLightSensor(rightLightSensor.getValue());
 			}
 			if(alive)
 			{
@@ -74,5 +87,14 @@ public class SensorThread extends Thread{
 	public boolean isUpdating()
 	{
 		return run;
+	}
+	
+	public void resetEncoders(){
+    	rightEncoder.setEncPosition(0);
+    	leftEncoder.setEncPosition(0);
+    }
+	
+	public void resetGyro(){
+		gyro.reset();
 	}
 }

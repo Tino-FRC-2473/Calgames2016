@@ -4,19 +4,18 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Database{
 
+	private static final double LEFT_ENC_CONSTANT = .01944349; //scales encoders to inches
+	private static final double RIGHT_ENC_CONSTANT = .00827586;
 
 	static Database theInstance;
 	static {
 		theInstance = new Database();
 	}
 
-
-
 	private Database() {
 
 	}
-
-
+	
 	public static Database getInstance() {
 		return theInstance;
 	}
@@ -35,7 +34,7 @@ public class Database{
 	private ThreadSafeHolder rightEncoderHolder = new ThreadSafeHolder();
 
 	public double getRightEncoder() {
-		return rightEncoderHolder.getValue();
+		return rightEncoderHolder.getValue() * RIGHT_ENC_CONSTANT;
 	}
 
 	public void setRightEncoder(double newValue) {
@@ -45,7 +44,7 @@ public class Database{
 	private ThreadSafeHolder leftEncoderHolder = new ThreadSafeHolder();
 
 	public double getLeftEncoder() {
-		return leftEncoderHolder.getValue();
+		return leftEncoderHolder.getValue() * LEFT_ENC_CONSTANT;
 	}
 
 	public void setLeftEncoder(double newValue) {
@@ -54,21 +53,21 @@ public class Database{
 
 	private ThreadSafeHolder leftLightSensorHolder = new ThreadSafeHolder();
 
-	public double getLeftLightSensorHolder() {
+	public double getLeftLightSensor() {
 		return leftLightSensorHolder.getValue();
 	}
 
-	public void setLeftLightSensorHolder(double newValue) {
+	public void setLeftLightSensor(double newValue) {
 		leftLightSensorHolder.setValue(newValue);
 	}
 
 	private ThreadSafeHolder rightLightSensorHolder = new ThreadSafeHolder();
 
-	public double getRightLightSensorHolder() {
+	public double getRightLightSensor() {
 		return rightLightSensorHolder.getValue();
 	}
 
-	public void setRightLightSensorHolder(double newValue) {
+	public void setRightLightSensor(double newValue) {
 		rightLightSensorHolder.setValue(newValue);
 	}
 
