@@ -90,13 +90,13 @@ public class Robot extends IterativeRobot{
 	 */
 	public void teleopPeriodic() {
 		if (!timerRunning) {
-			robotControlLoop.schedule(new TimerTask(){
+			robotControlLoop.scheduleAtFixedRate(new TimerTask(){
 
 				@Override
 				public void run() {
 					Scheduler.getInstance().run();
 				}
-			}, 20);
+			},0, 20);
 			timerRunning = true;
 		}
 		if (sensorThread == null) {
