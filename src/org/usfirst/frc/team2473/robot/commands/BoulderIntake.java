@@ -5,18 +5,23 @@
 
 package org.usfirst.frc.team2473.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team2473.robot.Robot;
+import org.usfirst.frc.team2473.robot.RobotMap;
 
 /**
  *
  */
 public class BoulderIntake extends Command {
+	
+	private DigitalInput breakbeam;
 
     public BoulderIntake() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.pickup);
+    	breakbeam = new DigitalInput(RobotMap.breakBeam);
     }
 
     // Called just before this Command runs the first time
@@ -43,8 +48,11 @@ public class BoulderIntake extends Command {
     protected void interrupted() {
     }
     
+    //Checks if the boulder is inside the robot
     private boolean isBoulderInside() {
-    	//Get data from the shooter's breakbeam to determine when to stop running execute()
+    	if (breakbeam.get()) {
+    		return true;
+    	}
     	return false;
     }
 }

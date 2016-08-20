@@ -21,4 +21,7 @@ public class RobotMap {
 	public static final int leftBackMotor = 8;
 	public static final int rightBackMotor = 2;
 	public static final int gyro = 0;
+	
+	//Random number for now, will change when the sensor is mounted
+	public static final int breakBeam = 5;
 }
