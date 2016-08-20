@@ -1,77 +1,60 @@
 package org.usfirst.frc.team2473.robot;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Database{
 
-	private static final double LEFT_ENC_CONSTANT = .01944349; //scales encoders to inches
-	private static final double RIGHT_ENC_CONSTANT = .00827586;
+	public static final double LEFT_ENC_CONSTANT = .01944349; // scales encoders
+																// to inches
+	public static final double RIGHT_ENC_CONSTANT = .00827586;
+
+
+
+
+	public enum Value {
+		GYRO, LEFT_LIGHT_SENSOR, RIGHT_LIGHT_SENSOR, LEFT_ENCODER, RIGHT_ENCODER, JOY1_X, JOY1_Y, JOY1_Z, JOY2_X, JOY2_Y, JOY2_Z;// add
+																																	// buttons
+
+
+
+	}
+
 
 	static Database theInstance;
 	static {
 		theInstance = new Database();
 	}
 
-	private Database() {
-
-	}
-	
-	public static Database getInstance() {
+	public static Database getInstance()
+	{
 		return theInstance;
 	}
+	
+	private Map<Value, ThreadSafeHolder> map;
 
-	private ThreadSafeHolder gyroHolder = new ThreadSafeHolder();
-
-	public double getGyroAngle() {
-		return gyroHolder.getValue();
+	private Database() {
+		HashMap<Value, ThreadSafeHolder>  tempMap = (new HashMap<>());
+		map = Collections.synchronizedMap(tempMap);
+		for (Value v : Value.values())
+		{
+			map.put(v, new ThreadSafeHolder());
+		}
 	}
 
-	public void setGyroAngle(double newValue) {
-		gyroHolder.setValue(newValue);
+	public double getValue(Value v) {
+		return map.get(v).getValue();
 	}
 
 
-	private ThreadSafeHolder rightEncoderHolder = new ThreadSafeHolder();
-
-	public double getRightEncoder() {
-		return rightEncoderHolder.getValue() * RIGHT_ENC_CONSTANT;
+	public void setValue(Value v, double newValue) {
+		
+		
+		map.get(v).setValue(newValue);
 	}
 
-	public void setRightEncoder(double newValue) {
-		rightEncoderHolder.setValue(newValue);
-	}
-
-	private ThreadSafeHolder leftEncoderHolder = new ThreadSafeHolder();
-
-	public double getLeftEncoder() {
-		return leftEncoderHolder.getValue() * LEFT_ENC_CONSTANT;
-	}
-
-	public void setLeftEncoder(double newValue) {
-		leftEncoderHolder.setValue(newValue);
-	}
-
-	private ThreadSafeHolder leftLightSensorHolder = new ThreadSafeHolder();
-
-	public double getLeftLightSensor() {
-		return leftLightSensorHolder.getValue();
-	}
-
-	public void setLeftLightSensor(double newValue) {
-		leftLightSensorHolder.setValue(newValue);
-	}
-
-	private ThreadSafeHolder rightLightSensorHolder = new ThreadSafeHolder();
-
-	public double getRightLightSensor() {
-		return rightLightSensorHolder.getValue();
-	}
-
-	public void setRightLightSensor(double newValue) {
-		rightLightSensorHolder.setValue(newValue);
-	}
 
 	 public void log(){
 	    	SmartDashboard.putNumber("Left Distance", getLeftEncoder());
@@ -79,6 +62,7 @@ public class Database{
 			SmartDashboard.putNumber("Gyro Angle", getGyroAngle());
 
 	 }
+
 }
 
 class ThreadSafeHolder{
