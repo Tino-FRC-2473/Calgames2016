@@ -35,11 +35,14 @@ public class SensorThread extends Thread{
 	public void run() {
 		while (alive) {
 			while (run && alive) {
-				Database.getInstance().setGyroAngle(gyro.getAngle());
-				Database.getInstance().setLeftEncoder(leftEncoder.getEncPosition());
-				Database.getInstance().setRightEncoder(rightEncoder.getEncPosition());
-				Database.getInstance().setLeftLightSensor(leftLightSensor.getValue());
-				Database.getInstance().setRightLightSensor(rightLightSensor.getValue());
+				for(Database.Value v : Database.Value.values())
+				{
+					switch(v)
+					{
+						case GYRO: Database.getInstance().setValue(v, gyro.getHeading); break;
+						
+					}
+				}
 			}
 			if(alive)
 			{

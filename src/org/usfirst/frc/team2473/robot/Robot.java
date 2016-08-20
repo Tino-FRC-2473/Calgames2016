@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot{
 
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
-		
+
 		SmartDashboard.putData(driveTrain);
 	}
 
@@ -96,7 +96,7 @@ public class Robot extends IterativeRobot{
 				public void run() {
 					Scheduler.getInstance().run();
 				}
-			},0, 20);
+			}, 0, 20);
 			timerRunning = true;
 		}
 		if (sensorThread == null) {
@@ -127,7 +127,7 @@ public class Robot extends IterativeRobot{
 		}
 
 		if (timerRunning) {
-			//ends the timer and stops it from executing any tasks
+			// ends the timer and stops it from executing any tasks
 			robotControlLoop.cancel();
 			robotControlLoop = new Timer();
 			timerRunning = false;
@@ -137,16 +137,15 @@ public class Robot extends IterativeRobot{
 	public void log() {
 		driveTrain.log();
 	}
-	
+
 	@Override
-	public void finalize()
-	{
+	public void finalize() {
 		try {
 			super.finalize();
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//set motors to 0
+		// set motors to 0
 	}
 }
