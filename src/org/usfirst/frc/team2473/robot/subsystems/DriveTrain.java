@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
+import org.usfirst.frc.team2473.robot.AutonomousConstants;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.AutonomousCommand;
 
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,21 +29,23 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
-//	private AnalogGyro gyro;
+	private AnalogGyro gyro;
 	private RobotDrive drive;
 	private Encoder left_encoder, right_encoder;
 	private AnalogInput one, two;
+	
 	public DriveTrain () {
 		super();
 
-//		gyro = new AnalogGyro(RobotMap.gyro);
-//		gyro.reset();
-//		gyro.calibrate();
+		gyro = new AnalogGyro(RobotMap.gyro);
+		gyro.reset();
+		gyro.calibrate();
 		
 		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
 		leftBackCAN = new CANTalon(RobotMap.leftBackMotor);
 		rightBackCAN = new CANTalon(RobotMap.rightBackMotor);
+
 		one = new AnalogInput(RobotMap.sensor_one);
 		two = new AnalogInput(RobotMap.sensor_two);
 		
@@ -78,6 +82,15 @@ public class DriveTrain extends Subsystem {
     public void turnLeft(double pow) {
     	drive.tankDrive(-pow, pow);    	
     }
+
+    public void pivotRight(double pow) {
+    	drive.tankDrive(pow, 0);
+    }
+
+    public void pivotLeft(double pow) {
+    	drive.tankDrive(0, pow);    	
+    }
+    
     
     public int getSensorOne() {
     	return one.getValue();
@@ -104,13 +117,14 @@ public class DriveTrain extends Subsystem {
     	return ((CANTalon)(rightFrontCAN)).getEncPosition();
     }
     
-//    public double getAngle() {
-//    	return gyro.getAngle();
-//    }
+    public double getAngle() {
+    	return gyro.getAngle();
+    }
     
-    public void log(){
-    	SmartDashboard.putNumber("Left Distance", left_encoder.getDistance());
-		SmartDashboard.putNumber("Right Distance", right_encoder.getDistance());
+    public boolean detectedElement() {
+    	int one = getSensorOne();
+    	int two = getSensorTwo();
+    	return (one == AutonomousConstants.cleat || one == AutonomousConstants.line || one == AutonomousConstants.ramp) || (two == AutonomousConstants.cleat || two == AutonomousConstants.line || two == AutonomousConstants.ramp);
     }
 }
 

@@ -28,43 +28,18 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
 
     public static Logger.LogLevel log;
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
+
     public void robotInit() {
     	driveTrain = new DriveTrain();
 		oi = new OI();
-		//create new command here to assign to autonomousCommand()
+
 		timer = new Timer();
 		SmartDashboard.putData(driveTrain);
 		autonomousCommand = new AutonomousCommand();
 		log = Logger.LogLevel.Debug;
     }
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
-	 * below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
-	 * or additional comparisons to the switch structure below with additional strings & commands.
-	 */
     public void autonomousInit() {
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-    	
-    	// schedule the autonomous command (example)
 
     	if (autonomousCommand != null) {
         	timer.start();
@@ -82,10 +57,6 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
@@ -94,7 +65,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        log();
     }
     
     /**
@@ -102,10 +72,6 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
-    }
-    
-    public void log(){
-    	driveTrain.log();
     }
     
     public static double getStart() {

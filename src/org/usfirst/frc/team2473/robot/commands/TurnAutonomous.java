@@ -8,49 +8,52 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TurnAutonomous extends Command {
 	
 	private final double ANGLE;
-	
+	private final String TURN;
+	private final double TURN_POWER = 0.6;
+
+	public TurnAutonomous(String turn, double amt) {
+		ANGLE = amt;
+		TURN = turn;
+		requires(Robot.driveTrain);
+	}
+
 	public TurnAutonomous() {
-		// TODO Auto-generated constructor stub
 		ANGLE = 90;
+		TURN = "right";
 		requires(Robot.driveTrain);
 	}
 	
+	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void execute() { 
-		// TODO Auto-generated method stub
-//		System.out.println("Angle: " + Math.floor(Robot.driveTrain.getAngle()));
-//		Logger.getInstance().log(Robot.log, "Angle: " + Double.toString(Robot.driveTrain.getAngle()));
-    	Robot.driveTrain.turnRight(0.6);
+		if(TURN.equals("right")) {
+			Robot.driveTrain.turnRight(TURN_POWER);
+		} else if(TURN.equals("left")) {
+			Robot.driveTrain.turnLeft(TURN_POWER);
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		//return Robot.driveTrain.getAngle() == ANGLE;
-//		if((Math.abs(Math.floor(Robot.driveTrain.getAngle()) - ANGLE)) == 0) {
-//			System.out.println("FINISHED!");
-//			return true;
-//		} else {
-//			return false;
-//		}
-		return false;
+		if((Math.abs(Math.floor(Robot.driveTrain.getAngle()) - ANGLE)) == 2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
 		
 	}
 }
