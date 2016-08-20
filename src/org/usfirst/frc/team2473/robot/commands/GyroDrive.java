@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.Database;
 import org.usfirst.frc.team2473.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,7 +18,7 @@ public class GyroDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	newHeading = Robot.driveTrain.getHeading();
+    	newHeading = Database.getInstance().getGyroAngle();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,7 +26,7 @@ public class GyroDrive extends Command {
     	
     	newHeading += Robot.oi.getJoystickLeft().getTwist() * 2 * (1-Math.abs(Robot.oi.getJoystickLeft().getY())*.4);
     	
-    	double error = Math.max(Math.min(.07*(Robot.driveTrain.getHeading() - newHeading),1),-1);
+    	double error = Math.max(Math.min(.07*(Database.getInstance().getGyroAngle() - newHeading),1),-1);
     	
     	Robot.driveTrain.driveArcade(-Robot.oi.getJoystickLeft().getY() * 0.9, error);
     }

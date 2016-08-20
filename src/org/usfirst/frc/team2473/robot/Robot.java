@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2473.robot;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,7 +28,8 @@ public class Robot extends IterativeRobot{
 
 	public static DriveTrain driveTrain;
 	public static OI oi;
-
+	public static AnalogGyro gyro;
+	
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
 
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot{
 	public void robotInit() {
 		driveTrain = new DriveTrain();
 		oi = new OI();
+		gyro = new AnalogGyro(RobotMap.gyro);
 
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
@@ -135,7 +138,7 @@ public class Robot extends IterativeRobot{
 	}
 
 	public void log() {
-		driveTrain.log();
+		Database.getInstance().log();
 	}
 	
 	@Override

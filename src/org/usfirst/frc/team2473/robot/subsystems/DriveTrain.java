@@ -64,31 +64,5 @@ public class DriveTrain extends Subsystem {
     	drive.arcadeDrive(speed, rotate);
    
 	}
-    
-    public double getRightEncoder(){
-    	return Database.getInstance().getRightEncoder();
-    }
-    
-    public double getLeftEncoder(){
-    	return Database.getInstance().getLeftEncoder();
-    }
-    
-    public double getHeading(){
-    	return Database.getInstance().getGyroAngle();
-    }
-    
-    public void resetSensors(){
-    	if(Robot.sensorThread != null){
-    		Robot.sensorThread.resetGyro();
-    		Robot.sensorThread.resetEncoders();
-    	}
-    }
-    
-    public void log(){
-    	SmartDashboard.putNumber("Left Distance", Database.getInstance().getLeftEncoder());
-		SmartDashboard.putNumber("Right Distance", Database.getInstance().getRightEncoder());
-		SmartDashboard.putNumber("Gyro Angle", Database.getInstance().getGyroAngle());
-
-    }
 }
 

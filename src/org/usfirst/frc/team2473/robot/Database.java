@@ -2,6 +2,8 @@ package org.usfirst.frc.team2473.robot;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Database{
 
 	private static final double LEFT_ENC_CONSTANT = .01944349; //scales encoders to inches
@@ -71,7 +73,12 @@ public class Database{
 		rightLightSensorHolder.setValue(newValue);
 	}
 
+	 public void log(){
+	    	SmartDashboard.putNumber("Left Distance", getLeftEncoder());
+			SmartDashboard.putNumber("Right Distance", getRightEncoder());
+			SmartDashboard.putNumber("Gyro Angle", getGyroAngle());
 
+	 }
 }
 
 class ThreadSafeHolder{

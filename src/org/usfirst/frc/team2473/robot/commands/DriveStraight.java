@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.Database;
 import org.usfirst.frc.team2473.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,7 +16,8 @@ public class DriveStraight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.resetSensors();
+    	Robot.sensorThread.resetEncoders();
+    	Robot.sensorThread.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +32,7 @@ public class DriveStraight extends Command {
     	//double direction = Math.abs(Robot.driveTrain.getHeading())/Robot.driveTrain.getHeading();
     	//Robot.driveTrain.driveArcade(.6, Math.min(Math.abs(Robot.driveTrain.getHeading()*.3),.5)*direction);
     	
-    	double error = Robot.driveTrain.getHeading();
+    	double error = Database.getInstance().getGyroAngle();
     	
     	Robot.driveTrain.driveArcade(.7, error*.3);
     	

@@ -13,20 +13,16 @@ public class SensorThread extends Thread{
 	private volatile boolean run = true, alive = true;
 
 	public SensorThread() {
-		this.gyro = new AnalogGyro(RobotMap.gyro);
+		this.gyro = Robot.gyro;
 		this.leftLightSensor = new AnalogInput(RobotMap.leftLightSensor);
 		this.leftEncoder = new CANTalon(RobotMap.leftFrontMotor);
 		this.rightEncoder = new CANTalon(RobotMap.rightFrontMotor);
 		this.rightLightSensor = new AnalogInput(RobotMap.rightLightSensor);
 		
-		gyro.initGyro();
-		gyro.calibrate();
-		
 		leftEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		
 		resetEncoders();
-		resetGyro();
 		
 		super.setDaemon(true);
 	}
