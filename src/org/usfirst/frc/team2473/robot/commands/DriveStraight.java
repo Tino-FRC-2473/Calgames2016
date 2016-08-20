@@ -32,7 +32,7 @@ public class DriveStraight extends Command {
     	//double direction = Math.abs(Robot.driveTrain.getHeading())/Robot.driveTrain.getHeading();
     	//Robot.driveTrain.driveArcade(.6, Math.min(Math.abs(Robot.driveTrain.getHeading()*.3),.5)*direction);
     	
-    	double error = Database.getInstance().getGyroAngle();
+    	double error = Database.getInstance().getValue(Database.Value.GYRO);
     	
     	Robot.driveTrain.driveArcade(.7, error*.3);
     	

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Database{
 
 	public static final double LEFT_ENC_CONSTANT = .01944349; // scales encoders
@@ -57,9 +59,9 @@ public class Database{
 
 
 	 public void log(){
-	    	SmartDashboard.putNumber("Left Distance", getLeftEncoder());
-			SmartDashboard.putNumber("Right Distance", getRightEncoder());
-			SmartDashboard.putNumber("Gyro Angle", getGyroAngle());
+	    	SmartDashboard.putNumber("Left Distance", Database.getInstance().getValue(Value.LEFT_ENCODER));
+			SmartDashboard.putNumber("Right Distance", Database.getInstance().getValue(Value.RIGHT_ENCODER));
+			SmartDashboard.putNumber("Gyro Angle", Database.getInstance().getValue(Value.GYRO));
 
 	 }
 

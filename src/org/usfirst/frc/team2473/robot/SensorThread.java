@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 
-public class SensorThread extends Thread{
+public class SensorThread extends Thread {
 
 	AnalogGyro gyro;
 	AnalogInput leftLightSensor, rightLightSensor;
@@ -18,12 +18,12 @@ public class SensorThread extends Thread{
 		this.leftEncoder = new CANTalon(RobotMap.leftFrontMotor);
 		this.rightEncoder = new CANTalon(RobotMap.rightFrontMotor);
 		this.rightLightSensor = new AnalogInput(RobotMap.rightLightSensor);
-		
+
 		leftEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		
+
 		resetEncoders();
-		
+
 		super.setDaemon(true);
 	}
 
@@ -31,24 +31,34 @@ public class SensorThread extends Thread{
 	public void run() {
 		while (alive) {
 			while (run && alive) {
-				for(Database.Value v : Database.Value.values())
-				{
-					switch(v)
-					{
-						case GYRO: Database.getInstance().setValue(v, gyro.getAngle()); break;
-						
+				for (Database.Value v : Database.Value.values()) {
+					switch (v) {
+					case GYRO:
+						Database.getInstance().setValue(v, gyro.getAngle());
+						break;
+					case LEFT_ENCODER:
+						Database.getInstance().setValue(v, leftEncoder.getEncPosition() * Database.LEFT_ENC_CONSTANT);
+						break;
+					case RIGHT_ENCODER:
+						Database.getInstance().setValue(v, rightEncoder.getEncPosition() * Database.RIGHT_ENC_CONSTANT);
+						break;
+					case LEFT_LIGHT_SENSOR:
+						Database.getInstance().setValue(v, leftLightSensor.getValue());
+						break;
+					case RIGHT_LIGHT_SENSOR:
+						Database.getInstance().setValue(v, rightLightSensor.getValue());
+						break;
 					}
 				}
 			}
-			if(alive)
-			{
+			if (alive) {
 				try {
 					wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 		}
 	}
 
@@ -67,33 +77,29 @@ public class SensorThread extends Thread{
 	public void resumeUpdating() {
 		notify();
 	}
-	
+
 	/**
 	 * kills this thread. It may run one last loop. Stops any future looping.
 	 */
-	public void kill()
-	{
+	public void kill() {
 		alive = false;
 		notify();
 	}
-	
-	
-	public boolean isDead()
-	{
+
+	public boolean isDead() {
 		return !alive;
 	}
-	
-	public boolean isUpdating()
-	{
+
+	public boolean isUpdating() {
 		return run;
 	}
-	
-	public void resetEncoders(){
-    	rightEncoder.setEncPosition(0);
-    	leftEncoder.setEncPosition(0);
-    }
-	
-	public void resetGyro(){
+
+	public void resetEncoders() {
+		rightEncoder.setEncPosition(0);
+		leftEncoder.setEncPosition(0);
+	}
+
+	public void resetGyro() {
 		gyro.reset();
 	}
 }
