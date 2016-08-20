@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
 import org.usfirst.frc.team2473.robot.AutonomousConstants;
+import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.AutonomousCommand;
 
@@ -25,10 +26,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
     
-	private SpeedController leftFrontCAN;
-	private SpeedController rightFrontCAN;
-	private SpeedController leftBackCAN;
-	private SpeedController rightBackCAN;
+	private CANTalon leftFrontCAN;
+	private CANTalon rightFrontCAN;
+	private CANTalon leftBackCAN;
+	private CANTalon rightBackCAN;
 	private AnalogGyro gyro;
 	private RobotDrive drive;
 	private Encoder left_encoder, right_encoder;
@@ -75,6 +76,16 @@ public class DriveTrain extends Subsystem {
     	
 	}
     
+    public void resetEncoders() {
+    	leftFrontCAN.changeControlMode(CANTalon.TalonControlMode.Position);
+    	leftFrontCAN.setEncPosition(0);
+    	rightFrontCAN.changeControlMode(CANTalon.TalonControlMode.Position);
+    	rightFrontCAN.setEncPosition(0);
+
+    	leftFrontCAN.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	rightFrontCAN.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    }
+    
     public void turnRight(double pow) {
     	drive(pow, -pow);
     }
@@ -101,20 +112,19 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getRightSpeed(){
-    	return ((CANTalon)rightFrontCAN).get();
+    	return rightFrontCAN.get();
     }
     
-    public double getLeftSpeed(){
-    	
-    	return ((CANTalon)leftFrontCAN).get();
+    public double getLeftSpeed(){    	
+    	return leftFrontCAN.get();
     }
     
     public double getLeftPosition() {
-    	return ((CANTalon)(leftFrontCAN)).getEncPosition();
+    	return leftFrontCAN.getEncPosition();
     }
 
     public double getRightPosition() {
-    	return ((CANTalon)(rightFrontCAN)).getEncPosition();
+    	return rightFrontCAN.getEncPosition();
     }
     
     public double getAngle() {
@@ -125,6 +135,17 @@ public class DriveTrain extends Subsystem {
     	int one = getSensorOne();
     	int two = getSensorTwo();
     	return (one == AutonomousConstants.cleat || one == AutonomousConstants.line || one == AutonomousConstants.ramp) || (two == AutonomousConstants.cleat || two == AutonomousConstants.line || two == AutonomousConstants.ramp);
+    }
+
+    public boolean detectedFloor() {
+    	int one = getSensorOne();
+    	int two = getSensorTwo();
+    	return (one == AutonomousConstants.floor && two == AutonomousConstants.floor);
+    }
+    
+    
+    public void halt() {
+    	Robot.driveTrain.drive(0,0);
     }
 }
 

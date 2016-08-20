@@ -8,4 +8,6 @@ public class RobotMap {
 	public static final int gyro = 0;
 	public static final int sensor_one = 1;
 	public static final int sensor_two = 2;
+	public static final int ballShooterMotor = 888; //Not sure about the number as of now. 
+	public static final int breakbeamChannel = 999;
 }

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class ForwardAutonomous extends Command {
+public class BackwardAutonomous extends Command {
 
 	final double ENCODER_RIGHT_VAL;
 	final double ENCODER_LEFT_VAL;
@@ -17,21 +17,21 @@ public class ForwardAutonomous extends Command {
 	private static final double LEFT_ENC_CONSTANT = .01944349; //scales encoders to inches
 	private static final double RIGHT_ENC_CONSTANT = .00827586;
 	
-	public ForwardAutonomous() {
+	public BackwardAutonomous() {
 		requires(Robot.driveTrain); //runs using drive train mechanism
 		ENCODER_LEFT_VAL = 500;
 		ENCODER_RIGHT_VAL = 500;
 		POW = DEFAULT_POW;
 	}
 
-	public ForwardAutonomous(int val){
+	public BackwardAutonomous(int val){
 		requires(Robot.driveTrain); //runs using drive train mechanism
 		ENCODER_RIGHT_VAL = val*12*RIGHT_ENC_CONSTANT;
 		ENCODER_LEFT_VAL = val*12*LEFT_ENC_CONSTANT;
 		POW = DEFAULT_POW;
 	}
 	
-	public ForwardAutonomous(int val, double pow) {
+	public BackwardAutonomous(int val, double pow) {
 		requires(Robot.driveTrain);
 		ENCODER_RIGHT_VAL = val*12*RIGHT_ENC_CONSTANT;
 		ENCODER_LEFT_VAL = val*12*LEFT_ENC_CONSTANT;
@@ -40,17 +40,17 @@ public class ForwardAutonomous extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.driveTrain.resetEncoders();
+		Robot.driveTrain.resetEncoders();		
 	}
 
 	@Override
 	protected void execute() {
-		Robot.driveTrain.drive(POW, POW);
+		Robot.driveTrain.drive(-POW, -POW);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		if (Robot.driveTrain.getRightPosition() >= ENCODER_RIGHT_VAL && Robot.driveTrain.getLeftPosition() >= ENCODER_LEFT_VAL) {
+		if (Robot.driveTrain.getRightPosition() <= -ENCODER_RIGHT_VAL && Robot.driveTrain.getLeftPosition() <= -ENCODER_LEFT_VAL) {
 			System.out.println("FINISHED!");
 			return true;
 		} else if(Robot.driveTrain.detectedElement()) {

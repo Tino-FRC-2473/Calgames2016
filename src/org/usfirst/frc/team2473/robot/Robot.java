@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
+	public static BallShooter ballShooter;
 	public static OI oi;
 	public static Timer timer;
 	public static double start;
@@ -31,7 +32,9 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
     	driveTrain = new DriveTrain();
-		oi = new OI();
+    	ballShooter = new BallShooter();
+
+    	oi = new OI();
 
 		timer = new Timer();
 		SmartDashboard.putData(driveTrain);
