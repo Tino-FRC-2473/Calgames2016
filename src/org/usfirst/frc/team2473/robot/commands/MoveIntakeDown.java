@@ -30,7 +30,7 @@ public class MoveIntakeDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		if (Robot.oi.getJoystickLeft().getRawButton(2)) {
+		if (System.currentTimeMillis() <= 100) {
 			return true;
 		}
 		return false;

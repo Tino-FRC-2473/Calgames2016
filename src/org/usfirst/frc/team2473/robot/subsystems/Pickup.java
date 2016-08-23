@@ -1,12 +1,10 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2473.robot.RobotMap;
-import org.usfirst.frc.team2473.robot.commands.IntakePosition;
-import org.usfirst.frc.team2473.robot.commands.MoveIntakeUp;
 
 
 /**
@@ -15,14 +13,14 @@ import org.usfirst.frc.team2473.robot.commands.MoveIntakeUp;
 public class Pickup extends Subsystem {
     
 	private SpeedController intake;
-	private DoubleSolenoid pistonOne;
-	private DoubleSolenoid pistonTwo;
+	private Solenoid pistonOne;
+	private Solenoid pistonTwo;
 	
 	
 	public Pickup(){
 		intake = new CANTalon(RobotMap.leftBackMotor);
-		pistonOne = new DoubleSolenoid(1, 2);
-		pistonTwo = new DoubleSolenoid(3, 4);
+		pistonOne = new Solenoid(0);
+		pistonTwo = new Solenoid(1);
 	}
 	
     // The methods for controlling the subsystem go here.
@@ -44,12 +42,12 @@ public class Pickup extends Subsystem {
     
     public void togglePiston(boolean forward) {
     	if (forward) {
-    		pistonOne.set(DoubleSolenoid.Value.kForward);
-    		pistonTwo.set(DoubleSolenoid.Value.kForward);
+    		pistonOne.set(true);
+    		pistonTwo.set(true);
     	}
     	else {
-    		pistonOne.set(DoubleSolenoid.Value.kReverse);
-    		pistonTwo.set(DoubleSolenoid.Value.kReverse);
+    		pistonOne.set(false);
+    		pistonTwo.set(false);
     	}
     }
 }
