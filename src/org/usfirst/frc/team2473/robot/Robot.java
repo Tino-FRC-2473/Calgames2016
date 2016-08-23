@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2473.robot;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static BallShooter ballShooter;
 	public static OI oi;
+	public static AnalogGyro gyro;
 	public static Timer timer;
 	public static double start;
     Command autonomousCommand;

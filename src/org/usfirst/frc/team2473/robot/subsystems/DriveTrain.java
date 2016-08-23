@@ -38,7 +38,7 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain () {
 		super();
 
-		gyro = new AnalogGyro(RobotMap.gyro);
+		gyro = Robot.gyro;
 		gyro.reset();
 		gyro.calibrate();
 		
@@ -47,8 +47,8 @@ public class DriveTrain extends Subsystem {
 		leftBackCAN = new CANTalon(RobotMap.leftBackMotor);
 		rightBackCAN = new CANTalon(RobotMap.rightBackMotor);
 
-		one = new AnalogInput(RobotMap.sensor_one);
-		two = new AnalogInput(RobotMap.sensor_two);
+		one = new AnalogInput(RobotMap.leftLightSensor);
+		two = new AnalogInput(RobotMap.rightLightSensor);
 		
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
 		
@@ -72,8 +72,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void drive(double left, double right) {
-    	drive.tankDrive(left, right);
-    	
+    	drive.tankDrive(left, right);    	
 	}
     
     public void resetEncoders() {
