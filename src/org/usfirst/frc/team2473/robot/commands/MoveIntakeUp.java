@@ -14,6 +14,8 @@ import org.usfirst.frc.team2473.robot.Robot;
  */
 public class MoveIntakeUp extends Command {
 
+	long startTime = System.currentTimeMillis();
+	
     public MoveIntakeUp() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.pickup);
@@ -30,7 +32,7 @@ public class MoveIntakeUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		if (System.currentTimeMillis() <= 100) {
+		if (System.currentTimeMillis() - startTime <= 100) {
 			return true;
 		}
 		return false;
