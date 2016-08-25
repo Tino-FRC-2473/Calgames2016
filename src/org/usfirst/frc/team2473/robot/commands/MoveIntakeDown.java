@@ -13,6 +13,8 @@ import org.usfirst.frc.team2473.robot.Robot;
  *
  */
 public class MoveIntakeDown extends Command {
+
+	long startTime = System.currentTimeMillis();
 	
     public MoveIntakeDown() {
         // Use requires() here to declare subsystem dependencies
@@ -21,21 +23,24 @@ public class MoveIntakeDown extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	MoveIntake.resetCounter();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	Robot.pickup.togglePiston(false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return true;
+		if (System.currentTimeMillis() - startTime <= 100) {
+			return true;
+		}
+		return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	
     }
 
     // Called when another command which requires one or more of the same
