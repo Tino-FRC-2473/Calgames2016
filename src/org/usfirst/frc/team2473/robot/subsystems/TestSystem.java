@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class TestSystem extends Subsystem {
 
-	private Servo servo;
+	public static Servo servo;
 	
 	public TestSystem (){
 		super();		

@@ -20,6 +20,7 @@ public class TurnServo extends Command {
 
 	@Override
 	protected void execute() {
+		System.out.println("Angle: " + Robot.system.servo.getAngle());
 		Robot.system.turnServo(DEG);
 	}
 
