@@ -14,8 +14,6 @@ import org.usfirst.frc.team2473.robot.Robot;
  */
 public class MoveIntakeDown extends Command {
 
-	long startTime = System.currentTimeMillis();
-	
     public MoveIntakeDown() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.pickup);
@@ -32,7 +30,7 @@ public class MoveIntakeDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		if (System.currentTimeMillis() - startTime <= 100) {
+		if (System.currentTimeMillis() <= 100) {
 			return true;
 		}
 		return false;
