@@ -16,6 +16,7 @@ public class Pickup extends Subsystem {
 	private Solenoid pistonOne;
 	private Solenoid pistonTwo;
 	
+	public boolean up = true;
 	
 	public Pickup(){
 		intake = new CANTalon(RobotMap.leftBackMotor);
