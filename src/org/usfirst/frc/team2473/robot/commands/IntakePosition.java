@@ -13,9 +13,7 @@ import org.usfirst.frc.team2473.robot.Robot;
  */
 public class IntakePosition extends Command {
 	
-	private long startTime = 0;
-	private boolean pistonOn = true;
-	private boolean loopFinished = false;
+	public boolean isRunning;
 	
 	public IntakePosition() {
         // Use requires() here to declare subsystem dependencies
@@ -24,35 +22,23 @@ public class IntakePosition extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	startTime = System.currentTimeMillis();
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (System.currentTimeMillis() - startTime > 500) {
-    		pistonOn = !pistonOn;
-    		startTime = System.currentTimeMillis();
-    		loopFinished = true;
-    	}
-    	
-    	if (Robot.oi.getJoystickLeft().getRawButton(1) && pistonOn){
-    		Robot.pickup.togglePiston(true);
-    	} else if (Robot.oi.getJoystickLeft().getRawButton(1) && !pistonOn){
-    		Robot.pickup.togglePiston(false);
-    	}
+    	isRunning = true;
+    	Robot.pickup.togglePiston(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		if (loopFinished) {
-			return true;
-		}
-		return false;
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	
+    	Robot.pickup.togglePiston(false);
     }
 
     // Called when another command which requires one or more of the same
