@@ -40,7 +40,7 @@ public class Database{
 	}
 
 	private Map<Value, ThreadSafeHolder> map;
-	private Map<ButtonName, Button> buttonMap;
+	private Map<ButtonName, InternalButton> buttonMap;
 	
 	private Database() {
 		HashMap<Value, ThreadSafeHolder> tempMap = (new HashMap<>());
@@ -70,6 +70,11 @@ public class Database{
 	public Button getButton(ButtonName name)
 	{
 		return buttonMap.get(name);
+	}
+	
+	public void setButtonValue(ButtonName name, boolean newValue)
+	{
+		buttonMap.get(name).setPressed(newValue);
 	}
 	
 
