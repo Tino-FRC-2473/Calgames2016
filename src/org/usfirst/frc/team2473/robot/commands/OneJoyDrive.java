@@ -20,7 +20,13 @@ public class OneJoyDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.driveTrain.driveArcade(-Robot.oi.getJoystickLeft().getY(), -(1 - Robot.oi.getJoystickLeft().getY()*.4) * Robot.oi.getJoystickLeft().getTwist());
-    	Robot.driveTrain.driveArcade(-Robot.oi.getJoystickRight().getY(), -(1 - Robot.oi.getJoystickRight().getY()*.3) *((Robot.oi.getJoystickLeft().getX() > 0)?1:-1) * Math.sqrt(Math.abs(Robot.oi.getJoystickLeft().getX())) * 1.0);
+    	
+    	double joyRightY = Robot.oi.getJoystickRight().getY();
+    	double joyLeftX = Robot.oi.getJoystickLeft().getX();
+    	double thrust = -sqrtWithSign(joyRightY);
+    	//double turn = /*((joyRightY > 0)?1:-1)*/-1 * (1 - joyRightY*.3) *sqrtWithSign(joyLeftX) * 1.0;
+    	double turn = (Math.abs(joyLeftX) < .04)?0:-1 *  ((joyLeftX > 0)?1:-1) *((Math.abs(joyRightY) * .40 + .60)*Math.abs(joyLeftX) + ((1 - Math.abs(joyRightY)) * .40));
+    	Robot.driveTrain.driveArcade(thrust,turn );
     	 
     }
 
@@ -38,5 +44,10 @@ public class OneJoyDrive extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	end();
+    }
+    
+    private double sqrtWithSign(double in)
+    {
+    	return (in > 0)?Math.sqrt(in):-Math.sqrt(-in) ;
     }
 }

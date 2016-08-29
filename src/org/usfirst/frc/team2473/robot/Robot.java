@@ -29,9 +29,11 @@ public class Robot extends IterativeRobot{
 	public static DriveTrain driveTrain;
 	public static OI oi;
 	public static AnalogGyro gyro;
-	
+
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
+
+	double lastTime;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -92,6 +94,9 @@ public class Robot extends IterativeRobot{
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
+
+		System.out.println(System.currentTimeMillis() - lastTime);
+
 		if (!timerRunning) {
 			robotControlLoop.scheduleAtFixedRate(new TimerTask(){
 
@@ -109,8 +114,10 @@ public class Robot extends IterativeRobot{
 			sensorThread.start();
 		}
 
-		log();
 
+
+		log();
+		lastTime = System.currentTimeMillis();
 
 
 

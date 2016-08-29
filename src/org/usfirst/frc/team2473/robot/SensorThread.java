@@ -11,6 +11,7 @@ public class SensorThread extends Thread {
 	AnalogInput leftLightSensor, rightLightSensor;
 	CANTalon leftEncoder, rightEncoder;
 	private volatile boolean run = true, alive = true;
+	long lastTime;
 
 	public SensorThread() {
 		this.gyro = Robot.gyro;
@@ -31,6 +32,7 @@ public class SensorThread extends Thread {
 	public void run() {
 		while (alive) {
 			while (run && alive) {
+				//System.out.println(System.currentTimeMillis() - lastTime);
 				for (Database.Value v : Database.Value.values()) {
 					switch (v) {
 					case GYRO:
@@ -50,6 +52,7 @@ public class SensorThread extends Thread {
 						break;
 					}
 				}
+				lastTime = System.currentTimeMillis();
 			}
 			if (alive) {
 				try {
