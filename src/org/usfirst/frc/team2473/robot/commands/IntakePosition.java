@@ -12,8 +12,6 @@ import org.usfirst.frc.team2473.robot.Robot;
  */
 public class IntakePosition extends Command {
 	
-	public boolean isRunning;
-	
 	public IntakePosition() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.pickup);
@@ -25,7 +23,6 @@ public class IntakePosition extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	isRunning = true;
     	Robot.pickup.togglePiston(true);
     }
 
