@@ -43,10 +43,12 @@ public class OI {
 	
 	Button button1 = new JoystickButton(joyLeft, 1);
 	Button button2 = new JoystickButton(joyLeft, 2);
+	Button button3 = new JoystickButton(joyLeft, 3);
 	
 	public OI() {
 		button1.toggleWhenPressed(new IntakePosition());
 		button2.toggleWhenPressed(new BoulderIntake());
+		button3.whenPressed(new AutoIntakePosition(1));
 	}
 	
 	public Joystick getJoystickLeft() {
