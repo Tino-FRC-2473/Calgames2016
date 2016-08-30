@@ -45,7 +45,7 @@ public class OI {
 //	Button button3 = new JoystickButton(joyLeft, 3);
 	
 	public OI() {
-		button1.toggleWhenPressed(new IntakePosition());
+		button1.toggleWhenActive(new IntakePosition());
 //		button1.whenPressed(new MoveIntakeUp());
 //		button1.whenReleased(new MoveIntakeDown());
 	}

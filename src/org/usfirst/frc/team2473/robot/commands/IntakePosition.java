@@ -5,7 +5,6 @@
 package org.usfirst.frc.team2473.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team2473.robot.Robot;
 
 /**
@@ -24,7 +23,6 @@ public class IntakePosition extends Command {
     protected void initialize() {
 
     }
-
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	isRunning = true;
@@ -38,12 +36,12 @@ public class IntakePosition extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.pickup.togglePiston(false);
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
+    	Robot.pickup.togglePiston(false);
     }
 }
