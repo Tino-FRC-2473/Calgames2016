@@ -14,6 +14,10 @@ public class AutoIntakePosition extends Command {
 	
 	private double robot_timeout;
 	
+	/**
+	 * 
+	 * @param timeout the amount of time to pause before toggling the solenoid off
+	 */
 	public AutoIntakePosition(double timeout) {
         // Use requires() here to declare subsystem dependencies
     	robot_timeout = timeout;

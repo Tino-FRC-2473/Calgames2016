@@ -8,7 +8,7 @@ import org.usfirst.frc.team2473.robot.RobotMap;
 
 
 /**
- *
+ *	@author Kashyap & Wesley
  */
 public class Pickup extends Subsystem {
     
