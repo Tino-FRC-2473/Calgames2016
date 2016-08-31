@@ -15,11 +15,10 @@ public class AutoIntakePosition extends Command {
 	private double robot_timeout;
 	
 	/**
-	 * 
-	 * @param timeout the amount of time to pause before toggling the solenoid off
+	 * This command toggles the piston on for the timeout duration before toggling the piston off.
+	 * @param timeout the amount of time to pause before toggling the solenoid off (in ms)
 	 */
 	public AutoIntakePosition(double timeout) {
-        // Use requires() here to declare subsystem dependencies
     	robot_timeout = timeout;
     	requires(Robot.pickup);
     }

@@ -5,7 +5,7 @@ import org.usfirst.frc.team2473.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * 
  */
 public class DriveRobot extends Command {
 	
@@ -14,6 +14,7 @@ public class DriveRobot extends Command {
 	private double encValue;
 
 	/**
+	 * This command moves the robot given the left and right motor speeds until the distance (in encoder ticks) given.
 	 * 
 	 * @param leftSpeed		the speed at which to run the left motor
 	 * @param rightSpeed	the speed at which to run the right motor

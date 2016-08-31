@@ -7,6 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class MyFirstCommandGroup extends CommandGroup {
     
+	/**
+	 * This command moves the robot forward, then autonomously extends the piston for intake before moving the robot back.
+	 */
     public  MyFirstCommandGroup() {
     	addSequential(new DriveRobot(10, 10, 1000));
     	addSequential(new AutoIntakePosition(1000));
