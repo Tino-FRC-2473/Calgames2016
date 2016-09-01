@@ -13,7 +13,7 @@ public class MyFirstCommandGroup extends CommandGroup {
     public  MyFirstCommandGroup() {
     	addSequential(new DriveRobot(10, 10, 1000));
     	addSequential(new AutoIntakePosition(1000));
-    	addSequential(new DriveRobot(-10, -10, 1000));
+    	addSequential(new DriveRobot(10, 10, 1000));
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

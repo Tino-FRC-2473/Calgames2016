@@ -24,6 +24,7 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
+	private SpeedController intakeCAN;
 	private AnalogGyro gyro;
 	
 	
@@ -36,6 +37,7 @@ public class DriveTrain extends Subsystem {
 		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
 		leftBackCAN = new CANTalon(RobotMap.leftBackMotor);
 		rightBackCAN = new CANTalon(RobotMap.rightBackMotor);
+		intakeCAN = new CANTalon(RobotMap.intakeMotor);
 		
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
 		
@@ -63,6 +65,10 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(left, right);
    
 	}
+    
+    public void moveIntake(double speed) {
+    	intakeCAN.set(speed);
+    }
     
     public double getRightEncoder(){
     	return ((CANTalon)rightFrontCAN).getEncPosition();
