@@ -41,9 +41,10 @@ public class DriveRobot extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	boolean rightDistReached = Robot.driveTrain.getRightEncoder() >= encValue;
+//    	boolean rightDistReached = Robot.driveTrain.getRightEncoder() >= encValue;
     	boolean leftDistReached = Robot.driveTrain.getLeftEncoder() >= encValue;
-        return rightDistReached && leftDistReached;
+//        return rightDistReached && leftDistReached;
+    	return leftDistReached;
     }
 
     // Called once after isFinished returns true

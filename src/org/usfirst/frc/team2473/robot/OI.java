@@ -39,7 +39,7 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	private Joystick joyLeft = new Joystick(0);
-	private Joystick joyRight = new Joystick(1);
+//	private Joystick joyRight = new Joystick(1);
 	
 	Button button1 = new JoystickButton(joyLeft, 1);
 	Button button2 = new JoystickButton(joyLeft, 2);
@@ -48,17 +48,17 @@ public class OI {
 	
 	public OI() {
 		button1.toggleWhenPressed(new IntakePosition());
-		button2.toggleWhenPressed(new BoulderIntake());
+		button4.toggleWhenPressed(new BoulderIntake());
 		button3.whenPressed(new AutoIntakePosition(1));
-		button4.whenPressed(new MyFirstCommandGroup());
+		button2.whenPressed(new MyFirstCommandGroup());
 	}
 	
 	public Joystick getJoystickLeft() {
         return joyLeft;
     }
 	
-	public Joystick getJoystickRight() {
-        return joyRight;
-    }
+//	public Joystick getJoystickRight() {
+////        return joyRight;
+//    }
 }
 

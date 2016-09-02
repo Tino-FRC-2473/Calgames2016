@@ -16,7 +16,7 @@ public class AutoIntakePosition extends Command {
 	
 	/**
 	 * This command toggles the piston on for the timeout duration before toggling the piston off.
-	 * @param timeout the amount of time to pause before toggling the solenoid off (in ms)
+	 * @param timeout the amount of time to pause before toggling the solenoid off (in MILLISECONDS WESLEY!!!!!)
 	 */
 	public AutoIntakePosition(double timeout) {
     	robot_timeout = timeout;
