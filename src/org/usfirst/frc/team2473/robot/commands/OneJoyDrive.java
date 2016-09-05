@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.Database;
+import org.usfirst.frc.team2473.robot.Database.Value;
 import org.usfirst.frc.team2473.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,11 +23,11 @@ public class OneJoyDrive extends Command {
     protected void execute() {
     	//Robot.driveTrain.driveArcade(-Robot.oi.getJoystickLeft().getY(), -(1 - Robot.oi.getJoystickLeft().getY()*.4) * Robot.oi.getJoystickLeft().getTwist());
     	
-    	double joyRightY = Robot.oi.getJoystickRight().getY();
-    	double joyLeftX = Robot.oi.getJoystickLeft().getX();
-    	double thrust = -sqrtWithSign(joyRightY);
+    	double throttleZ = Database.getInstance().getValue(Value.THROTTLE_VALUE);
+    	double wheelX = Database.getInstance().getValue(Value.WHEEL_TWIST);
+    	double thrust = -sqrtWithSign(throttleZ);
     	//double turn = /*((joyRightY > 0)?1:-1)*/-1 * (1 - joyRightY*.3) *sqrtWithSign(joyLeftX) * 1.0;
-    	double turn = (Math.abs(joyLeftX) < .04)?0:-1 *  ((joyLeftX > 0)?1:-1) *((Math.abs(joyRightY) * .40 + .60)*Math.abs(joyLeftX) + ((1 - Math.abs(joyRightY)) * .40));
+    	double turn = (Math.abs(wheelX) < .04)?0:-1 *  ((wheelX > 0)?1:-1) *((Math.abs(throttleZ) * .40 + .60)*Math.abs(wheelX) + ((1.0 - Math.abs(throttleZ)) * .40));
     	Robot.driveTrain.driveArcade(thrust,turn );
     	 
     }

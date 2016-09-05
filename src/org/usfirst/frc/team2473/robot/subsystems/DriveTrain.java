@@ -3,7 +3,7 @@ package org.usfirst.frc.team2473.robot.subsystems;
 import org.usfirst.frc.team2473.robot.Database;
 import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
-import org.usfirst.frc.team2473.robot.commands.DriveStraight;
+import org.usfirst.frc.team2473.robot.commands.DriveStraightForward;
 import org.usfirst.frc.team2473.robot.commands.GyroDrive;
 import org.usfirst.frc.team2473.robot.commands.OneJoyDrive;
 import org.usfirst.frc.team2473.robot.commands.TankDrive;

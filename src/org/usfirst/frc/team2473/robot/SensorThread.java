@@ -1,17 +1,31 @@
 package org.usfirst.frc.team2473.robot;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.DoubleSupplier;
+import java.util.function.Function;
+
+import org.usfirst.frc.team2473.robot.Database.Value;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 
-public class SensorThread extends Thread {
+
+public class SensorThread extends Thread{
 
 	AnalogGyro gyro;
 	AnalogInput leftLightSensor, rightLightSensor;
 	CANTalon leftEncoder, rightEncoder;
 	private volatile boolean run = true, alive = true;
 	long lastTime;
+
+	private Map<Database.Value, Double> tempMap;
+
+	//a map of how each value is called
+	private Map<Database.Value, DoubleSupplier> callMap;
 
 	public SensorThread() {
 		this.gyro = Robot.gyro;
@@ -25,6 +39,20 @@ public class SensorThread extends Thread {
 
 		resetEncoders();
 
+		tempMap = new HashMap<>();
+
+		callMap = new HashMap<>();
+
+
+		callMap.put(Value.GYRO, () -> gyro.getAngle());
+		callMap.put(Value.LEFT_LIGHT_SENSOR, () -> leftLightSensor.getValue());
+		callMap.put(Value.RIGHT_LIGHT_SENSOR, () -> rightLightSensor.getValue());
+		callMap.put(Value.RIGHT_ENCODER, () -> rightEncoder.getEncPosition() * Database.RIGHT_ENC_CONSTANT);
+		callMap.put(Value.LEFT_ENCODER, () ->  leftEncoder.getEncPosition() * Database.LEFT_ENC_CONSTANT);
+		
+		
+		
+		callMap = Collections.unmodifiableMap(callMap);
 		super.setDaemon(true);
 	}
 
@@ -32,27 +60,17 @@ public class SensorThread extends Thread {
 	public void run() {
 		while (alive) {
 			while (run && alive) {
-				//System.out.println(System.currentTimeMillis() - lastTime);
-				for (Database.Value v : Database.Value.values()) {
-					switch (v) {
-					case GYRO:
-						Database.getInstance().setValue(v, gyro.getAngle());
-						break;
-					case LEFT_ENCODER:
-						Database.getInstance().setValue(v, leftEncoder.getEncPosition() * Database.LEFT_ENC_CONSTANT);
-						break;
-					case RIGHT_ENCODER:
-						Database.getInstance().setValue(v, rightEncoder.getEncPosition() * Database.RIGHT_ENC_CONSTANT);
-						break;
-					case LEFT_LIGHT_SENSOR:
-						Database.getInstance().setValue(v, leftLightSensor.getValue());
-						break;
-					case RIGHT_LIGHT_SENSOR:
-						Database.getInstance().setValue(v, rightLightSensor.getValue());
-						break;
-					}
-				}
+				// System.out.println(System.currentTimeMillis() - lastTime);
+				
+				updateSensors();
+				
 				lastTime = System.currentTimeMillis();
+				// Thread.yield();
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			if (alive) {
 				try {
@@ -65,6 +83,20 @@ public class SensorThread extends Thread {
 		}
 	}
 
+	private void updateSensors()
+	{
+		//snapshots a value for every sensor
+		for (Database.Value v : callMap.keySet()) {
+			tempMap.put(v, callMap.get(v).getAsDouble());
+		}
+		
+		//push those values to the database, emptying the tempMap
+		for(Database.Value v : tempMap.keySet())
+		{
+			Database.getInstance().setValue(v, tempMap.get(v));
+		}
+	}
+	
 	/**
 	 * stops this thread from updating Database. The thread may still finish its
 	 * current loop.

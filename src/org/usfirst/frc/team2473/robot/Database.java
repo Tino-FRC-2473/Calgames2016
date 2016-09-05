@@ -20,13 +20,13 @@ public class Database{
 
 
 	public enum Value {
-		GYRO, LEFT_LIGHT_SENSOR, RIGHT_LIGHT_SENSOR, LEFT_ENCODER, RIGHT_ENCODER, JOY1_X, JOY1_Y, JOY1_Z, JOY2_X, JOY2_Y, JOY2_Z;// add
+		GYRO, LEFT_LIGHT_SENSOR, RIGHT_LIGHT_SENSOR, LEFT_ENCODER, RIGHT_ENCODER, WHEEL_TWIST, THROTTLE_VALUE;// add
 																																	// buttons
 
 	}
 
 	public enum ButtonName {
-
+		//TRIGGER
 	}
 
 
@@ -40,7 +40,7 @@ public class Database{
 	}
 
 	private Map<Value, ThreadSafeHolder> map;
-	private Map<ButtonName, InternalButton> buttonMap;
+	private Map<ButtonName, ThreadSafeInternalButton> buttonMap;
 	
 	private Database() {
 		HashMap<Value, ThreadSafeHolder> tempMap = (new HashMap<>());
@@ -51,7 +51,7 @@ public class Database{
 		buttonMap = Collections.synchronizedMap(new HashMap<>());
 		for(ButtonName b : ButtonName.values())
 		{
-			buttonMap.put(b, new InternalButton());
+			buttonMap.put(b, new ThreadSafeInternalButton());
 		}
 			
 	}
@@ -67,12 +67,12 @@ public class Database{
 		map.get(v).setValue(newValue);
 	}
 
-	public Button getButton(ButtonName name)
+	public synchronized Button getButton(ButtonName name)
 	{
 		return buttonMap.get(name);
 	}
 	
-	public void setButtonValue(ButtonName name, boolean newValue)
+	public synchronized void setButtonValue(ButtonName name, boolean newValue)
 	{
 		buttonMap.get(name).setPressed(newValue);
 	}
@@ -85,6 +85,10 @@ public class Database{
 				Database.getInstance().getValue(Value.RIGHT_ENCODER));
 		SmartDashboard.putNumber("Gyro Angle",
 				Database.getInstance().getValue(Value.GYRO));
+		SmartDashboard.putNumber("Wheel Twist",
+				Database.getInstance().getValue(Value.WHEEL_TWIST));
+		SmartDashboard.putNumber("Throttle Value",
+				Database.getInstance().getValue(Value.THROTTLE_VALUE));
 
 	}
 
@@ -146,6 +150,7 @@ class ThreadSafeInternalButton extends InternalButton
 	public synchronized void whileHeld(Command command) {
 		// TODO Auto-generated method stub
 		super.whileHeld(command);
+		
 	}
 
 	@Override

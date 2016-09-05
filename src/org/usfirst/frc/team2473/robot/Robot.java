@@ -114,8 +114,9 @@ public class Robot extends IterativeRobot{
 			sensorThread.start();
 		}
 
-
-
+		oi.updateButtons();
+		oi.updateJoysticks();
+		
 		log();
 		lastTime = System.currentTimeMillis();
 
