@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OneJoyDrive extends Command {
 
+	private static final double SPEED_SCALAR = 0.4;
+	private static final double SPEED_ADJ_FACTOR = 0.6;
+	private static final double DEAD_ZONE = 0.04;
+	
     public OneJoyDrive() {
         requires(Robot.driveTrain);
     }
@@ -27,8 +31,11 @@ public class OneJoyDrive extends Command {
     	double wheelX = Database.getInstance().getValue(Value.WHEEL_TWIST);
     	double thrust = -sqrtWithSign(throttleZ);
     	//double turn = /*((joyRightY > 0)?1:-1)*/-1 * (1 - joyRightY*.3) *sqrtWithSign(joyLeftX) * 1.0;
-    	double turn = (Math.abs(wheelX) < .04)?0:-1 *  ((wheelX > 0)?1:-1) *((Math.abs(throttleZ) * .40 + .60)*Math.abs(wheelX) + ((1.0 - Math.abs(throttleZ)) * .40));
-    	Robot.driveTrain.driveArcade(thrust,turn );
+    	double wheel = Math.abs(wheelX);
+    	double throttle = (Math.abs(throttleZ) * SPEED_SCALAR) + SPEED_ADJ_FACTOR;
+    	double deadz = (wheel < DEAD_ZONE) ? 0 : -1;
+    	double turn = (deadz *  Math.signum(wheelX) *(throttle)*wheel + ((1.0 - Math.abs(throttleZ)) * SPEED_SCALAR));
+    	Robot.driveTrain.driveArcade(thrust,turn);
     	 
     }
 
