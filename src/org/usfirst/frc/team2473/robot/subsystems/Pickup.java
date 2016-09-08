@@ -41,11 +41,11 @@ public class Pickup extends Subsystem {
     public void togglePiston(boolean forward) {
     	if (forward) {
     		pistonOne.set(true);
-    		pistonTwo.set(true);
+    		pistonTwo.set(false);
     	}
     	else {
+    		pistonTwo.set(true);
     		pistonOne.set(false);
-    		pistonTwo.set(false);
     	}
     }
 }
