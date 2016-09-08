@@ -10,8 +10,21 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraightForward extends Command {
 
-    public DriveStraightForward() {
+	
+	private double kP;
+	private double speed;
+	
+    /**
+	 * @deprecated Use {@link #DriveStraightForward(double,double)} instead
+	 */
+	public DriveStraightForward() {
+		this(0.7, 0.3);
+	}
+
+	public DriveStraightForward(double speed, double kP) {
     	requires(Robot.driveTrain);
+    	this.speed = speed;
+    	this.kP = kP;
     }
 
     // Called just before this Command runs the first time
@@ -34,7 +47,7 @@ public class DriveStraightForward extends Command {
     	
     	double error = Database.getInstance().getValue(Database.Value.GYRO);
     	
-    	Robot.driveTrain.driveArcade(.7, error*.3);
+    	Robot.driveTrain.driveArcade(speed, error*kP);
     	
     }
 

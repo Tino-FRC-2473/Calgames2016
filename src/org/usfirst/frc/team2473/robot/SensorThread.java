@@ -90,7 +90,7 @@ public class SensorThread extends Thread{
 			tempMap.put(v, callMap.get(v).getAsDouble());
 		}
 		
-		//push those values to the database, emptying the tempMap
+		//push those values to the database
 		for(Database.Value v : tempMap.keySet())
 		{
 			Database.getInstance().setValue(v, tempMap.get(v));
