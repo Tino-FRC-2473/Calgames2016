@@ -50,7 +50,7 @@ public class OI {
 		button1.toggleWhenPressed(new IntakePosition());
 		button4.toggleWhenPressed(new BoulderIntake());
 		button3.whenPressed(new AutoIntakePosition(1));
-		button2.whenPressed(new MyFirstCommandGroup());
+		button2.whenPressed(new DriveAndToggle());
 	}
 	
 	public Joystick getJoystickLeft() {
