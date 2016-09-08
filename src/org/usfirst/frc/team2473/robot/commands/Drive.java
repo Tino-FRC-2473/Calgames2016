@@ -15,6 +15,7 @@ public class Drive extends Command {
 	public static final double SPEED_TURNING_ADDING_CONSTANT = 0.6;
 	public static final double DEADZONE_AREA = 0.04;
 	public static final double MAX_TURN = 0.8;
+	public static final double 
 	
 	private boolean drivingStraight;//is the robot driving straight
 	private double startingGyroValue;//the gyro value when starting to drive straight
@@ -43,7 +44,7 @@ public class Drive extends Command {
     			drivingStraight = true;
     			startingGyroValue = Database.getInstance().getValue(Value.GYRO);
     		}
-    		driveStraight(thrust, Database.getInstance().getValue(Value.GYRO) - startingGyroValue);
+    		driveStraight(thrust, 0.3*(Database.getInstance().getValue(Value.GYRO) - startingGyroValue));
     		
     	}
     	else
