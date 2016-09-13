@@ -19,7 +19,6 @@ public class Drive extends Command {
 	public static final double KI = 0.00;
 	public static final double KD = 0.00;
 	
-	
 	private boolean drivingStraight;//is the robot driving straight
 	private double startingGyroValue;//the gyro value when starting to drive straight
 	private double integral;

@@ -17,7 +17,7 @@ import org.usfirst.frc.team2473.robot.commands.*;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI{
+public class OI {
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -72,7 +72,6 @@ public class OI{
 
 		buttonCallMap = Collections.unmodifiableMap(buttonCallMap);
 
-
 		joyCallMap = new HashMap<>();
 
 		// add joystick calls here
@@ -80,8 +79,6 @@ public class OI{
 		joyCallMap.put(Value.THROTTLE_VALUE, () -> getThrottle().getZ());
 
 		joyCallMap = Collections.unmodifiableMap(joyCallMap);
-
-
 
 		// Database.getInstance().getButton(ButtonName.TRIGGER).whenActive(new
 		// ButtonTest());
@@ -97,29 +94,24 @@ public class OI{
 
 	public void updateJoysticks() {
 		
-		//take a snapshot of the values
-		for(Value v : joyCallMap.keySet())
-		{
+		// snapshots the current joystick
+		for (Value v : joyCallMap.keySet()) {
 			joyMap.put(v, joyCallMap.get(v).getAsDouble());
 		}
-		
-		//push those values to the Database and clear the map
-		for(Value v : joyMap.keySet())
-		{
+		// pushes to the Database
+		for (Value v : joyMap.keySet()) {
 			Database.getInstance().setValue(v, joyMap.get(v));
 		}
 	}
 
 	public void updateButtons() {
-		//snapshot the buttons
+		// snapshots the current joystick
 		for (ButtonName b : buttonCallMap.keySet()) {
 			tempButtonMap.put(b, buttonCallMap.get(b).getAsBoolean());
 		}
-
-		//push those values 
+		// pushes to the DatabaseÏ
 		for (ButtonName b : tempButtonMap.keySet()) {
 			Database.getInstance().setButtonValue(b, tempButtonMap.get(b));
 		}
 	}
 }
-
