@@ -10,9 +10,9 @@ import org.usfirst.frc.team2473.robot.Robot;
 /**
  *
  */
-public class IntakePosition extends Command {
+public class Intake extends Command {
 	
-	public IntakePosition() {
+	public Intake() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.pickup);
     }
@@ -24,6 +24,7 @@ public class IntakePosition extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.pickup.togglePiston(true);
+    	Robot.pickup.startIntake();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,6 +40,7 @@ public class IntakePosition extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.pickup.stopIntake();
     	Robot.pickup.togglePiston(false);
     }
 }
