@@ -109,7 +109,7 @@ public class Robot extends IterativeRobot{
 		}
 		if (sensorThread == null) {
 			// create the args for sensorThread
-			sensorThread = new SensorThread();
+			sensorThread = new SensorThread(2);
 			sensorThread.setPriority(2);
 			sensorThread.start();
 		}

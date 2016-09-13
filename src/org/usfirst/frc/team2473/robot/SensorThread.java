@@ -16,18 +16,24 @@ import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 
 public class SensorThread extends Thread{
 
+	//add new sensors here
 	AnalogGyro gyro;
 	AnalogInput leftLightSensor, rightLightSensor;
 	CANTalon leftEncoder, rightEncoder;
 	private volatile boolean run = true, alive = true;
 	long lastTime;
+	int delay;
 
 	private Map<Database.Value, Double> tempMap;
 
 	//a map of how each value is called
 	private Map<Database.Value, DoubleSupplier> callMap;
 
-	public SensorThread() {
+	public SensorThread(int delay) {
+		
+		this.delay = delay;
+		
+		//add new sensors here
 		this.gyro = Robot.gyro;
 		this.leftLightSensor = new AnalogInput(RobotMap.leftLightSensor);
 		this.leftEncoder = new CANTalon(RobotMap.leftFrontMotor);
@@ -43,7 +49,7 @@ public class SensorThread extends Thread{
 
 		callMap = new HashMap<>();
 
-
+		//add the sensor name in the Values enum and the method of the sensor that returns the sensor value.
 		callMap.put(Value.GYRO, () -> gyro.getAngle());
 		callMap.put(Value.LEFT_LIGHT_SENSOR, () -> leftLightSensor.getValue());
 		callMap.put(Value.RIGHT_LIGHT_SENSOR, () -> rightLightSensor.getValue());
@@ -55,7 +61,12 @@ public class SensorThread extends Thread{
 		callMap = Collections.unmodifiableMap(callMap);
 		super.setDaemon(true);
 	}
-
+	
+	/**
+	 * this method simulates the thread methods Thread.pause() and Thread.kill(). 
+	 * It continuously polls sensors and then sleeps for delay length while alive and running.
+	 * When it is not running it simply waits and stops running when it is not alive
+	 */
 	@Override
 	public void run() {
 		while (alive) {
@@ -67,7 +78,7 @@ public class SensorThread extends Thread{
 				lastTime = System.currentTimeMillis();
 				// Thread.yield();
 				try {
-					Thread.sleep(1);
+					Thread.sleep(delay);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
