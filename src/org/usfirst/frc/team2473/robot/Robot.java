@@ -95,7 +95,7 @@ public class Robot extends IterativeRobot{
 	 */
 	public void teleopPeriodic() {
 
-		System.out.println(System.currentTimeMillis() - lastTime);
+		//System.out.println(System.currentTimeMillis() - lastTime);
 
 		if (!timerRunning) {
 			robotControlLoop.scheduleAtFixedRate(new TimerTask(){

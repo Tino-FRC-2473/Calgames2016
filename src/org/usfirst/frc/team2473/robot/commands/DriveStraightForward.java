@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2473.robot.commands;
 
 import org.usfirst.frc.team2473.robot.Database;
+import org.usfirst.frc.team2473.robot.Database.Value;
 import org.usfirst.frc.team2473.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -45,7 +46,7 @@ public class DriveStraightForward extends Command {
     	//double direction = Math.abs(Robot.driveTrain.getHeading())/Robot.driveTrain.getHeading();
     	//Robot.driveTrain.driveArcade(.6, Math.min(Math.abs(Robot.driveTrain.getHeading()*.3),.5)*direction);
     	
-    	double error = Database.getInstance().getValue(Database.Value.GYRO);
+    	double error = Database.getInstance().getValue(Value.GYRO);
     	
     	Robot.driveTrain.driveArcade(speed, error*kP);
     	
@@ -66,4 +67,6 @@ public class DriveStraightForward extends Command {
     protected void interrupted() {
     	end();
     }
+    
+    
 }

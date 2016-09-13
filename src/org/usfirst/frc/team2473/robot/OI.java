@@ -96,36 +96,27 @@ public class OI{
 	}
 
 	public void updateJoysticks() {
-		for (Value n : Value.values()) {
-			switch (n) {
-				case WHEEL_TWIST:
-					joyMap.put(n, getWheel().getX());
-					break;
-				case THROTTLE_VALUE:
-					joyMap.put(n, getThrottle().getZ());
-					break;
-				default:
-					continue;
-			}
+		
+		//take a snapshot of the values
+		for(Value v : joyCallMap.keySet())
+		{
+			joyMap.put(v, joyCallMap.get(v).getAsDouble());
 		}
-
-		for (Value n : Value.values()) {
-			switch (n) {
-				case WHEEL_TWIST:
-				case THROTTLE_VALUE:
-					Database.getInstance().setValue(n, joyMap.get(n));
-					break;
-				default:
-					continue;
-			}
+		
+		//push those values to the Database and clear the map
+		for(Value v : joyMap.keySet())
+		{
+			Database.getInstance().setValue(v, joyMap.get(v));
 		}
 	}
 
 	public void updateButtons() {
+		//snapshot the buttons
 		for (ButtonName b : buttonCallMap.keySet()) {
 			tempButtonMap.put(b, buttonCallMap.get(b).getAsBoolean());
 		}
 
+		//push those values 
 		for (ButtonName b : tempButtonMap.keySet()) {
 			Database.getInstance().setButtonValue(b, tempButtonMap.get(b));
 		}
