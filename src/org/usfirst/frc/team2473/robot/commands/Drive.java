@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command {
 
-	public static final double SPEED_TURNING_MULTIPLICATION_CONSTANT = 0.4;
-	public static final double SPEED_TURNING_ADDING_CONSTANT = 0.6;
+	public static final double SPEED_TURNING_MULTIPLICATION_CONSTANT = 0.30;
+	public static final double SPEED_TURNING_ADDING_CONSTANT = 0.70;
 	public static final double DEADZONE_AREA = 0.04;
 	public static final double MAX_TURN = 0.8;
-	public static final double KP = 0.2;
-	public static final double KI = 0.00;
+	public static final double KP = 0.075;
+	public static final double KI = 0.003;
 	public static final double KD = 0.00;
 	
 	private boolean drivingStraight;//is the robot driving straight
@@ -39,7 +39,7 @@ public class Drive extends Command {
     	
     	double throttleZ = Database.getInstance().getValue(Value.THROTTLE_VALUE);
     	double wheelX = Database.getInstance().getValue(Value.WHEEL_TWIST);
-    	double thrust = -sqrtWithSign(throttleZ);
+    	double thrust = -sqrtWithSign(throttleZ*.75);
     	
     	if(Math.abs(wheelX) < DEADZONE_AREA && Math.abs(thrust) > .05)
     	{
@@ -67,11 +67,13 @@ public class Drive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
     
     
@@ -83,6 +85,9 @@ public class Drive extends Command {
     	double derivative = proportion - lastProportion;
     	double rotate = KP * proportion + KI*integral + KD*derivative;
     	
+    	if(Math.abs(rotate) > .70){
+    		rotate = Math.signum(rotate) * .7;
+    	}
     	
     	Robot.driveTrain.driveArcade(speed, rotate);
     	lastProportion = proportion;
@@ -103,6 +108,7 @@ public class Drive extends Command {
     {
     	double sign = Math.signum(rawIn);
     	double result = rawIn;
+    	rawIn *= .8;
     	
     	if(Math.abs(rawIn) < DEADZONE_AREA) return 0;
     	
