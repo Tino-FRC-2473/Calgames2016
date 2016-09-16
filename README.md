@@ -5,11 +5,13 @@ Read the structure documentation: https://wpilib.screenstepslive.com/s/4485/m/13
 Scan the WPI Java Api: http://first.wpi.edu/FRC/roborio/release/docs/java/
 
 Install Eclipse neon
-Set up WPI on eclipse: https://wpilib.screenstepslive.com/s/4485/m/13809/l/599681-installing-eclipse-c-java
-Check if eclipse setup properly:
-	1. Click new project(Not java project)
-	2. Find WPILIB Robot Development
-	3. If you found this, Good Job!, you set up your eclipse correctly
+
+	Set up WPI on eclipse: https://wpilib.screenstepslive.com/s/4485/m/13809/l/599681-installing-eclipse-c-java
+	
+	Check if eclipse setup properly:
+		1. Click new project(Not java project)
+		2. Find WPILIB Robot Development
+		3. If you found this, Good Job!, you set up your eclipse correctly
 
 Install Github
 	Two Options: Github Desktop or Git Command Line
@@ -28,13 +30,13 @@ Install Github
 		3. initialize the local repo (git init)
 		4. clone the remote (git clone https://github.com/Tino-FRC-2473/Calgames2016.git)
 		
-Adding the cloned repo to Eclipse
-	1. Go to eclipse
-	2. Create a new project(Not a java project)
-		a. New WPILib Robot Development - Robot Java Project
-		b. Name the project exactly "Calgames2016" and finish
-	3. Setup Gitignore
-		a. Add everything thats not .java files
+	Adding the cloned repo to Eclipse
+		1. Go to eclipse
+		2. Create a new project(Not a java project)
+			a. New WPILib Robot Development - Robot Java Project
+			b. Name the project exactly "Calgames2016" and finish
+		3. Setup Gitignore
+			a. Add everything thats not .java files
 
 /////////BEGINNING A NEW PROJECT
 ///////////////////////
