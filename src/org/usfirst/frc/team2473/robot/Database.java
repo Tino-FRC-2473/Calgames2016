@@ -105,7 +105,7 @@ public class Database{
 	}
 
 	
-	public double getValue(Value v, long timeout)
+	public double getValue(Value v, long timeout) throws InterruptedException, TimeoutException
 	{
 		return map.get(v).getValue(timeout);
 	}
@@ -120,6 +120,10 @@ public class Database{
 		map.get(v).setValue(newValue);
 	}
 
+	public void setValue(Value v, double newValue, long timeout) throws InterruptedException, TimeoutException{
+		map.get(v).setValue(newValue, timeout);
+	}
+	
 	/**
 	 * returns the internal button that is mapped to the ButtonName
 	 * @param name the name of the button
