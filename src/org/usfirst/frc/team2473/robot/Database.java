@@ -3,7 +3,11 @@ package org.usfirst.frc.team2473.robot;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import javax.naming.TimeLimitExceededException;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
@@ -171,6 +175,22 @@ class ThreadSafeHolder{
 			lock.readLock().unlock();
 		}
 
+	}
+	
+	public double getValue(long timeout) throws TimeLimitExceededException, InterruptedException
+	{
+		try{
+		if(lock.readLock().tryLock(timeout, TimeUnit.MILLISECONDS))
+			{
+				return value;
+			}
+			else
+			{
+				throw new TimeLimitExceededException();
+			}
+		} finally {
+			lock.readLock().unlock();
+		}
 	}
 
 	public void setValue(double newValue) {
