@@ -104,6 +104,11 @@ public class Database{
 		return map.get(v).getValue();
 	}
 
+	
+	public double getValue(Value v, long timeout)
+	{
+		return map.get(v).getValue(timeout);
+	}
 	/**
 	 * sets the double value of the value in a thread-safe manner
 	 * @param v the value you are querying
@@ -177,7 +182,7 @@ class ThreadSafeHolder{
 
 	}
 	
-	public double getValue(long timeout) throws TimeLimitExceededException, InterruptedException
+	public double getValue(long timeout) throws TimeoutException, InterruptedException
 	{
 		try{
 		if(lock.readLock().tryLock(timeout, TimeUnit.MILLISECONDS))
@@ -186,7 +191,7 @@ class ThreadSafeHolder{
 			}
 			else
 			{
-				throw new TimeLimitExceededException();
+				throw new TimeoutException();
 			}
 		} finally {
 			lock.readLock().unlock();
@@ -198,6 +203,21 @@ class ThreadSafeHolder{
 			lock.writeLock().lock();
 			value = newValue;
 		} finally {
+			lock.writeLock().unlock();
+		}
+	}
+	public void setValue(double newValue, long timeout) throws InterruptedException, TimeoutException{
+		try{
+			
+			if(lock.writeLock().tryLock(timeout, TimeUnit.MILLISECONDS))
+			{
+				value = newValue;
+			}
+			else
+			{
+				throw new TimeoutException();
+			}
+		}finally{
 			lock.writeLock().unlock();
 		}
 	}
