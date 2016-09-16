@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TankDrive extends Command {
+public class ButtonTest extends Command {
 
-    public TankDrive() {
-    	requires(Robot.driveTrain);
+    public ButtonTest() {
+        requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.driveTrain.drive(     -Robot.oi.getJoystickLeft().getY()    ,    -Robot.oi.getJoystickRight().getY()    );
+    	Robot.driveTrain.drive(.2, .2);
     }
 
     // Make this return true when this Command no longer needs to run execute()

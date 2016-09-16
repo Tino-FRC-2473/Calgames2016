@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2473.robot.commands;
 
+import org.usfirst.frc.team2473.robot.Database;
 import org.usfirst.frc.team2473.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,19 +8,27 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TankDrive extends Command {
+public class GyroDrive extends Command {
 
-    public TankDrive() {
-    	requires(Robot.driveTrain);
+	private double newHeading;
+	
+    public GyroDrive() {
+        requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	newHeading = Database.getInstance().getValue(Database.Value.GYRO);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.driveTrain.drive(     -Robot.oi.getJoystickLeft().getY()    ,    -Robot.oi.getJoystickRight().getY()    );
+    	
+    	//newHeading += Robot.oi.getJoystickLeft().getTwist() * 2 * (1-Math.abs(Robot.oi.getJoystickLeft().getY())*.4);
+    	
+    	//double error = Math.max(Math.min(.07*(Database.getInstance().getValue(Database.Value.GYRO) - newHeading),1),-1);
+    	
+    	//Robot.driveTrain.driveArcade(-Robot.oi.getJoystickLeft().getY() * 0.9, error);
     }
 
     // Make this return true when this Command no longer needs to run execute()
