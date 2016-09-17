@@ -32,9 +32,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
 public class DriveTrain extends Subsystem {
     
 	private CANTalon leftFrontCAN;
@@ -126,7 +123,7 @@ public class DriveTrain extends Subsystem {
     	return rightFrontCAN.get();
     }
     
-    public double getLeftSpeed(){    	
+    public double getLeftSpeed(){
     	return leftFrontCAN.get();
     }
     
@@ -160,8 +157,5 @@ public class DriveTrain extends Subsystem {
 
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
-   
 	}
-
 }
-
