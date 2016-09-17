@@ -181,7 +181,6 @@ class ThreadSafeHolder{
  */
 class ThreadSafeInternalButton extends InternalButton
 {
-
 	@Override
 	public synchronized void setInverted(boolean inverted) {
 		// TODO Auto-generated method stub
