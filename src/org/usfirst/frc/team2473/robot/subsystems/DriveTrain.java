@@ -60,30 +60,6 @@ public class DriveTrain extends Subsystem {
    
 	}
 
-    public double getRightEncoder(){
-    	return ((CANTalon)rightFrontCAN).getEncPosition();
-    }
-    
-    public double getLeftEncoder(){
-    	return ((CANTalon)leftFrontCAN).getEncPosition();
-    }
-    
-    public double getHeading(){
-    	return gyro.getAngle();
-    }
-    
-    public void reset(){
-    	((CANTalon)rightFrontCAN).setEncPosition(0);
-    	((CANTalon)leftFrontCAN).setEncPosition(0);
-    	gyro.reset();
-    }
-    
-    public void log(){
-    	SmartDashboard.putNumber("Left Distance", ((CANTalon)leftFrontCAN).getEncPosition());
-		SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition());
-		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
-    }
-
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
    
