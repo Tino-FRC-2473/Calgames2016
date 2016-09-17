@@ -21,6 +21,10 @@ public class RobotMap {
 	public static final int leftBackMotor = 8;
 	public static final int rightBackMotor = 2;
 	public static final int intakeMotor = 1; //To be determined
+	
+	public static final int pistonLeft = 0;
+	public static final int pistonRight = 1;
+	
 	public static final int gyro = 0;
 	public static final int leftLightSensor = 1;
 	public static final int rightLightSensor = 2;

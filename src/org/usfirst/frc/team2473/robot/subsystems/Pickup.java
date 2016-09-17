@@ -17,14 +17,14 @@ public class Pickup extends Subsystem {
 	
 	private SpeedController intakeCAN;
 	
-	private Solenoid pistonOne;
-	private Solenoid pistonTwo;
+	private Solenoid pistonLeft;
+	private Solenoid pistonRight;
 	
 	public boolean up = true;
 	
 	public Pickup(){
-		pistonOne = new Solenoid(0);
-		pistonTwo = new Solenoid(1);
+		pistonLeft = new Solenoid(RobotMap.pistonLeft);
+		pistonRight = new Solenoid(RobotMap.pistonRight);
 		intakeCAN = new CANTalon(RobotMap.intakeMotor);
 	}
 	
@@ -51,12 +51,12 @@ public class Pickup extends Subsystem {
     
     public void togglePiston(boolean forward) {
     	if (forward) {
-    		pistonOne.set(true);
-    		pistonTwo.set(false);
+    		pistonLeft.set(true);
+    		pistonRight.set(false);
     	}
     	else {
-    		pistonTwo.set(true);
-    		pistonOne.set(false);
+    		pistonRight.set(true);
+    		pistonLeft.set(false);
     	}
     }
 }
