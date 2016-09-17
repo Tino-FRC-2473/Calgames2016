@@ -23,13 +23,7 @@ public class RobotMap {
 	public static final int gyro = 0;
 	public static final int leftLightSensor = 1;
 	public static final int rightLightSensor = 2;
-<<<<<<< HEAD
 	public static final int ballShooterMotor = 0;
 	public static final int breakbeamChannel = 8;
 	
 }
-=======
-
-	
-}
->>>>>>> cc30f25906e30dbb4aa2f21e40eec448ba3a8bae

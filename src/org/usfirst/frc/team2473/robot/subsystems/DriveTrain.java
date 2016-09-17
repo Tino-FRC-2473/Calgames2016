@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
-<<<<<<< HEAD
 import org.usfirst.frc.team2473.robot.AutonomousConstants;
 import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
@@ -8,7 +7,6 @@ import org.usfirst.frc.team2473.robot.commands.AutonomousCommand;
 
 
 import org.usfirst.frc.team2473.robot.commands.ForwardAutonomous;
-=======
 import org.usfirst.frc.team2473.robot.Database;
 import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
@@ -17,7 +15,6 @@ import org.usfirst.frc.team2473.robot.commands.DriveStraightForward;
 import org.usfirst.frc.team2473.robot.commands.GyroDrive;
 import org.usfirst.frc.team2473.robot.commands.OneJoyDrive;
 import org.usfirst.frc.team2473.robot.commands.TankDrive;
->>>>>>> cc30f25906e30dbb4aa2f21e40eec448ba3a8bae
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -39,23 +36,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
     
-<<<<<<< HEAD
 	private CANTalon leftFrontCAN;
 	private CANTalon rightFrontCAN;
 	private CANTalon leftBackCAN;
 	private CANTalon rightBackCAN;
 	private AnalogGyro gyro;
-	private RobotDrive drive;
 	private Encoder left_encoder, right_encoder;
 	private AnalogInput one, two;
-=======
-	private SpeedController  leftFrontCAN;
-	private SpeedController rightFrontCAN;
-	private SpeedController leftBackCAN;
-	private SpeedController rightBackCAN;
-	
+
 	private RobotDrive drive;
->>>>>>> cc30f25906e30dbb4aa2f21e40eec448ba3a8bae
 	
 	public DriveTrain () {
 		super();
@@ -74,16 +63,13 @@ public class DriveTrain extends Subsystem {
 		
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN, rightBackCAN);
 		
-<<<<<<< HEAD
-		
+
 		left_encoder = new Encoder(RobotMap.leftFrontMotor,RobotMap.leftBackMotor);
 		right_encoder = new Encoder(RobotMap.rightFrontMotor,RobotMap.rightBackMotor);
 
 		left_encoder.setDistancePerPulse(1);
 		right_encoder.setDistancePerPulse(1);
 		
-=======
->>>>>>> cc30f25906e30dbb4aa2f21e40eec448ba3a8bae
 		drive.setMaxOutput(.70);
 		drive.setInvertedMotor(MotorType.kFrontLeft, true);
 		drive.setInvertedMotor(MotorType.kRearLeft, true);
@@ -93,18 +79,13 @@ public class DriveTrain extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-<<<<<<< HEAD
-
-=======
          setDefaultCommand(new Drive());
->>>>>>> cc30f25906e30dbb4aa2f21e40eec448ba3a8bae
     }
     
     public void drive(double left, double right) {
     	drive.tankDrive(left, right);    	
 	}
     
-<<<<<<< HEAD
     public void resetEncoders() {
     	leftFrontCAN.changeControlMode(CANTalon.TalonControlMode.Position);
     	leftFrontCAN.setEncPosition(0);
@@ -176,11 +157,11 @@ public class DriveTrain extends Subsystem {
     public void halt() {
     	Robot.driveTrain.drive(0,0);
     }
-=======
+
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
    
 	}
->>>>>>> cc30f25906e30dbb4aa2f21e40eec448ba3a8bae
+
 }
 
