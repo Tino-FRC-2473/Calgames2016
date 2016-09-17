@@ -31,13 +31,9 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
-<<<<<<< HEAD
 	private SpeedController intakeCAN;
 	private AnalogGyro gyro;
-	
-=======
->>>>>>> master
-	
+
 	private RobotDrive drive;
 	
 	public DriveTrain (){
@@ -68,7 +64,6 @@ public class DriveTrain extends Subsystem {
    
 	}
     
-<<<<<<< HEAD
     public void moveIntake(double speed) {
     	intakeCAN.set(speed);
     }
