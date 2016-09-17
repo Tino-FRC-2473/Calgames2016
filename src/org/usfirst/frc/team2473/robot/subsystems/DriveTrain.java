@@ -59,7 +59,7 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(left, right);
    
 	}
-    
+
     public double getRightEncoder(){
     	return ((CANTalon)rightFrontCAN).getEncPosition();
     }
@@ -83,6 +83,7 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition());
 		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
     }
+
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
    
