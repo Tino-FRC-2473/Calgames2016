@@ -8,6 +8,7 @@ import org.usfirst.frc.team2473.robot.commands.AutonomousCommand;
 
 import org.usfirst.frc.team2473.robot.commands.ForwardAutonomous;
 import org.usfirst.frc.team2473.robot.Database;
+import org.usfirst.frc.team2473.robot.Database.Value;
 import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.Drive;
@@ -113,12 +114,12 @@ public class DriveTrain extends Subsystem {
     }
     
     
-    public int getSensorOne() {
-    	return one.getValue();
+    public double getSensorLeft() {
+    	return Database.getInstance().getValue(Value.LEFT_LIGHT_SENSOR);
     }
 
-    public int getSensorTwo() {
-    	return two.getValue();
+    public double getSensorRight() {
+    	return Database.getInstance().getValue(Value.RIGHT_LIGHT_SENSOR);
     }
     
     public double getRightSpeed(){
@@ -130,30 +131,29 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getLeftPosition() {
-    	return leftFrontCAN.getEncPosition();
+    	return Database.getInstance().getValue(Value.LEFT_ENCODER);
     }
 
     public double getRightPosition() {
-    	return rightFrontCAN.getEncPosition();
+    	return Database.getInstance().getValue(Value.RIGHT_ENCODER);
     }
     
     public double getAngle() {
-    	return gyro.getAngle();
+    	return Database.getInstance().getValue(Value.GYRO);
     }
     
     public boolean detectedElement() {
-    	int one = getSensorOne();
-    	int two = getSensorTwo();
+    	double one = getSensorLeft();
+    	double two = getSensorRight();
     	return (one == AutonomousConstants.cleat || one == AutonomousConstants.line || one == AutonomousConstants.ramp) || (two == AutonomousConstants.cleat || two == AutonomousConstants.line || two == AutonomousConstants.ramp);
     }
 
     public boolean detectedFloor() {
-    	int one = getSensorOne();
-    	int two = getSensorTwo();
+    	double one = getSensorLeft();
+    	double two = getSensorRight();
     	return (one == AutonomousConstants.floor && two == AutonomousConstants.floor);
     }
-    
-    
+        
     public void halt() {
     	Robot.driveTrain.drive(0,0);
     }

@@ -17,8 +17,8 @@ public class SensorReader extends Command {
 
 	@Override
 	protected void execute() {
-		System.out.println("Value 1: " + Robot.driveTrain.getSensorOne());
-		System.out.println("Value 2: " + Robot.driveTrain.getSensorTwo());
+		System.out.println("Value 1: " + Robot.driveTrain.getSensorLeft());
+		System.out.println("Value 2: " + Robot.driveTrain.getSensorRight());
 	}
 
 	@Override

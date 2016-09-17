@@ -23,6 +23,6 @@ public class BallShooter extends Subsystem{
 	
 	public void spinMotor(double speed) {
 		shooterCAN.set(speed);
-	} 
+	}
 
 }

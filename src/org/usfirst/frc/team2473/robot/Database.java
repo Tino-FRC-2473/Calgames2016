@@ -20,86 +20,34 @@ import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * Over database that stores a snapshot of the joysticks and sensor values in a thread safe way
- * This is constantly updated by multiple querying threads.
- * To use this class, you can access the values by using the getValue and getButton methods.
- * This class follows the <a href = "">singleton design pattern</a>
- * @author thatSteveFan, Will Fang
- *
- */
-
 public class Database{
 
 	public static final double LEFT_ENC_CONSTANT = .01944349; // scales encoders
 																// to inches
 	public static final double RIGHT_ENC_CONSTANT = .00827586;
 
-
-
 	public enum Value {
 		GYRO, LEFT_LIGHT_SENSOR, RIGHT_LIGHT_SENSOR, LEFT_ENCODER, RIGHT_ENCODER, JOY1_X, JOY1_Y, JOY1_Z, JOY2_X, JOY2_Y, JOY2_Z, WHEEL_TWIST, THROTTLE_VALUE;// add
 	}
 
-
-	/**
-	 * an enum that describes all the sensors that this database is tracking.<br>
-	 * This includes the joysticks.<br>
-	 * To add a new sensor, add it here as an enum element and update the appropriate calling method. ex Sensor Thread, OI
-	 * 
-	 * @author thatSteveFan
-	 * 
-	 */
-
-	/**
-	 * This is the enum that defines the different buttons that will be avaliable for use.
-	 * To add a new button, add it as the enum element and update the appropriate thread, ex. OI
-	 * 
-	 * @author RehanDurrani
-	 *
-	 */
 	public enum ButtonName {
 		//TRIGGER
 	}
-
-	/**
-	 * the instance of this class.
-	 * 
-	 */
 
 	static Database theInstance;
 	static {
 		theInstance = new Database();
 	}
 
-
 	public static Database getInstance()
 	{
 		return theInstance;
 	}
 	
-//	private Database() {
-//		HashMap<Value, ThreadSafeHolder>  tempMap = (new HashMap<>());
-//		map = Collections.synchronizedMap(tempMap);
-//		for (Value v : Value.values())
-//		{
-//			map.put(v, new ThreadSafeHolder());
-//		}
-//	}
-
-	
-	/**
-	 * A map between the Value enum and their respective value holders
-	 */
 	private Map<Value, ThreadSafeHolder> map;
-	/**
-	 * A map between the ButtonName enum and their respective actual buttons
-	 */
+
 	private Map<ButtonName, ThreadSafeInternalButton> buttonMap;
 	
-	/**
-	 * Constructor that makes the single instance
-	 */
 	private Database() {
 		HashMap<Value, ThreadSafeHolder> tempMap = (new HashMap<>());//creates the map
 		map = Collections.synchronizedMap(tempMap);//makes the map thread-safe
@@ -142,31 +90,16 @@ public class Database{
 		map.get(v).setValue(newValue, timeout);
 	}
 	
-	/**
-	 * returns the internal button that is mapped to the ButtonName
-	 * @param name the name of the button
-	 * @return the button corresponding to the button enum
-	 */
 	public synchronized Button getButton(ButtonName name)
 	{
 		return buttonMap.get(name);
 	}
-	
-	/**
-	 * Sets whether the accessed button is pressed or not
-	 * @param name the name of the button
-	 * @param newValue the state of button, pressed or not
-	 */
+
 	public synchronized void setButtonValue(ButtonName name, boolean newValue)
 	{
 		buttonMap.get(name).setPressed(newValue);
 	}
 	
-
-	/**
-	 * Logs values directly to the dashboard
-	 * Use this method to print sensor and joystick values
-	 */
 	public void log() {
 		SmartDashboard.putNumber("Left Distance",
 				Database.getInstance().getValue(Value.LEFT_ENCODER));
@@ -174,9 +107,7 @@ public class Database{
 				Database.getInstance().getValue(Value.RIGHT_ENCODER));
 		SmartDashboard.putNumber("Gyro Angle",
 				Database.getInstance().getValue(Value.GYRO));
-
 	}
-
 }
 
 /**

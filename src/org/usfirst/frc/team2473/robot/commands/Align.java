@@ -28,11 +28,11 @@ public class Align extends Command{
 	protected void execute() {
 		// TODO Auto-generated method stub
 		String state = "";
-		if(Robot.driveTrain.getSensorOne() == COLOR_VAL && Robot.driveTrain.getSensorTwo() != COLOR_VAL) {
+		if(Robot.driveTrain.getSensorLeft() == COLOR_VAL && Robot.driveTrain.getSensorRight() != COLOR_VAL) {
 			state = "left";
-		} else if(Robot.driveTrain.getSensorOne() != COLOR_VAL && Robot.driveTrain.getSensorTwo() == COLOR_VAL) {
+		} else if(Robot.driveTrain.getSensorLeft() != COLOR_VAL && Robot.driveTrain.getSensorRight() == COLOR_VAL) {
 			state = "right";
-		} else if(Robot.driveTrain.getSensorOne() != COLOR_VAL && Robot.driveTrain.getSensorTwo() != COLOR_VAL) {
+		} else if(Robot.driveTrain.getSensorLeft() != COLOR_VAL && Robot.driveTrain.getSensorRight() != COLOR_VAL) {
 			state = direction_on;
 		}
 
@@ -42,7 +42,7 @@ public class Align extends Command{
 
 	@Override
 	protected boolean isFinished() {
-		return (Robot.driveTrain.getSensorOne() == COLOR_VAL) && (Robot.driveTrain.getSensorTwo() == COLOR_VAL);
+		return (Robot.driveTrain.getSensorLeft() == COLOR_VAL) && (Robot.driveTrain.getSensorRight() == COLOR_VAL);
 	}
 
 	@Override
@@ -61,13 +61,13 @@ public class Align extends Command{
 		switch(direction) {
 			case "right": 
 				direction_on = "right";
-				if(Robot.driveTrain.getSensorOne() != COLOR_VAL) {
+				if(Robot.driveTrain.getSensorLeft() != COLOR_VAL) {
 					Robot.driveTrain.pivotRight(0.6);
 				}
 			break;
 			case "left":
 				direction_on = "left";
-				if(Robot.driveTrain.getSensorTwo() != COLOR_VAL) {
+				if(Robot.driveTrain.getSensorRight() != COLOR_VAL) {
 					Robot.driveTrain.pivotLeft(0.6);
 				}
 			break;
