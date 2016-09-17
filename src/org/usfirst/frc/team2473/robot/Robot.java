@@ -34,15 +34,7 @@ public class Robot extends IterativeRobot{
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
 
-<<<<<<< HEAD
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
-    	driveTrain = new DriveTrain();
-    	pickup = new Pickup();
-=======
+	
 	double lastTime;
 
 	/**
@@ -51,7 +43,7 @@ public class Robot extends IterativeRobot{
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
->>>>>>> master
+		pickup = new Pickup();
 		oi = new OI();
 		gyro = new AnalogGyro(RobotMap.gyro);
 
