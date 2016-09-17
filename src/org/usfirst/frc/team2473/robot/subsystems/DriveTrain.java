@@ -5,8 +5,6 @@ import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.Drive;
 import org.usfirst.frc.team2473.robot.commands.DriveStraightForward;
-import org.usfirst.frc.team2473.robot.commands.GyroDrive;
-import org.usfirst.frc.team2473.robot.commands.OneJoyDrive;
 import org.usfirst.frc.team2473.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -68,34 +66,9 @@ public class DriveTrain extends Subsystem {
     	intakeCAN.set(speed);
     }
     
-    public double getRightEncoder(){
-    	return ((CANTalon)rightFrontCAN).getEncPosition();
-    }
-    
-    public double getLeftEncoder(){
-    	return ((CANTalon)leftFrontCAN).getEncPosition();
-    }
-    
-    public double getHeading(){
-    	return gyro.getAngle();
-    }
-    
-    public void reset(){
-    	((CANTalon)rightFrontCAN).setEncPosition(0);
-    	((CANTalon)leftFrontCAN).setEncPosition(0);
-    	gyro.reset();
-    }
-    
-    public void log(){
-    	SmartDashboard.putNumber("Left Distance", ((CANTalon)leftFrontCAN).getEncPosition());
-		SmartDashboard.putNumber("Right Distance", ((CANTalon)rightFrontCAN).getEncPosition());
-		SmartDashboard.putNumber("Gyro Angle", gyro.getAngle());
-    }
-=======
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
    
 	}
->>>>>>> master
 }
 
