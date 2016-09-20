@@ -11,6 +11,10 @@ public class TurnAutonomous extends Command {
 	private final String TURN;
 	private final double TURN_POWER = 0.6;
 
+	/**
+	 * @param turn The direction of the turn.
+	 * @param amt The angle of the turn in degrees.
+	 */
 	public TurnAutonomous(String turn, double amt) {
 		ANGLE = amt;
 		TURN = turn;
@@ -40,7 +44,7 @@ public class TurnAutonomous extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if((Math.abs(Math.floor(Robot.driveTrain.getAngle()) - ANGLE)) == 2) {
+		if((Math.abs(Math.floor(Robot.driveTrain.getAngle()) - ANGLE)) <= 2) {
 			return true;
 		} else {
 			return false;

@@ -24,6 +24,11 @@ public class BackwardAutonomous extends Command {
 		POW = DEFAULT_POW;
 	}
 
+	
+	/**
+	 * 
+	 * @param val Distance needed to go in feet.
+	 */
 	public BackwardAutonomous(int val){
 		requires(Robot.driveTrain); //runs using drive train mechanism
 		ENCODER_RIGHT_VAL = val*12*RIGHT_ENC_CONSTANT;
@@ -31,6 +36,11 @@ public class BackwardAutonomous extends Command {
 		POW = DEFAULT_POW;
 	}
 	
+	/**
+	 * 
+	 * @param val Distance needed to go in feet.
+	 * @param pow Motor power.
+	 */
 	public BackwardAutonomous(int val, double pow) {
 		requires(Robot.driveTrain);
 		ENCODER_RIGHT_VAL = val*12*RIGHT_ENC_CONSTANT;

@@ -24,6 +24,9 @@ public class ForwardAutonomous extends Command {
 		POW = DEFAULT_POW;
 	}
 
+	/**
+	 * @param val The distance needed to go in feet.
+	 */
 	public ForwardAutonomous(int val){
 		requires(Robot.driveTrain); //runs using drive train mechanism
 		ENCODER_RIGHT_VAL = val*12*RIGHT_ENC_CONSTANT;
@@ -31,6 +34,10 @@ public class ForwardAutonomous extends Command {
 		POW = DEFAULT_POW;
 	}
 	
+	/**
+	 * @param val The distance needed to go in feet.
+	 * @param pow The power of the motor (From -1 to 1)
+	 */
 	public ForwardAutonomous(int val, double pow) {
 		requires(Robot.driveTrain);
 		ENCODER_RIGHT_VAL = val*12*RIGHT_ENC_CONSTANT;
