@@ -5,7 +5,6 @@ import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.Drive;
 import org.usfirst.frc.team2473.robot.commands.DriveStraightForward;
-import org.usfirst.frc.team2473.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
