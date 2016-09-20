@@ -7,4 +7,5 @@ public abstract class Monitor {
 	}
 	
 	public abstract void monitor(); //Must implement method l.exceptionThrown(RobotException e);
+	
 }
