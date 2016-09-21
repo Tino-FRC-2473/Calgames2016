@@ -53,7 +53,8 @@ public class DriveTrain extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-         setDefaultCommand(new Drive());
+         //setDefaultCommand(new Drive());
+    	//add a default command for testing ease
     }
     
     public void drive(double left, double right) {
