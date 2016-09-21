@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot{
+public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	boolean timerRunning;
@@ -34,6 +34,8 @@ public class Robot extends IterativeRobot{
 	Timer robotControlLoop;
 
 	double lastTime;
+
+	private Command runningCommand;// the command currently running
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -51,35 +53,41 @@ public class Robot extends IterativeRobot{
 	}
 
 	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
 	 */
 	public void autonomousInit() {
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+		if (runningCommand != null) {
+			runningCommand.cancel();
+		}
 
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		runningCommand = new AutonomousCommand();
+		runningCommand.start();
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		if (!timerRunning) {
+			robotControlLoop.scheduleAtFixedRate(new TimerTask() {
+
+				@Override
+				public void run() {
+					Scheduler.getInstance().run();
+				}
+			}, 0, 20);
+			timerRunning = true;
+		}
+
+		if (sensorThread == null || sensorThread.isAlive()) {
+			// create the args for sensorThread
+			sensorThread = new SensorThread(2);
+			sensorThread.setPriority(2);
+			sensorThread.start();
+		} else if (!sensorThread.isUpdating()) {
+			sensorThread.resumeUpdating();
+		}
+		log();
 	}
 
 	public void teleopInit() {
@@ -87,6 +95,12 @@ public class Robot extends IterativeRobot{
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		if (runningCommand != null) {
+			runningCommand.cancel();
+		}
+
+		runningCommand = new Drive();
+		runningCommand.start();
 
 	}
 
@@ -95,10 +109,10 @@ public class Robot extends IterativeRobot{
 	 */
 	public void teleopPeriodic() {
 
-		//System.out.println(System.currentTimeMillis() - lastTime);
+		// System.out.println(System.currentTimeMillis() - lastTime);
 
 		if (!timerRunning) {
-			robotControlLoop.scheduleAtFixedRate(new TimerTask(){
+			robotControlLoop.scheduleAtFixedRate(new TimerTask() {
 
 				@Override
 				public void run() {
@@ -112,15 +126,15 @@ public class Robot extends IterativeRobot{
 			sensorThread = new SensorThread(2);
 			sensorThread.setPriority(2);
 			sensorThread.start();
+		} else if (!sensorThread.isUpdating()) {
+			sensorThread.resumeUpdating();
 		}
 
 		oi.updateButtons();
 		oi.updateJoysticks();
-		
+
 		log();
 		lastTime = System.currentTimeMillis();
-
-
 
 	}
 
@@ -149,12 +163,17 @@ public class Robot extends IterativeRobot{
 		Database.getInstance().log();
 	}
 
+	/**
+	 * called as the system shuts down
+	 */
 	@Override
 	public void finalize() {
 		try {
 			super.finalize();
+			driveTrain.drive(0, 0);
+			// other resetting stuff
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		// set motors to 0
