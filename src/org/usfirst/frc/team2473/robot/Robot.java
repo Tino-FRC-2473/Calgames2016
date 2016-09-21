@@ -15,6 +15,13 @@ import org.usfirst.frc.team2473.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the IterativeRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the manifest file in the resource
+ * directory.
+ */
 public class Robot extends IterativeRobot {
 
 	boolean timerRunning;
@@ -25,51 +32,87 @@ public class Robot extends IterativeRobot {
 	public static AnalogGyro gyro;
 	public static Timer timer;
 	public static double start;
-    Command autonomousCommand;
+	Command autonomousCommand;
+	public static SensorThread sensorThread;
+	Timer robotControlLoop;
 
-    public static Logger.LogLevel log;
+	public static Logger.LogLevel log;
+	private Command runningCommand;// the command currently running
 
-    public void robotInit() {
-    	driveTrain = new DriveTrain();
-    	ballShooter = new BallShooter();
-
-    	oi = new OI();
-
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
+		driveTrain = new DriveTrain();
+		oi = new OI();
+		gyro = new AnalogGyro(RobotMap.gyro);
+		robotControlLoop = new Timer(false);
+		timerRunning = false;
 		timer = new Timer();
 		SmartDashboard.putData(driveTrain);
 		autonomousCommand = new AutonomousCommand();
 		log = Logger.LogLevel.Debug;
-    }
+	}
 
-    public void autonomousInit() {
+	/**
+	 * This function is called periodically during operator control
+	 */
 
-    	if (autonomousCommand != null) {
-        	autonomousCommand.start();
-        }
-        
-    }
+	public static double getStart() {
+		return start;
+	}
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
+	/**
+	 */
+	public void autonomousInit() {
 
-    public void teleopInit() {
-        if (autonomousCommand != null) autonomousCommand.cancel();
-    }
+		if (runningCommand != null) {
+			runningCommand.cancel();
+		}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    
-    public static double getStart() {
-    	return start;
-    }
-        
-	public static SensorThread sensorThread;
-	Timer robotControlLoop;
+		runningCommand = new AutonomousCommand();
+		runningCommand.start();
+	}
+
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		if (!timerRunning) {
+			robotControlLoop.scheduleAtFixedRate(new TimerTask() {
+
+				@Override
+				public void run() {
+					Scheduler.getInstance().run();
+				}
+			}, 0, 20);
+			timerRunning = true;
+		}
+
+		if (sensorThread == null || sensorThread.isAlive()) {
+			// create the args for sensorThread
+			sensorThread = new SensorThread(2);
+			sensorThread.setPriority(2);
+			sensorThread.start();
+		} else if (!sensorThread.isUpdating()) {
+			sensorThread.resumeUpdating();
+		}
+		log();
+	}
+
+	public void teleopInit() {
+		// This makes sure that the autonomous stops running when
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (runningCommand != null) {
+			runningCommand.cancel();
+		}
+
+		runningCommand = new Drive();
+		runningCommand.start();
+	}
 
 	double lastTime;
 
@@ -78,10 +121,10 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 
-		//System.out.println(System.currentTimeMillis() - lastTime);
+		// System.out.println(System.currentTimeMillis() - lastTime);
 
 		if (!timerRunning) {
-			robotControlLoop.scheduleAtFixedRate(new TimerTask(){
+			robotControlLoop.scheduleAtFixedRate(new TimerTask() {
 
 				@Override
 				public void run() {
@@ -95,15 +138,15 @@ public class Robot extends IterativeRobot {
 			sensorThread = new SensorThread(2);
 			sensorThread.setPriority(2);
 			sensorThread.start();
+		} else if (!sensorThread.isUpdating()) {
+			sensorThread.resumeUpdating();
 		}
 
 		oi.updateButtons();
 		oi.updateJoysticks();
-		
+
 		log();
 		lastTime = System.currentTimeMillis();
-
-
 
 	}
 
@@ -132,12 +175,17 @@ public class Robot extends IterativeRobot {
 		Database.getInstance().log();
 	}
 
+	/**
+	 * called as the system shuts down
+	 */
 	@Override
 	public void finalize() {
 		try {
 			super.finalize();
+			driveTrain.drive(0, 0);
+			// other resetting stuff
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		// set motors to 0
