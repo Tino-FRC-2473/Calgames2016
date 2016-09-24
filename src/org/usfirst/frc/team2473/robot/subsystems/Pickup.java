@@ -32,11 +32,11 @@ public class Pickup extends Subsystem {
 	//Call these methods from the commands.
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-//    	setDefaultCommand(new Intake());
+
+    	
     }
     
+    //starIntake() and stopIntake() are for increased code legibility
     public void startIntake() {
     	moveIntake(0.5);
     }
