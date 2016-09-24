@@ -48,7 +48,6 @@ public class Drive extends Command {
     			integral = 0;
     		}
     		driveStraight(thrust);
-    		
     	}
     	else
     	{
