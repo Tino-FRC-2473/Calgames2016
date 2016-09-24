@@ -20,7 +20,7 @@ public class Pickup extends Subsystem {
 	private Solenoid pistonLeft;
 	private Solenoid pistonRight;
 	
-	public boolean up = true;
+	public boolean extended = false;
 	
 	public Pickup(){
 		pistonLeft = new Solenoid(RobotMap.pistonLeft);

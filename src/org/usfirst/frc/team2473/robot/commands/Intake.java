@@ -23,7 +23,10 @@ public class Intake extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pickup.togglePiston(true);
+    	if (!Robot.pickup.extended) {
+    		Robot.pickup.togglePiston(true);
+    		Robot.pickup.extended = true;
+    	}
     	Robot.pickup.startIntake();
     }
 
@@ -34,8 +37,7 @@ public class Intake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.pickup.stopIntake();
-    	Robot.pickup.togglePiston(false);
+    	interrupted();
     }
 
     // Called when another command which requires one or more of the same
@@ -43,5 +45,6 @@ public class Intake extends Command {
     protected void interrupted() {
     	Robot.pickup.stopIntake();
     	Robot.pickup.togglePiston(false);
+    	Robot.pickup.extended = false;
     }
 }
