@@ -49,6 +49,9 @@ public class Robot extends IterativeRobot {
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
 
+		PIThread thread = new PIThread();
+		thread.start();
+		
 		SmartDashboard.putData(driveTrain);
 	}
 
@@ -101,6 +104,8 @@ public class Robot extends IterativeRobot {
 
 		runningCommand = new Drive();
 		runningCommand.start();
+		
+
 
 	}
 
