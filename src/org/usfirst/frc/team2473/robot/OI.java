@@ -2,6 +2,7 @@ package org.usfirst.frc.team2473.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -69,7 +70,8 @@ public class OI {
 		buttonCallMap = new HashMap<>();
 
 		// add the button calls here
-
+		buttonCallMap.put(ButtonName.TRIGGER, () -> getThrottle().getRawButton(1));
+		
 		buttonCallMap = Collections.unmodifiableMap(buttonCallMap);
 
 		joyCallMap = new HashMap<>();
@@ -82,6 +84,9 @@ public class OI {
 
 		// Database.getInstance().getButton(ButtonName.TRIGGER).whenActive(new
 		// ButtonTest());
+		
+		//Database.getInstance().getButton(ButtonName.TRIGGER).whileActive(new FireBallShooter());
+		//new JoystickButton(getThrottle(), 1).whileActive(new FireBallShooter());
 	}
 
 	public Joystick getThrottle() {
@@ -109,7 +114,7 @@ public class OI {
 		for (ButtonName b : buttonCallMap.keySet()) {
 			tempButtonMap.put(b, buttonCallMap.get(b).getAsBoolean());
 		}
-		// pushes to the DatabaseÏ
+		// pushes to the Database
 		for (ButtonName b : tempButtonMap.keySet()) {
 			Database.getInstance().setButtonValue(b, tempButtonMap.get(b));
 		}

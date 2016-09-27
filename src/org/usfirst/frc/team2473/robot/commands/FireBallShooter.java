@@ -13,19 +13,16 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FireBallShooter extends Command {
 	
 	double percentageOfSpeedOnMotor;
-	private DigitalInput breakbeam;
 	
 	public FireBallShooter(){
 		requires(Robot.ballShooter);
-		percentageOfSpeedOnMotor = .5;
-		breakbeam = new DigitalInput(RobotMap.breakbeamChannel);
+		percentageOfSpeedOnMotor = .4;
 	}
 	
 	//Startup the 
 	@Override
 	protected void initialize() {
 		// Nothing
-		
 	}
 
 	@Override
@@ -36,9 +33,7 @@ public class FireBallShooter extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		//Check if the BreakBeam is completed and if it is then the ball is not 
-		//inside anymore
-		return !breakbeam.get();
+		return false;
 	}
 
 	@Override

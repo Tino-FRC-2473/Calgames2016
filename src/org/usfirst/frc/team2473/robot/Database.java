@@ -48,7 +48,7 @@ public class Database{
 	 *
 	 */
 	public enum ButtonName {
-		//TRIGGER
+		TRIGGER
 	}
 
 	/**
@@ -147,6 +147,8 @@ public class Database{
 				Database.getInstance().getValue(Value.WHEEL_TWIST));
 		SmartDashboard.putNumber("Throttle Value",
 				Database.getInstance().getValue(Value.THROTTLE_VALUE));
+		SmartDashboard.putBoolean("Trigger Pressed",
+				Database.getInstance().getButton(ButtonName.TRIGGER).get());
 
 	}
 
