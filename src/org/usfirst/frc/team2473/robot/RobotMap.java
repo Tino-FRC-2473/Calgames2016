@@ -25,7 +25,7 @@ public class RobotMap {
 	
 	public static final int pistonLeft = 0;
 	public static final int pistonRight = 1;
-	
+
 	public static final int gyro = 0;
 	public static final int leftLightSensor = 1;
 	public static final int rightLightSensor = 2;
