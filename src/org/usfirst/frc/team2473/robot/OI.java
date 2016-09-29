@@ -46,13 +46,6 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-	
-	private Joystick joyLeft = new Joystick(0);
-	private Joystick joyRight = new Joystick(1);
-	
-	Button button1 = new JoystickButton(joyLeft, 1);
-	Button button2 = new JoystickButton(joyLeft, 2);
-	Button button3 = new JoystickButton(joyLeft, 3);
 
 	private Joystick throttle = new Joystick(0);
 	private Joystick wheel = new Joystick(1);
@@ -77,7 +70,6 @@ public class OI {
 		buttonCallMap = new HashMap<>();
 
 		// add the button calls here
-
 		buttonCallMap = Collections.unmodifiableMap(buttonCallMap);
 
 		joyCallMap = new HashMap<>();
@@ -91,7 +83,6 @@ public class OI {
 		// Database.getInstance().getButton(ButtonName.TRIGGER).whenActive(new
 		// ButtonTest());
 		
-		button1.whileHeld(new Intake());
 	}
 
 	public Joystick getThrottle() {
@@ -119,7 +110,6 @@ public class OI {
 		for (ButtonName b : buttonCallMap.keySet()) {
 			tempButtonMap.put(b, buttonCallMap.get(b).getAsBoolean());
 		}
-		// pushes to the DatabaseÏ
 		for (ButtonName b : tempButtonMap.keySet()) {
 			Database.getInstance().setButtonValue(b, tempButtonMap.get(b));
 		}
