@@ -91,7 +91,7 @@ public class OI {
 		// Database.getInstance().getButton(ButtonName.TRIGGER).whenActive(new
 		// ButtonTest());
 		
-		button1.toggleWhenPressed(new Intake());
+		button1.whileHeld(new Intake());
 	}
 
 	public Joystick getThrottle() {
