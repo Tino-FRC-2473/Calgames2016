@@ -16,7 +16,7 @@ public class FireBallShooter extends Command {
 	
 	public FireBallShooter(){
 		requires(Robot.ballShooter);
-		percentageOfSpeedOnMotor = .4;
+		percentageOfSpeedOnMotor = -1.0;
 	}
 	
 	//Startup the 

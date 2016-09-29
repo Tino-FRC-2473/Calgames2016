@@ -85,7 +85,7 @@ public class OI {
 		// Database.getInstance().getButton(ButtonName.TRIGGER).whenActive(new
 		// ButtonTest());
 		
-		//Database.getInstance().getButton(ButtonName.TRIGGER).whileActive(new FireBallShooter());
+		Database.getInstance().getButton(ButtonName.TRIGGER).whileActive(new FireBallShooter());
 		//new JoystickButton(getThrottle(), 1).whileActive(new FireBallShooter());
 	}
 
