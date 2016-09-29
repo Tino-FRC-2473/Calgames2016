@@ -25,7 +25,7 @@ public class Pickup extends Subsystem {
 	public Pickup(){
 		pistonLeft = new Solenoid(RobotMap.pistonLeft);
 		pistonRight = new Solenoid(RobotMap.pistonRight);
-		intakeCAN = new CANTalon(RobotMap.intakeMotor);
+		intakeCAN = new CANTalon(RobotMap.pickUpMotor);
 	}
 	
     // The methods for controlling the subsystem go here.
