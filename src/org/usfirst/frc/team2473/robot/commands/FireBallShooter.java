@@ -14,7 +14,7 @@ public class FireBallShooter extends Command {
 	
 	double percentageOfSpeedOnMotor;
 	
-	public FireBallShooter(){
+		timeOut = duration;
 		requires(Robot.ballShooter);
 		percentageOfSpeedOnMotor = -1.0;
 	}
@@ -27,13 +27,14 @@ public class FireBallShooter extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.ballShooter.spinMotor(percentageOfSpeedOnMotor);		
+		Robot.ballShooter.spinMotor(percentageOfSpeedOnMotor);	
+		setTimeout(timeOut);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return isTimedOut();
 	}
 
 	@Override

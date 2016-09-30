@@ -67,7 +67,9 @@ public class OI {
 
 		// add the button calls here
 		buttonCallMap.put(ButtonName.TRIGGER, () -> getThrottle().getRawButton(1));
+		buttonCallMap.put(ButtonName.PISTONS, () -> getThrottle().getRawButton(2));
 		buttonCallMap.put(ButtonName.PICKUP, () -> getThrottle().getRawButton(3));
+		
 		
 		buttonCallMap = Collections.unmodifiableMap(buttonCallMap);
 
@@ -82,8 +84,9 @@ public class OI {
 		// Database.getInstance().getButton(ButtonName.TRIGGER).whenActive(new
 		// ButtonTest());
 		
-		Database.getInstance().getButton(ButtonName.TRIGGER).whileActive(new FireBallShooter());
-		Database.getInstance().getButton(ButtonName.PICKUP).whileHeld(new Intake());
+		Database.getInstance().getButton(ButtonName.TRIGGER).whenPressed(new FireBallShooter(.75));
+		Database.getInstance().getButton(ButtonName.PISTONS).whenPressed(new ToggleIntake());
+		Database.getInstance().getButton(ButtonName.PICKUP).whileHeld(new SpinPickup());
 		//new JoystickButton(getThrottle(), 1).whileActive(new FireBallShooter());
 	}
 
