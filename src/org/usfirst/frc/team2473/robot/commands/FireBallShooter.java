@@ -13,10 +13,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FireBallShooter extends Command {
 	
 	double percentageOfSpeedOnMotor;
+	double timeOut;
 	
-		timeOut = duration;
+	public FireBallShooter(double duration){
 		requires(Robot.ballShooter);
 		percentageOfSpeedOnMotor = -1.0;
+		timeOut = duration;
 	}
 	
 	//Startup the 
