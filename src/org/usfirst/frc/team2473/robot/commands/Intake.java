@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2473.robot.Robot;
 
 /**
- *
+ * MyFirstIntake: Forever rest in peace.
+ *@deprecated As of 10/1/16, use SpinPickup and ToggleIntake
  */
 public class Intake extends Command {
 	
