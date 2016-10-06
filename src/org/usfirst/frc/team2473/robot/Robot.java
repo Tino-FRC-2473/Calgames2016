@@ -31,7 +31,6 @@ public class Robot extends IterativeRobot{
 	public static BallShooter ballShooter;
 	public static OI oi;
 	public static AnalogGyro gyro;
-
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
 
