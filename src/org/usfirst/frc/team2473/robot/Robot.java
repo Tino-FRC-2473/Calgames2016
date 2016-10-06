@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot{
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
+		
 		CameraServer.getInstance().startAutomaticCapture("cam0");
 		
 		driveTrain = new DriveTrain();

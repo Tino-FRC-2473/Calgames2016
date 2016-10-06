@@ -69,6 +69,7 @@ public class OI {
 		buttonCallMap.put(ButtonName.TRIGGER, () -> getThrottle().getRawButton(1));
 		buttonCallMap.put(ButtonName.PISTONS, () -> getThrottle().getRawButton(4));
 		buttonCallMap.put(ButtonName.PICKUP, () -> getThrottle().getRawButton(2));
+		buttonCallMap.put(ButtonName.CAMERASWAP, () -> getWheel().getRawButton(3));
 		
 		
 		buttonCallMap = Collections.unmodifiableMap(buttonCallMap);

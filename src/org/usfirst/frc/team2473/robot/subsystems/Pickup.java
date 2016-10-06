@@ -38,7 +38,7 @@ public class Pickup extends Subsystem {
     
     //starIntake() and stopIntake() are for increased code legibility
     public void startIntake() {
-    	moveIntake(0.8);
+    	moveIntake(-0.8);
     }
     
     public void stopIntake() {
