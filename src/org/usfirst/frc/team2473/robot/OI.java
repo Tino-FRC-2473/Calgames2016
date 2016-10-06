@@ -88,6 +88,7 @@ public class OI {
 		Database.getInstance().getButton(ButtonName.TRIGGER).whenPressed(new FireBallShooter(.75));
 		Database.getInstance().getButton(ButtonName.PISTONS).whenPressed(new ToggleIntake());
 		Database.getInstance().getButton(ButtonName.PICKUP).whileHeld(new SpinPickup());
+		//Database.getInstance().getButton(ButtonName.CAMERASWAP).whenPressed(new SwapCamera());
 		//new JoystickButton(getThrottle(), 1).whileActive(new FireBallShooter());
 	}
 
