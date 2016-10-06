@@ -28,7 +28,8 @@ public class DriveTrain extends Subsystem {
 	private SpeedController rightFrontCAN;
 	private SpeedController leftBackCAN;
 	private SpeedController rightBackCAN;
-	
+	private AnalogGyro gyro;
+
 	private RobotDrive drive;
 	
 	public DriveTrain (){
@@ -57,7 +58,7 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(left, right);
    
 	}
-    
+
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
    

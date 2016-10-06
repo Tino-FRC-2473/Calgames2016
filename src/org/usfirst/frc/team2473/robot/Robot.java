@@ -27,12 +27,15 @@ public class Robot extends IterativeRobot{
 	boolean timerRunning;
 
 	public static DriveTrain driveTrain;
+	public static Pickup pickup;
+	public static BallShooter ballShooter;
 	public static OI oi;
 	public static AnalogGyro gyro;
 
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
 
+	
 	double lastTime;
 
 	/**
@@ -41,6 +44,8 @@ public class Robot extends IterativeRobot{
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
+		pickup = new Pickup();
+		ballShooter = new BallShooter();
 		oi = new OI();
 		gyro = new AnalogGyro(RobotMap.gyro);
 
@@ -48,6 +53,7 @@ public class Robot extends IterativeRobot{
 		timerRunning = false;
 
 		SmartDashboard.putData(driveTrain);
+		SmartDashboard.putData(ballShooter);
 	}
 
 	/**
