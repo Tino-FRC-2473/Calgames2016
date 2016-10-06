@@ -13,8 +13,8 @@ public class Diagnostic {
 	public Diagnostic(){
 		
 	}
-	public boolean testEverything() throws InterruptedException {
-		return shooterTest() & controllerTest() & driveTest();
+	public boolean testEverything() throws Exception {
+		return /*shooterTest() & controllerTest() &*/ driveTest();
 	}
 	private boolean driveTest() {
 		SmartDashboard.putString("DB/String 1","BEGINNING DRIVE TEST NOW");

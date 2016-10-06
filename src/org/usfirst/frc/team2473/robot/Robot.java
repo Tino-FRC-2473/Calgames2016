@@ -137,7 +137,7 @@ public class Robot extends IterativeRobot{
 	public void testPeriodic() {
 		try {
 			d.testEverything();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
