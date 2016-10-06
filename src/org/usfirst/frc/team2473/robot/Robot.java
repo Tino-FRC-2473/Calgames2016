@@ -52,6 +52,12 @@ public class Robot extends IterativeRobot{
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
 		d = new Diagnostic();
+		try {
+			d.testEverything();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		SmartDashboard.putData(driveTrain);
 		SmartDashboard.putData(ballShooter);
 	}
