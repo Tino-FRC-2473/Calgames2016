@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot{
 	public static AnalogGyro gyro;
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
+	public static Diagnostic d;
 
 	
 	double lastTime;
@@ -50,7 +51,7 @@ public class Robot extends IterativeRobot{
 
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
-
+		d = new Diagnostic();
 		SmartDashboard.putData(driveTrain);
 		SmartDashboard.putData(ballShooter);
 	}
