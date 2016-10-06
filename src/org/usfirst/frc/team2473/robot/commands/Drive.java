@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command {
 
-	public static final double SPEED_TURNING_MULTIPLICATION_CONSTANT = 0.30;
-	public static final double SPEED_TURNING_ADDING_CONSTANT = 0.70;
+	public static final double SPEED_TURNING_MULTIPLICATION_CONSTANT = 0.20;
+	public static final double SPEED_TURNING_ADDING_CONSTANT = 0.80;
 	public static final double DEADZONE_AREA = 0.04;
 	public static final double MAX_TURN = 0.8;
-	public static final double KP = 0;//.075;
-	public static final double KI = 0;//.003;
-	public static final double KD = 0;//.00;
+	public static final double KP = .075;
+	public static final double KI = .003;
+	public static final double KD = .00;
 	
 	private boolean drivingStraight;//is the robot driving straight
 	private double startingGyroValue;//the gyro value when starting to drive straight
