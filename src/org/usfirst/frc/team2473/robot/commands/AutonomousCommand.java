@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousCommand extends CommandGroup {
 
 	public AutonomousCommand() {
-		addSequential(new ForwardAutonomous(2));
+		addSequential(new ForwardAutonomous(10));
 	}
 
 	public AutonomousCommand(String defense) {
