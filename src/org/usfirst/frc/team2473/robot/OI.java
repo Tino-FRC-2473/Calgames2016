@@ -135,21 +135,21 @@ public class OI {
 		} catch (InterruptedException e) {
 			System.exit(1);
 		}
-		SmartDashboard.putString("DB/String 1",(buttonCallMap.get(ButtonName.TRIGGER).getAsBoolean()? "TRIGGER IS REGISTERED":"TRIGGER IS NOT REGISTERED"));
+		SmartDashboard.putString("DB/String 2",(buttonCallMap.get(ButtonName.TRIGGER).getAsBoolean()? "TRIGGER IS REGISTERED":"TRIGGER IS NOT REGISTERED"));
 		SmartDashboard.putString("DB/String 1","PLEASE PRESS AND HOLD THE PISTON UNTIL IT IS REGISTERED");
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			System.exit(1);
 		}
-		SmartDashboard.putString("DB/String 1",(buttonCallMap.get(ButtonName.PISTONS).getAsBoolean()? "PISTON IS REGISTERED":"PISTON IS NOT REGISTERED"));
+		SmartDashboard.putString("DB/String 2",(buttonCallMap.get(ButtonName.PISTONS).getAsBoolean()? "PISTON IS REGISTERED":"PISTON IS NOT REGISTERED"));
 		SmartDashboard.putString("DB/String 1","PLEASE PRESS AND HOLD THE PICKUP UNTIL IT IS REGISTERED");
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			System.exit(1);
 		}
-		SmartDashboard.putString("DB/String 1",(buttonCallMap.get(ButtonName.PICKUP).getAsBoolean()? "PICKUP IS REGISTERED":"PICKUP IS NOT REGISTERED"));	
+		SmartDashboard.putString("DB/String 2",(buttonCallMap.get(ButtonName.PICKUP).getAsBoolean()? "PICKUP IS REGISTERED":"PICKUP IS NOT REGISTERED"));	
 	}
 	
 	public void testJoysticks() {

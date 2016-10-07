@@ -17,7 +17,7 @@ public class Diagnostic {
 		return /*shooterTest() & controllerTest() &*/ driveTest();
 	}
 	private boolean driveTest() {
-		SmartDashboard.putString("DB/String 1","BEGINNING DRIVE TEST NOW");
+		SmartDashboard.putString("DB/String 0","BEGINNING DRIVE TEST NOW");
 		SpeedController leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
 		SpeedController rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
 		SpeedController leftBackCAN = new CANTalon(RobotMap.leftBackMotor);
@@ -31,7 +31,13 @@ public class Diagnostic {
 			System.exit(1);
 		}
 		double enc2 = ((CANTalon) leftFrontCAN).getEncPosition();
-		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: " + enc1 + "\nFINAL ENC. VALUE.: " + enc2 + "\nDIFF.:" + (enc2-enc1)+ "\nREVERSING LEFT FRONT MOTOR NOW");
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","REVERSING LEFT FRONT MOTOR NOW");
 		leftFrontCAN.set(0);
 		leftFrontCAN.set(-0.7);
 		try {
@@ -41,7 +47,13 @@ public class Diagnostic {
 		}
 		enc1 = enc2;
 		enc2 = ((CANTalon) leftFrontCAN).getEncPosition();
-		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: " + enc1 + "\nFINAL ENC. VALUE.: " + enc2 + "\nDIFF.:" + (enc2-enc1) + "\nRUNNING RIGHT FRONT MOTOR NOW");
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","RUNNING RIGHT FRONT MOTOR NOW");
 		enc1 = ((CANTalon) rightFrontCAN).getEncPosition();
 		rightFrontCAN.set(0.7);
 		try {
@@ -50,7 +62,13 @@ public class Diagnostic {
 			System.exit(1);
 		}
 		enc2 = ((CANTalon) rightFrontCAN).getEncPosition();
-		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: " + enc1 + "\nFINAL ENC. VALUE.: " + enc2 + "\nDIFF.:" + (enc2-enc1)+ "\nREVERSING RIGHT FRONT MOTOR NOW");
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","REVERSING RIGHT FRONT MOTOR NOW");
 		rightFrontCAN.set(0);
 		rightFrontCAN.set(-0.7);
 		try {
@@ -60,7 +78,13 @@ public class Diagnostic {
 		}
 		enc1 = enc2;
 		enc2 = ((CANTalon) rightFrontCAN).getEncPosition();
-		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: " + enc1 + "\nFINAL ENC. VALUE.: " + enc2 + "\nDIFF.:" + (enc2-enc1) + "\nRUNNING LEFT BACK MOTOR NOW");
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","RUNNING LEFT BACK MOTOR NOW");
 		enc1 = ((CANTalon) leftBackCAN).getEncPosition();
 		leftFrontCAN.set(0.7);
 		try {
@@ -69,7 +93,13 @@ public class Diagnostic {
 			System.exit(1);
 		}
 		enc2 = ((CANTalon) leftBackCAN).getEncPosition();
-		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: " + enc1 + "\nFINAL ENC. VALUE.: " + enc2 + "\nDIFF.:" + (enc2-enc1)+ "\nREVERSING LEFT BACK MOTOR NOW");
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","REVERSING LEFT BACK MOTOR NOW");
 		leftFrontCAN.set(0);
 		leftFrontCAN.set(-0.7);
 		try {
@@ -79,7 +109,13 @@ public class Diagnostic {
 		}
 		enc1 = enc2;
 		enc2 = ((CANTalon) leftFrontCAN).getEncPosition();
-		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: " + enc1 + "\nFINAL ENC. VALUE.: " + enc2 + "\nDIFF.:" + (enc2-enc1) + "\nRUNNING RIGHT BACK MOTOR NOW");
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","RUNNING RIGHT BACK MOTOR NOW");
 		enc1 = ((CANTalon) rightBackCAN).getEncPosition();
 		rightFrontCAN.set(0.7);
 		try {
@@ -88,22 +124,43 @@ public class Diagnostic {
 			System.exit(1);
 		}
 		enc2 = ((CANTalon) rightBackCAN).getEncPosition();
-		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: " + enc1 + "\nFINAL ENC. VALUE.: " + enc2 + "\nDIFF.:" + (enc2-enc1)+ "\nDRIVE TEST CONCLUDED SUCCESSFULLY");
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","REVERSING RIGHT BACK MOTOR NOW");
+		enc1 = enc2;
+		rightFrontCAN.set(-0.7);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			System.exit(1);
+		}
+		enc2 = ((CANTalon) rightBackCAN).getEncPosition();
+		SmartDashboard.putString("DB/String 1", "INIT. ENC. VAL: ");
+		SmartDashboard.putString("DB/String 2", ""+ enc1);
+		SmartDashboard.putString("DB/String 3", "FINAL ENC. VALUE.: ");
+		SmartDashboard.putString("DB/String 4", "" + enc2);
+		SmartDashboard.putString("DB/String 5", "DIFF.:");
+		SmartDashboard.putString("DB/String 6", "" + (enc2-enc1));
+		SmartDashboard.putString("DB/String 0","DRIVE TEST CONCLUDED SUCCESSFULLY");
 		return true;
 	}
 	private boolean controllerTest() {
-		SmartDashboard.putString("DB/String 1","BEGINNING CONTROLLER TEST NOW");
+		SmartDashboard.putString("DB/String 0","BEGINNING CONTROLLER TEST NOW");
 		OI o = new OI();
 		SmartDashboard.putString("DB/String 1","FIRST, LET'S WORK THROUGH THE BUTTONS.");
 		o.diagnostic = true;
 		o.testButtons();
 		o.diagnostic = false;
 		o.testJoysticks();
-		SmartDashboard.putString("DB/String 1","ENTIRE CONTROLLER TEST HAS ENDED SUCCESSFULLY");
+		SmartDashboard.putString("DB/String 0","ENTIRE CONTROLLER TEST HAS ENDED SUCCESSFULLY");
 		return false;
 	}
 	private boolean shooterTest() throws InterruptedException {
-		SmartDashboard.putString("DB/String 1","BEGINNING SHOOTER TEST NOW");
+		SmartDashboard.putString("DB/String 0","BEGINNING SHOOTER TEST NOW");
 		Pickup p = new Pickup();
 		SmartDashboard.putString("DB/String 1","THE PICKUP SHOULD EXTEND NOW");
 		p.togglePiston(true);
@@ -123,7 +180,8 @@ public class Diagnostic {
 			SmartDashboard.putString("DB/String 1","TOGGLE INTAKE TOOK LONGER THAN 5 SECONDS.");
 			return false;
 		}
-		SmartDashboard.putString("DB/String 1","TOGGLE INTAKE COMPLETED SUCCESSFULLY\nBEGINNING SPIN PICKUP TEST");
+		SmartDashboard.putString("DB/String 1", "TOGGLE INTAKE COMPLETED SUCCESSFULLY");
+		SmartDashboard.putString("DB/String 1", "BEGINNING SPIN PICKUP TEST");
 		SpinPickup s = new SpinPickup();
 		s.start();
 		while(s.timeSinceInitialized()<5000);
@@ -137,7 +195,7 @@ public class Diagnostic {
 		BallShooter b = new BallShooter();
 		b.spinMotor(-1.0);
 		b.spinMotor(0);
-		SmartDashboard.putString("DB/String 1","ENTIRE SHOOTER TEST HAS CONCLUDED SUCCESSFULLY.");
+		SmartDashboard.putString("DB/String 0","ENTIRE SHOOTER TEST HAS CONCLUDED SUCCESSFULLY.");
 		return true;
 	}
 }
