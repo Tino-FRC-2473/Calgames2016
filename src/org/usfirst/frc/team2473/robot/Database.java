@@ -20,9 +20,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Database{
 
-	public static final double LEFT_ENC_CONSTANT = .01944349; // scales encoders
+	public static final double LEFT_ENC_CONSTANT = 1;//.01944349; // scales encoders
 																// to inches
-	public static final double RIGHT_ENC_CONSTANT = .00827586;
+	public static final double RIGHT_ENC_CONSTANT = 1;//.00827586;
 
 
 

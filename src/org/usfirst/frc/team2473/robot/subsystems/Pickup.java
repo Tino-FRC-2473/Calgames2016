@@ -46,7 +46,7 @@ public class Pickup extends Subsystem {
     }
     
     private void moveIntake(double speed) {
-    	intakeCAN.set(speed);
+    	intakeCAN.set(-speed);
     }
     
     public void togglePiston(boolean forward) {

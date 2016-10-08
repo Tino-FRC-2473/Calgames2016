@@ -27,6 +27,7 @@ public class Robot extends IterativeRobot{
 	boolean timerRunning;
 
 	public static DriveTrain driveTrain;
+	public static Command auto;
 	public static Pickup pickup;
 	public static BallShooter ballShooter;
 	public static OI oi;
@@ -45,13 +46,15 @@ public class Robot extends IterativeRobot{
 	public void robotInit() {
 		driveTrain = new DriveTrain();
 		pickup = new Pickup();
+		gyro = new AnalogGyro(RobotMap.gyro);
+		//auto = new DriveStraightForward(0.8, 0);
 		ballShooter = new BallShooter();
 		oi = new OI();
-		gyro = new AnalogGyro(RobotMap.gyro);
+		
 
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
-		d = new Diagnostic();
+		//d = new Diagnostic();
 		
 		SmartDashboard.putData(driveTrain);
 		SmartDashboard.putData(ballShooter);
@@ -78,8 +81,8 @@ public class Robot extends IterativeRobot{
 		 */
 
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+//		if (autonomousCommand != null)
+//			autonomousCommand.start();
 	}
 
 	/**

@@ -73,8 +73,8 @@ public class OI {
 
 		// add the button calls here
 		buttonCallMap.put(ButtonName.TRIGGER, () -> getThrottle().getRawButton(1));
-		buttonCallMap.put(ButtonName.PISTONS, () -> getThrottle().getRawButton(2));
-		buttonCallMap.put(ButtonName.PICKUP, () -> getThrottle().getRawButton(3));
+		buttonCallMap.put(ButtonName.PISTONS, () -> getThrottle().getRawButton(4));
+		buttonCallMap.put(ButtonName.PICKUP, () -> getThrottle().getRawButton(2));
 
 		buttonCallMap = Collections.unmodifiableMap(buttonCallMap);
 

@@ -14,18 +14,20 @@ public class DriveStraightForward extends Command {
 	
 	private double kP;
 	private double speed;
+	private double distance;
 	
     /**
 	 * @deprecated Use {@link #DriveStraightForward(double,double)} instead
 	 */
 	public DriveStraightForward() {
-		this(0.7, 0.3);
+		this(0.7, 0.3, 100);
 	}
 
-	public DriveStraightForward(double speed, double kP) {
+	public DriveStraightForward(double speed, double kP, double distance) {
     	requires(Robot.driveTrain);
     	this.speed = speed;
     	this.kP = kP;
+    	this.distance = distance;
     }
 
     // Called just before this Command runs the first time
