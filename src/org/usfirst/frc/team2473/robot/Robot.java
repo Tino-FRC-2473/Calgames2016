@@ -51,14 +51,11 @@ public class Robot extends IterativeRobot{
 		ballShooter = new BallShooter();
 		oi = new OI();
 		
-
+		sensorThread = new SensorThread(5);
+		sensorThread.start();
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
-		//d = new Diagnostic();
-		
-		SmartDashboard.putData(driveTrain);
-		SmartDashboard.putData(ballShooter);
-	}
+		}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -117,12 +114,6 @@ public class Robot extends IterativeRobot{
 			}, 0, 20);
 			timerRunning = true;
 		}
-		if (sensorThread == null) {
-			// create the args for sensorThread
-			sensorThread = new SensorThread(2);
-			sensorThread.setPriority(2);
-			sensorThread.start();
-		}
 
 		oi.updateButtons();
 		oi.updateJoysticks();
@@ -149,9 +140,6 @@ public class Robot extends IterativeRobot{
 
 	@Override
 	public void disabledPeriodic() {
-		if (sensorThread != null && sensorThread.isUpdating()) {
-			sensorThread.stopUpdating();
-		}
 
 		if (timerRunning) {
 			// ends the timer and stops it from executing any tasks

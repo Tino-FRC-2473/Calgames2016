@@ -20,7 +20,7 @@ public class SensorThread extends Thread{
 	AnalogGyro gyro;
 	AnalogInput leftLightSensor, rightLightSensor;
 	CANTalon leftEncoder, rightEncoder;
-	private volatile boolean run = true, alive = true;
+	private volatile boolean alive = true;
 	long lastTime;
 	int delay;
 
@@ -70,7 +70,7 @@ public class SensorThread extends Thread{
 	@Override
 	public void run() {
 		while (alive) {
-			while (run && alive) {
+
 				// System.out.println(System.currentTimeMillis() - lastTime);
 				
 				updateSensors();
@@ -82,14 +82,6 @@ public class SensorThread extends Thread{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
-			if (alive) {
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
 
 		}
 	}
@@ -108,21 +100,6 @@ public class SensorThread extends Thread{
 		}
 	}
 	
-	/**
-	 * stops this thread from updating Database. The thread may still finish its
-	 * current loop.
-	 */
-	public void stopUpdating() {
-		run = false;
-	}
-
-	/**
-	 * Makes this thread start updating Database with values from the sensors.
-	 * Does nothing if it is already running
-	 */
-	public void resumeUpdating() {
-		notify();
-	}
 
 	/**
 	 * kills this thread. It may run one last loop. Stops any future looping.
@@ -134,10 +111,6 @@ public class SensorThread extends Thread{
 
 	public boolean isDead() {
 		return !alive;
-	}
-
-	public boolean isUpdating() {
-		return run;
 	}
 
 	public void resetEncoders() {
