@@ -53,6 +53,7 @@ public class Drive extends Command {
     	}
     	else
     	{
+    		thrust += 0.1;
     		drivingStraight = false;
     		Robot.driveTrain.driveArcade(thrust, shapeWheel(-wheelX,throttleZ));
     	}
