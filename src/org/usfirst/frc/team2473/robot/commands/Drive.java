@@ -15,9 +15,9 @@ public class Drive extends Command {
 	public static final double SPEED_TURNING_ADDING_CONSTANT = 0.70;
 	public static final double DEADZONE_AREA = 0.04;
 	public static final double MAX_TURN = 1.0;
-	public static final double KP = .075;
-	public static final double KI = .003;
-	public static final double KD = .00;
+	public static final double KP = 0.00; //0.075;
+	public static final double KI = 0.00; //0.003;
+	public static final double KD = 0.00;
 	
 	private boolean drivingStraight;//is the robot driving straight
 	private double startingGyroValue;//the gyro value when starting to drive straight
@@ -82,7 +82,7 @@ public class Drive extends Command {
     	double proportion = Database.getInstance().getValue(Value.GYRO) - startingGyroValue;
     	integral += proportion;
     	double derivative = proportion - lastProportion;
-    	double rotate = KP * proportion + KI*integral + KD*derivative;
+    	double rotate = -KP * proportion - KI*integral - KD*derivative;
     	
     	if(Math.abs(rotate) > .70){
     		rotate = Math.signum(rotate) * .7;
