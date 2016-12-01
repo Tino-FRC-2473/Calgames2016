@@ -24,8 +24,6 @@ public class Database{
 																// to inches
 	public static final double RIGHT_ENC_CONSTANT = 1;//.00827586;
 
-
-
 	/**
 	 * an enum that describes all the sensors that this database is tracking.<br>
 	 * This includes the joysticks.<br>
