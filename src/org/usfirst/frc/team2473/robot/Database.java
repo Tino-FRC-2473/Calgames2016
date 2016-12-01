@@ -46,7 +46,7 @@ public class Database{
 	 *
 	 */
 	public enum ButtonName {
-		TRIGGER, PISTONS, PICKUP
+		TRIGGER, PISTONS, PICKUP, STRAIGHT
 	}
 
 	/**

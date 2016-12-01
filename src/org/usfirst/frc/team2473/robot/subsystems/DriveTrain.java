@@ -58,10 +58,17 @@ public class DriveTrain extends Subsystem {
     	drive.tankDrive(left, right);
    
 	}
-
+    
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
    
 	}
+    
+    public void setAllSpeed(double speed) {
+    	leftFrontCAN.set(speed);
+    	rightFrontCAN.set(speed);
+    	leftBackCAN.set(speed);
+    	rightBackCAN.set(speed);
+    }
 }
 
