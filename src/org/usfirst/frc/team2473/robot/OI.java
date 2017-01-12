@@ -8,6 +8,7 @@ import java.util.function.DoubleSupplier;
 
 import org.usfirst.frc.team2473.robot.Database.ButtonName;
 import org.usfirst.frc.team2473.robot.Database.Value;
+import org.usfirst.frc.team2473.robot.commands.DriveStraight;
 import org.usfirst.frc.team2473.robot.commands.FireBallShooter;
 import org.usfirst.frc.team2473.robot.commands.SpinPickup;
 import org.usfirst.frc.team2473.robot.commands.ToggleIntake;
@@ -75,6 +76,8 @@ public class OI {
 		buttonCallMap.put(ButtonName.TRIGGER, () -> getThrottle().getRawButton(1));
 		buttonCallMap.put(ButtonName.PISTONS, () -> getThrottle().getRawButton(4));
 		buttonCallMap.put(ButtonName.PICKUP, () -> getThrottle().getRawButton(2));
+		buttonCallMap.put(ButtonName.STRAIGHT, () -> getThrottle().getRawButton(5));
+		
 
 		buttonCallMap = Collections.unmodifiableMap(buttonCallMap);
 
@@ -92,6 +95,7 @@ public class OI {
 			Database.getInstance().getButton(ButtonName.TRIGGER).whenPressed(new FireBallShooter(.75));
 			Database.getInstance().getButton(ButtonName.PISTONS).whenPressed(new ToggleIntake());
 			Database.getInstance().getButton(ButtonName.PICKUP).whileHeld(new SpinPickup());
+			Database.getInstance().getButton(ButtonName.STRAIGHT).whileHeld(new DriveStraight());
 			// new JoystickButton(getThrottle(), 1).whileActive(new
 			// FireBallShooter());
 		}
