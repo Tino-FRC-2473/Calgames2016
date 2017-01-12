@@ -29,10 +29,10 @@ public class DriveTrain extends Subsystem{
 	public DriveTrain() {
 		super();
 
-		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
-		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
-		leftBackCAN = new CANTalon(RobotMap.leftBackMotor);
-		rightBackCAN = new CANTalon(RobotMap.rightBackMotor);
+//		leftFrontCAN = new CANTalon(RobotMap.leftFrontMotor);
+//		rightFrontCAN = new CANTalon(RobotMap.rightFrontMotor);
+//		leftBackCAN = new CANTalon(RobotMap.leftBackMotor);
+//		rightBackCAN = new CANTalon(RobotMap.rightBackMotor);
 
 		drive = new RobotDrive(leftFrontCAN, leftBackCAN, rightFrontCAN,
 				rightBackCAN);
@@ -59,7 +59,7 @@ public class DriveTrain extends Subsystem{
 
 	}
 
-	public double getMotor(Motor m) {
+	public double getMotorVoltage(Motor m) {
 		switch (m) {
 			case LEFT_BACK:
 				return leftBackCAN.getOutputVoltage();
@@ -74,11 +74,5 @@ public class DriveTrain extends Subsystem{
 		}
 	}
 
-	public void setAllSpeed(double speed) {
-		leftFrontCAN.set(speed);
-		rightFrontCAN.set(speed);
-		leftBackCAN.set(speed);
-		rightBackCAN.set(speed);
-	}
 }
 

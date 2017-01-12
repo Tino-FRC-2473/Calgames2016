@@ -8,18 +8,14 @@ import java.util.TimerTask;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
-import org.usfirst.frc.team2473.robot.subsystems.BallShooter;
 import org.usfirst.frc.team2473.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2473.robot.subsystems.DriveTrain.Motor;
-import org.usfirst.frc.team2473.robot.subsystems.Pickup;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,13 +31,10 @@ public class Robot extends IterativeRobot{
 
 	public static DriveTrain driveTrain;
 	public static Command auto;
-	public static Pickup pickup;
-	public static BallShooter ballShooter;
 	public static OI oi;
 	public static AnalogGyro gyro;
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
-	public static Diagnostic d;
 	DashboardThread dt;
 
 
@@ -55,10 +48,8 @@ public class Robot extends IterativeRobot{
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
-		pickup = new Pickup();
-		gyro = new AnalogGyro(RobotMap.gyro);
+//		gyro = new AnalogGyro(RobotMap.gyro);
 		// auto = new DriveStraightForward(0.8, 0);
-		ballShooter = new BallShooter();
 		oi = new OI();
 
 		sensorThread = new SensorThread(5);
@@ -67,14 +58,12 @@ public class Robot extends IterativeRobot{
 		timerRunning = false;
 
 		Map<String, Supplier<Command>> systemsMap = new HashMap<>();
-		systemsMap.put("DRIVE_TRAIN", () -> driveTrain.getCurrentCommand());
-		systemsMap.put("PICKUP", () -> pickup.getCurrentCommand());
-		systemsMap.put("BALL_SHOOTER", () -> ballShooter.getCurrentCommand());
+//		systemsMap.put("DRIVE_TRAIN", () -> driveTrain.getCurrentCommand());
 
 		Map<String, DoubleSupplier> motorMaker = new HashMap<>();
 
 		for (Motor m : DriveTrain.Motor.values()) {
-			motorMaker.put(m.toString(), () -> driveTrain.getMotor(m));
+			motorMaker.put(m.toString(), () -> driveTrain.getMotorVoltage(m));
 		}
 
 
@@ -155,13 +144,6 @@ public class Robot extends IterativeRobot{
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
-		try {
-			d.testEverything();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		LiveWindow.run();
 	}
 
 	@Override
@@ -184,8 +166,6 @@ public class Robot extends IterativeRobot{
 		try {
 			super.finalize();
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		// set motors to 0
 	}

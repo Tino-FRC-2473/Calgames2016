@@ -8,7 +8,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Over database that stores a snapshot of the joysticks and sensor values in a thread safe way
@@ -33,8 +32,7 @@ public class Database{
 	 * 
 	 */
 	public enum Value {
-		GYRO, LEFT_LIGHT_SENSOR, RIGHT_LIGHT_SENSOR, LEFT_ENCODER, RIGHT_ENCODER, WHEEL_TWIST, THROTTLE_VALUE;// add
-																																	// buttons
+		;// add buttons
 
 	}
 
@@ -46,7 +44,7 @@ public class Database{
 	 *
 	 */
 	public enum ButtonName {
-		TRIGGER, PISTONS, PICKUP, STRAIGHT
+		;
 	}
 
 	/**
@@ -135,18 +133,6 @@ public class Database{
 	 * Use this method to print sensor and joystick values
 	 */
 	public void log() {
-		SmartDashboard.putNumber("Left Distance",
-				Database.getInstance().getValue(Value.LEFT_ENCODER));
-		SmartDashboard.putNumber("Right Distance",
-				Database.getInstance().getValue(Value.RIGHT_ENCODER));
-		SmartDashboard.putNumber("Gyro Angle",
-				Database.getInstance().getValue(Value.GYRO));
-		SmartDashboard.putNumber("Wheel Twist",
-				Database.getInstance().getValue(Value.WHEEL_TWIST));
-		SmartDashboard.putNumber("Throttle Value",
-				Database.getInstance().getValue(Value.THROTTLE_VALUE));
-		SmartDashboard.putBoolean("Trigger Pressed",
-				Database.getInstance().getButton(ButtonName.TRIGGER).get());
 
 	}
 

@@ -35,10 +35,6 @@ public class SensorThread extends Thread{
 		
 		//add new sensors here
 		this.gyro = Robot.gyro;
-		this.leftLightSensor = new AnalogInput(RobotMap.leftLightSensor);
-		this.leftEncoder = new CANTalon(RobotMap.leftBackMotor);
-		this.rightEncoder = new CANTalon(RobotMap.rightFrontMotor);
-		this.rightLightSensor = new AnalogInput(RobotMap.rightLightSensor);
 
 		leftEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		rightEncoder.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -50,11 +46,7 @@ public class SensorThread extends Thread{
 		callMap = new HashMap<>();
 
 		//add the sensor name in the Values enum and the method of the sensor that returns the sensor value.
-		callMap.put(Value.GYRO, () -> gyro.getAngle());
-		callMap.put(Value.LEFT_LIGHT_SENSOR, () -> leftLightSensor.getValue());
-		callMap.put(Value.RIGHT_LIGHT_SENSOR, () -> rightLightSensor.getValue());
-		callMap.put(Value.RIGHT_ENCODER, () -> rightEncoder.getEncPosition() * Database.RIGHT_ENC_CONSTANT);
-		callMap.put(Value.LEFT_ENCODER, () ->  -leftEncoder.getEncPosition() * Database.LEFT_ENC_CONSTANT);
+		//callMap.put(Value.GYRO, () -> gyro.getAngle());
 		
 		
 		
