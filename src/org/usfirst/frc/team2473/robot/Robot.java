@@ -1,18 +1,25 @@
 
 package org.usfirst.frc.team2473.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
-import org.usfirst.frc.team2473.robot.commands.*;
-import org.usfirst.frc.team2473.robot.subsystems.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team2473.robot.subsystems.BallShooter;
+import org.usfirst.frc.team2473.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2473.robot.subsystems.DriveTrain.Motor;
+import org.usfirst.frc.team2473.robot.subsystems.Pickup;
+
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,9 +42,12 @@ public class Robot extends IterativeRobot{
 	public static SensorThread sensorThread;
 	Timer robotControlLoop;
 	public static Diagnostic d;
+	DashboardThread dt;
 
-	
+
 	double lastTime;
+
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -47,15 +57,31 @@ public class Robot extends IterativeRobot{
 		driveTrain = new DriveTrain();
 		pickup = new Pickup();
 		gyro = new AnalogGyro(RobotMap.gyro);
-		//auto = new DriveStraightForward(0.8, 0);
+		// auto = new DriveStraightForward(0.8, 0);
 		ballShooter = new BallShooter();
 		oi = new OI();
-		
+
 		sensorThread = new SensorThread(5);
 		sensorThread.start();
 		robotControlLoop = new Timer(false);
 		timerRunning = false;
+
+		Map<String, Supplier<Command>> systemsMap = new HashMap<>();
+		systemsMap.put("DRIVE_TRAIN", () -> driveTrain.getCurrentCommand());
+		systemsMap.put("PICKUP", () -> pickup.getCurrentCommand());
+		systemsMap.put("BALL_SHOOTER", () -> ballShooter.getCurrentCommand());
+
+		Map<String, DoubleSupplier> motorMaker = new HashMap<>();
+
+		for (Motor m : DriveTrain.Motor.values()) {
+			motorMaker.put(m.toString(), () -> driveTrain.getMotor(m));
 		}
+
+
+		dt = new DashboardThread(new PowerDistributionPanel(), motorMaker,
+				systemsMap);
+		dt.start();
+	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -78,8 +104,8 @@ public class Robot extends IterativeRobot{
 		 */
 
 		// schedule the autonomous command (example)
-//		if (autonomousCommand != null)
-//			autonomousCommand.start();
+		// if (autonomousCommand != null)
+		// autonomousCommand.start();
 	}
 
 	/**
@@ -102,7 +128,7 @@ public class Robot extends IterativeRobot{
 	 */
 	public void teleopPeriodic() {
 
-		//System.out.println(System.currentTimeMillis() - lastTime);
+		// System.out.println(System.currentTimeMillis() - lastTime);
 
 		if (!timerRunning) {
 			robotControlLoop.scheduleAtFixedRate(new TimerTask(){
@@ -117,7 +143,7 @@ public class Robot extends IterativeRobot{
 
 		oi.updateButtons();
 		oi.updateJoysticks();
-		
+
 		log();
 		lastTime = System.currentTimeMillis();
 
@@ -163,4 +189,6 @@ public class Robot extends IterativeRobot{
 		}
 		// set motors to 0
 	}
+
+
 }

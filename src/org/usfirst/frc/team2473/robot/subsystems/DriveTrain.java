@@ -1,36 +1,31 @@
 package org.usfirst.frc.team2473.robot.subsystems;
 
-import org.usfirst.frc.team2473.robot.Database;
-import org.usfirst.frc.team2473.robot.Robot;
 import org.usfirst.frc.team2473.robot.RobotMap;
 import org.usfirst.frc.team2473.robot.commands.Drive;
-import org.usfirst.frc.team2473.robot.commands.DriveStraightForward;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class DriveTrain extends Subsystem {
     
-	private SpeedController  leftFrontCAN;
-	private SpeedController rightFrontCAN;
-	private SpeedController leftBackCAN;
-	private SpeedController rightBackCAN;
+	private CANTalon  leftFrontCAN;
+	private CANTalon rightFrontCAN;
+	private CANTalon leftBackCAN;
+	private CANTalon rightBackCAN;
 	private AnalogGyro gyro;
 
 	private RobotDrive drive;
+	
+	public enum Motor
+	{
+		LEFT_FRONT, RIGHT_FRONT, LEFT_BACK, RIGHT_BACK;
+	}
 	
 	public DriveTrain (){
 		super();
@@ -62,6 +57,17 @@ public class DriveTrain extends Subsystem {
     public void driveArcade(double speed, double rotate) {
     	drive.arcadeDrive(speed, rotate);
    
+	}
+    
+    public double getMotor(Motor m)
+	{
+		switch (m) {
+			case LEFT_BACK: return leftBackCAN.getOutputVoltage();
+			case LEFT_FRONT: return leftFrontCAN.getOutputVoltage();
+			case RIGHT_BACK: return rightBackCAN.getOutputVoltage();
+			case RIGHT_FRONT: return rightFrontCAN.getOutputVoltage();
+			default: throw new IllegalArgumentException();
+		}
 	}
 }
 
