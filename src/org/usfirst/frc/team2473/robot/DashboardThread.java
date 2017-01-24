@@ -50,15 +50,15 @@ public class DashboardThread extends Thread {
 					System.out.println("connected");
 					while(true)
 					{
-						out.println("START: SENSORS AND JOYSTICKS:");
+						out.println("START: SENSORS");
 						for(Value v : Value.values())
 						{
 							out.println(v + ":" + Database.getInstance().getValue(v));
 						}
-						out.println("END: SENSORS AND JOYSTICKS:");
-						out.println("START: BATTERY INFORMATION");
+						out.println("END: SENSORS:");
+						out.println("START: BATTERY");
 						out.printf("VOLTAGE: %f", pdp.getVoltage());
-						out.println("END: BATTERY INFORMATION");
+						out.println("END: BATTERY");
 						out.println("START: MOTORS");
 						for(String s: motorMaker.keySet())
 						{
