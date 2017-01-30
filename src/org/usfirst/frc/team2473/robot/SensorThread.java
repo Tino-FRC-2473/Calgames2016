@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2473.robot;
 
 import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.DoubleSupplier;
@@ -10,8 +11,8 @@ import org.usfirst.frc.team2473.robot.Database.Value;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 
 
 public class SensorThread extends Thread{
